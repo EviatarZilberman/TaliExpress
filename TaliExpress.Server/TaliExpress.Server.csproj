@@ -10,6 +10,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="app.config" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.SpaProxy">
       <Version>8.*-*</Version>
     </PackageReference>
@@ -17,9 +21,19 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\MongoDBServiceApp\MongoDBService\MongoDBService.csproj" />
     <ProjectReference Include="..\taliexpress.client\taliexpress.client.esproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="app.config" />
   </ItemGroup>
 
 </Project>
