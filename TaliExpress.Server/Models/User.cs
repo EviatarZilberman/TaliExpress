@@ -14,5 +14,8 @@ namespace TaliExpress.Server.Models
         public int Status { get; set; } = (int)UserStatus.Inactive;
         public List<PaymentDetails> PaymentDetailsList { get; set; } = new List<PaymentDetails>();
         public int Coins { get; set; } = 0;
+        public Cart Cart { get; set; } = new Cart();
+        public Store? Store { get; set; } = null;
+        public UserShadow Shadow { get; set; } = new UserShadow();
     }
 }
