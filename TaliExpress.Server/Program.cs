@@ -24,7 +24,7 @@ app.UseStaticFiles();
 app.UseHttpsRedirection();
 
 app.UseRouting();
-app.UseCors("AllowFrontend");
+app.UseCors(ConfigurationsKeeper.Instance().GetValue("Allow_frontend"));
 
 app.UseAuthorization();
 
