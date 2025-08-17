@@ -1,9 +1,11 @@
-﻿using MongoDBService.Classes;
+﻿using Microsoft.AspNetCore.Mvc;
+using MongoDBService.Classes;
+using TaliExpress.Server.Controllers.Interfaces;
 using TaliExpress.Server.Enums;
 
 namespace TaliExpress.Server.Models
 {
-    public class User : AMongoDBItem
+    public class User : AMongoDBItem, IUser
     {
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
@@ -17,5 +19,30 @@ namespace TaliExpress.Server.Models
         public Cart Cart { get; set; } = new Cart();
         public Store? Store { get; set; } = null;
         public UserShadow Shadow { get; set; } = new UserShadow();
+
+        public ReturnCode DeleteUser([FromBody] string userId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ReturnCode Get([FromBody] string userId, ref User user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ReturnCode GetAll(ref User[] users)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ReturnCode InsertNewUser([FromBody] User user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ReturnCode UpdateUser([FromBody] User user)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
