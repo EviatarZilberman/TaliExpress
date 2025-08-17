@@ -2,5 +2,7 @@
 {
     public enum ReturnCode
     {
+        Success,
+        General_Error
     }
 }

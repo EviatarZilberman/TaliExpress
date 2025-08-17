@@ -2,11 +2,11 @@
 using TaliExpress.Server.Enums;
 using TaliExpress.Server.Models;
 
-namespace TaliExpress.Server.Controllers.Interfaces
+namespace TaliExpress.Server.Interfaces
 {
     public interface IUser
     {
-        public ReturnCode InsertNewUser([FromBody] User user);
+        public Task<ReturnCode> InsertNewUser(User user);
         public ReturnCode UpdateUser([FromBody] User user);
         public ReturnCode DeleteUser([FromBody] string userId);
         public ReturnCode GetAll(ref User[] users);

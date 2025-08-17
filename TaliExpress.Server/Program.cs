@@ -1,7 +1,7 @@
 using ConfigApp.Classes;
 using System.Configuration;
-using TaliExpress.Server.Controllers.Interfaces;
 using TaliExpress.Server.Enums;
+using TaliExpress.Server.Interfaces;
 using TaliExpress.Server.Models;
 
 var builder = WebApplication.CreateBuilder(args);

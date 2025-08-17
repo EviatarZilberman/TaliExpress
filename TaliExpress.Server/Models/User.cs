@@ -1,12 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ConfigApp.Classes;
+using Microsoft.AspNetCore.Mvc;
 using MongoDBService.Classes;
-using TaliExpress.Server.Controllers.Interfaces;
+using MongoDBService.Enums;
 using TaliExpress.Server.Enums;
+using TaliExpress.Server.Interfaces;
 
 namespace TaliExpress.Server.Models
 {
     public class User : AMongoDBItem, IUser
     {
+        private static readonly string CollectionName = "Users";
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
@@ -35,9 +38,22 @@ namespace TaliExpress.Server.Models
             throw new NotImplementedException();
         }
 
-        public ReturnCode InsertNewUser([FromBody] User user)
+        public async Task<ReturnCode> InsertNewUser(User user)
         {
-            throw new NotImplementedException();
+            if (user == null)
+            {
+                return ReturnCode.General_Error;
+            }
+
+            Task<MongoDBReturnCodes> res = MongoDBServiceManager<User>.Instance(ConfigurationsKeeper.Instance().GetValue(Utils.DB_name.ToString()), CollectionName).Insert(user);
+            if (await res == MongoDBReturnCodes.Success)
+            {
+                return ReturnCode.Success;
+            }
+            else
+            {
+                return ReturnCode.General_Error;
+            }
         }
 
         public ReturnCode UpdateUser([FromBody] User user)
