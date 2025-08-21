@@ -10,7 +10,17 @@ export class APIRequesterComponent {
 
   constructor(private http: HttpClient) { }
 
-  register(item: any, controller: string, method: string): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/${controller}/${method}`, item);
+  CallAPI(item: any, controller: string, method: string): /*Observable<any> |*/ string {
+    // No need to stringify manually; HttpClient does it for you
+    const answer: any = this.http.post<any>(
+      `${this.apiUrl}/${controller}/${method}`,
+      item, // pass the object directly
+      {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+    );
+    return answer;
   }
 }

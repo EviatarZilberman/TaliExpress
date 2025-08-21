@@ -20,7 +20,7 @@ export class RegisterComponent extends BaseComponent {
 
   registerUser(user: User): void | string {
     if (user === null) return 'User data is null';
-    this.apiRequester.register(user, 'users', 'register').subscribe({
+    this.apiRequester.CallAPI(user, 'users', 'register').subscribe({
       next: (response) => {
         console.log('Response from API:', response);
         alert(response.message);

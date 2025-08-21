@@ -37,7 +37,8 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/app/upper-nav-bar/upper-nav-bar.component.css"
             ],
             "scripts": []
           },
