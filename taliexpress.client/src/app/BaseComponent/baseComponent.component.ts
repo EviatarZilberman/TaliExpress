@@ -1,16 +1,16 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
-import { IRedirect } from '../../../Interfaces/IRedirect';
 import { Router } from '@angular/router';
+//import { Component } from '@angular/core';
+import { IRedirect } from '../../../Interfaces/IRedirect';
 
-@Component({
-  selector: 'baseComponent',
-  standalone: false,
-})
+//@Component({
+//  selector: 'baseComponent',
+//  standalone: false,
+//})
 export abstract class BaseComponent implements IRedirect {
   title: string = 'taliexpress.client.baseComponent';
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(protected http: HttpClient, protected router: Router) {}
 
 
   redirectByPath(path: string): void {

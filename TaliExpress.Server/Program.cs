@@ -1,13 +1,13 @@
 using ConfigApp.Classes;
 using System.Configuration;
 using TaliExpress.Server.Enums;
-using TaliExpress.Server.Interfaces;
+//using TaliExpress.Server.Interfaces;
 using TaliExpress.Server.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
-builder.Services.AddScoped<IUser, User>();
+//builder.Services.AddScoped<IManager, User>();
 
 // Add services to the container.
 
