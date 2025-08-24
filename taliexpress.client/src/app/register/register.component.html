@@ -1,1 +1,53 @@
-<p>register works!</p>
+<button class="btn btn-primary" (click)="showModal('userRegisterModal')">Register</button>
+
+<div id="userRegisterModal" class="modal" (click)="hideModal('userRegisterModal')">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <span class="close" (click)="hideModal('userRegisterModal')">&times;</span>
+
+    <div class="container">
+      <h2 class="heading">Template Driven Form</h2>
+      <form #userForm="ngForm" (ngSubmit)="registerUser(user)">
+
+        <div class="form-group">
+          <div>
+            <label for="firstName">First Name</label>
+            <input type="text" class="form-control" id="firstName" name="firstName"
+                   [(ngModel)]="user.firstName" required>
+            <div *ngIf="userForm.controls['firstName']?.touched && userForm.controls['firstName']?.invalid"
+                 class="text-danger">
+              First Name is required.
+            </div>
+          </div>
+
+          <div>
+            <label for="lastName">Last Name</label>
+            <input type="text" class="form-control" id="lastName" name="lastName"
+                   [(ngModel)]="user.lastName" required>
+            <div *ngIf="userForm.controls['lastName']?.touched && userForm.controls['lastName']?.invalid"
+                 class="text-danger">
+              Last Name is required.
+            </div>
+          </div>
+
+          <div>
+            <label for="phoneNumber">Phone Number</label>
+            <input type="text" class="form-control" id="phoneNumber" name="phoneNumber"
+                   [(ngModel)]="user.phoneNumber" required>
+            <div *ngIf="userForm.controls['phoneNumber']?.touched && userForm.controls['phoneNumber']?.invalid"
+                 class="text-danger">
+              Phone Number is required.
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+
+        <div>
+          <button type="submit" class="btn btn-primary" (click)="hideModal('userRegisterModal')">Close</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

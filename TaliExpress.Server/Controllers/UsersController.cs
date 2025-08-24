@@ -13,6 +13,7 @@ namespace TaliExpress.Server.Controllers
         {
             UsersManager usersManager = new UsersManager();
             await usersManager.Insert(user);
+            //-- TODO =  Send verification email (not implemented)
             return Ok();
         }
     }

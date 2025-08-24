@@ -11,23 +11,25 @@ import { User } from '../../../Classes/User';
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
+
 export class RegisterComponent extends BaseComponent {
   override title: string = 'taliexpress.client.registerComponent';
+  user: User = new User();
 
   constructor(private apiRequester: APIRequesterComponent, protected override router: Router, protected httpClient: HttpClient) {
     super(httpClient, router);
+
   };
 
   registerUser(user: User): void | string {
     if (user === null) return 'User data is null';
     this.apiRequester.CallAPI(user, 'users', 'register').subscribe({
       next: (response) => {
-        console.log('Response from API:', response);
-        alert(response.message);
+        console.log('Login success:', response);
+        // handle login success (save token, redirect, etc.)
       },
       error: (err) => {
-        console.error('Error from API:', err);
-        alert('Registration failed');
+        console.error('Login failed:', err);
       }
     });
     return;

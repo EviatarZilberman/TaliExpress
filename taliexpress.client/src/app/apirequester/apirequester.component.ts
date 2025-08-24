@@ -6,11 +6,11 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class APIRequesterComponent {
-  private apiUrl = 'https://localhost:5001/api/';
+  private apiUrl = 'https://localhost:5001';
 
   constructor(private http: HttpClient) { }
 
-  CallAPI(item: any, controller: string, method: string): /*Observable<any> |*/ string {
+  CallAPI(item: any, controller: string, method: string): Observable<any> {
     // No need to stringify manually; HttpClient does it for you
     const answer: any = this.http.post<any>(
       `${this.apiUrl}/${controller}/${method}`,

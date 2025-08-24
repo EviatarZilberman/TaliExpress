@@ -16,32 +16,32 @@ export class LoginComponent extends BaseComponent {
     super(httpClient, router);
   };
 
-  login(userName: string, password: string): void | string | undefined {
-    const user: User = {
-      email: userName,
-      password: password,
-      firstName: '',
-      lastName: '',
-      phoneNumber: '',
-      tempPassword: ''
-    }
-    const answer: string = this.apiRequester.CallAPI(user, 'users', 'register');
-    if (answer === 'err') {
-      return alert('Error calling API');
-    }
-    else {
-      return answer;
-    }
-    return undefined;
-    //  .subscribe({
-    //  next: (response) => {
-    //    console.log('Response from API:', response);
-    //    alert(response.message);
-    //  },
-    //  error: (err) => {
-    //    console.error('Error from API:', err);
-    //    alert('Registration failed');
-    //  }
-    //});
-  }
+  //login(userName: string, password: string): void | string | undefined {
+  //  const user: User = {
+  //    email: userName,
+  //    password: password,
+  //    firstName: '',
+  //    lastName: '',
+  //    phoneNumber: '',
+  //    tempPassword: ''
+  //  }
+  //  const answer: string = this.apiRequester.CallAPI(user, 'users', 'register');
+  //  if (answer === 'err') {
+  //    return alert('Error calling API');
+  //  }
+  //  else {
+  //    return answer;
+  //  }
+  //  return undefined;
+  //  //  .subscribe({
+  //  //  next: (response) => {
+  //  //    console.log('Response from API:', response);
+  //  //    alert(response.message);
+  //  //  },
+  //  //  error: (err) => {
+  //  //    console.error('Error from API:', err);
+  //  //    alert('Registration failed');
+  //  //  }
+  //  //});
+  //}
 }
