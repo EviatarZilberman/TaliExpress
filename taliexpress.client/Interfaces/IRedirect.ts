@@ -1,3 +1,3 @@
 export interface IRedirect {
-  redirectByPath(path: string): void
+  redirectByPath(path: string, modalId: string): void
 }

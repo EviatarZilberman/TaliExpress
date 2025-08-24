@@ -7,7 +7,8 @@ export abstract class BaseComponent implements IRedirect {
 
   constructor(protected http: HttpClient, protected router: Router) { }
 
-  redirectByPath(path: string): void {
+  redirectByPath(path: string, modalId: string): void {
+    if (modalId !== null) this.hideModal(modalId);
     this.router.navigate([path]);
   }
 

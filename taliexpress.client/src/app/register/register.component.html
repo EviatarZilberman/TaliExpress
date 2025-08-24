@@ -1,9 +1,3 @@
-<button class="btn btn-primary" (click)="showModal('userRegisterModal')">Register</button>
-
-<div id="userRegisterModal" class="modal" (click)="hideModal('userRegisterModal')">
-  <div class="modal-content" (click)="$event.stopPropagation()">
-    <span class="close" (click)="hideModal('userRegisterModal')">&times;</span>
-
     <div class="container">
       <h2 class="heading">Template Driven Form</h2>
       <form #userForm="ngForm" (ngSubmit)="registerUser(user)">
@@ -37,17 +31,42 @@
                  class="text-danger">
               Phone Number is required.
             </div>
+
+            <div>
+              <label for="email">Email</label>
+              <input type="text" class="form-control" id="email" name="email"
+                     [(ngModel)]="user.email" required>
+              <div *ngIf="userForm.controls['email']?.touched && userForm.controls['email']?.invalid"
+                   class="text-danger">
+                Email is required.
+              </div>
+            </div>
+
+            <div>
+              <label for="password">Password</label>
+              <input type="text" class="form-control" id="password" name="password"
+                     [(ngModel)]="user.password" required>
+              <div *ngIf="userForm.controls['password']?.touched && userForm.controls['password']?.invalid"
+                   class="text-danger">
+                Password is required.
+              </div>
+            </div>
+
+            <div>
+              <label for="confirmPassword">Confirm Password</label>
+              <input type="text" class="form-control" id="tempPassword" name="tempPassword"
+                     [(ngModel)]="user.tempPassword" required>
+              <div *ngIf="userForm.controls['tempPassword']?.touched && userForm.controls['tempPassword']?.invalid"
+                   class="text-danger">
+                Confirm Password is required.
+              </div>
+            </div>
           </div>
         </div>
 
         <div>
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
-
-        <div>
-          <button type="submit" class="btn btn-primary" (click)="hideModal('userRegisterModal')">Close</button>
+          <input type="submit" value="submit" />
+          <!--<button type="submit" class="btn btn-primary">Submit</button>-->
         </div>
       </form>
     </div>
-  </div>
-</div>
