@@ -9,6 +9,6 @@ namespace TaliExpress.Server.Managers
         public abstract ReturnCode Update([FromBody] T item);
         public abstract ReturnCode Delete([FromBody] string id);
         public abstract ReturnCode GetAll(ref List<T>? items);
-        public abstract ReturnCode Get([FromBody] string commonId, ref T? item);
+        public abstract ReturnCode Get([FromBody] string commonId, out T? item);
     }
 }

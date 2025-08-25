@@ -11,12 +11,8 @@ namespace TaliExpress.Server.Models
         public string Password { get; set; } = string.Empty;
         public string TempPassword { get; set; } = string.Empty;
         public string PhoneNumber { get; set; } = string.Empty;
-        public List<Address> Adresses { get; set; } = new List<Address>();
         public int Status { get; set; } = (int)UserStatus.Inactive;
-        public List<PaymentDetails> PaymentDetailsList { get; set; } = new List<PaymentDetails>();
-        public int Coins { get; set; } = 0;
-        public Cart Cart { get; set; } = new Cart();
-        public Store? Store { get; set; } = null;
-        public UserShadow Shadow { get; set; } = new UserShadow();
+        public int LoginTries { get; set; } = 0;
+        public DateTime LastLogin {  get; set; } = DateTime.MinValue;
     }
 }

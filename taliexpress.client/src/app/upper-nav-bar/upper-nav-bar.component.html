@@ -23,22 +23,25 @@
           </ul>
         </li>
         <li>
-          <a href="#">Contact</a>
-        </li>
-        <li class="search-bar">
-          <input type="text" placeholder="Search..." />
-          <button>Search</button>
+          <a (click)="showModal('registerOrLogin')">Connect</a>
         </li>
       </ul>
+      <div class="nav-center">
+        <div class="search-bar">
+          <input type="text" id="product" placeholder="Search..." />
+          <button (click)="searchProduct('product')">Search</button>
+        </div>
+      </div>
     </nav>
-  </div>
-
-  <!-- //-- right side login and register button-->
-  <div style="margin-left: 90%; width: 10%; display: inline-block;">
-    <button class="button btn btn-primary" (click)="showModal('registerOrLogin')">Connect</button>
   </div>
 </div>
 
+<!-- //-- right side login and register button-->
+<!--<div style="margin-left: 90%; width: 10%; display: inline-block;">
+    <button class="button btn btn-primary" (click)="showModal('registerOrLogin')">Connect</button>
+  </div>
+</div>-->
+<!-- Register or login modal -->
 <div id="registerOrLogin" class="modal" (click)="hideModal('registerOrLogin')">
   <div class="modal-content" (click)="$event.stopPropagation()">
     <span class="close" (click)="hideModal('registerOrLogin')">&times;</span>

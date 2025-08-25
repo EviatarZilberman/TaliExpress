@@ -23,15 +23,6 @@ export class RegisterComponent extends BaseComponent {
 
   registerUser(user: User): void | string {
     if (user === null) return 'User data is null';
-    this.apiRequester.CallAPI(user, 'users', 'register').subscribe({
-      next: (response) => {
-        console.log('Login success:', response);
-        // handle login success (save token, redirect, etc.)
-      },
-      error: (err) => {
-        console.error('Login failed:', err);
-      }
-    });
-    return;
+    return this.apiRequester.APIReturn(user, 'users', 'register', 'p');
   }
 }

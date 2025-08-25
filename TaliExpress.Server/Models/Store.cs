@@ -1,8 +1,8 @@
 ﻿namespace TaliExpress.Server.Models
 {
-    public class Store
+    public class Store : UserOwner
     {
-        List<Product> Products { get; set; } = new List<Product>();
+        LinkedList<Product> Products { get; set; } = new LinkedList<Product>();
         public string Name { get; set; } = string.Empty;
         public string[] ShipTo { get; set; } = new string[] { "All" };
     }

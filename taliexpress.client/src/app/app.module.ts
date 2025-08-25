@@ -6,14 +6,16 @@ import { AppComponent } from './app.component';
 import { RegisterComponent } from './register/register.component';
 import { UpperNavBarComponent } from './upper-nav-bar/upper-nav-bar.component';
 import { LoginComponent } from './login/login.component';
-import { FormsModule } from '@angular/forms'; 
+import { FormsModule } from '@angular/forms';
+import { ProductComponent } from './product/product.component'; 
 
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
     UpperNavBarComponent,
-    LoginComponent
+    LoginComponent,
+    ProductComponent
   ],
   imports: [
     BrowserModule,

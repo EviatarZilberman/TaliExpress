@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { BaseComponent } from '../BaseComponent/baseComponent.component';
 import { HttpClient } from '@angular/common/http';
+import { HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { APIRequesterComponent } from '../apirequester/apirequester.component';
 import { User } from '../../../Classes/User';
@@ -12,36 +13,17 @@ import { User } from '../../../Classes/User';
   styleUrl: './login.component.css'
 })
 export class LoginComponent extends BaseComponent {
+  public user: User = new User();
   constructor(private apiRequester: APIRequesterComponent, protected override router: Router, protected httpClient: HttpClient) {
     super(httpClient, router);
   };
 
-  //login(userName: string, password: string): void | string | undefined {
-  //  const user: User = {
-  //    email: userName,
-  //    password: password,
-  //    firstName: '',
-  //    lastName: '',
-  //    phoneNumber: '',
-  //    tempPassword: ''
-  //  }
-  //  const answer: string = this.apiRequester.CallAPI(user, 'users', 'register');
-  //  if (answer === 'err') {
-  //    return alert('Error calling API');
-  //  }
-  //  else {
-  //    return answer;
-  //  }
-  //  return undefined;
-  //  //  .subscribe({
-  //  //  next: (response) => {
-  //  //    console.log('Response from API:', response);
-  //  //    alert(response.message);
-  //  //  },
-  //  //  error: (err) => {
-  //  //    console.error('Error from API:', err);
-  //  //    alert('Registration failed');
-  //  //  }
-  //  //});
-  //}
+  login(user: User): void | string | undefined | User {
+
+    let params = new HttpParams()
+      .set('email', user.email)
+      .set('password', user.password);
+    const response: any = this.apiRequester.APIReturn(params, 'users', 'login', 'g');
+    return response;
+  }
 }

@@ -216,3 +216,29 @@ ul {
   cursor: pointer;
 }
 
+nav {
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex; /* FLEX LAYOUT */
+  align-items: center;
+  justify-content: space-between; /* space between left and center */
+  border: 2px solid #EBECF1;
+  border-radius: 30px;
+  padding: 0 20px;
+  width: 80%; /* adjust width as needed */
+}
+
+  nav .nav-left ul {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+
+  nav .nav-center {
+    flex: 1; /* take remaining space */
+    display: flex;
+    justify-content: center; /* center search bar */
+  }

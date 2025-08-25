@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { BaseComponent } from '../BaseComponent/baseComponent.component';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Product } from '../../../Classes/Product';
 
 @Component({
   selector: 'app-upper-nav-bar',
@@ -15,4 +16,8 @@ export class UpperNavBarComponent extends BaseComponent {
   constructor(protected override router: Router, protected httpClient: HttpClient) {
     super(httpClient, router);
   };
+
+  searchProduct(description: string): Product[] | string {
+    return 'null';
+  }
 }

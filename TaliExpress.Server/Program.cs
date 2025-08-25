@@ -1,16 +1,9 @@
 using ConfigApp.Classes;
-using System.Configuration;
 using TaliExpress.Server.Enums;
-//using TaliExpress.Server.Interfaces;
-using TaliExpress.Server.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
-//builder.Services.AddScoped<IManager, User>();
-
-// Add services to the container.
-
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

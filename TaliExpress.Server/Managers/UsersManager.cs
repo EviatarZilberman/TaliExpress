@@ -15,10 +15,11 @@ namespace TaliExpress.Server.Managers
             throw new NotImplementedException();
         }
 
-        public override ReturnCode Get([FromBody] string userId, ref User? user)
+        public override ReturnCode Get([FromBody] string userId, out User? user)
         {
             if (string.IsNullOrEmpty(userId))
             {
+                user = null;
                 return ReturnCode.General_Error;
             }
             FilterDefinition<User> filter = FilterCreator<User>.CreateFilter(AttributesAndWords.Email.ToString(), userId);
@@ -29,6 +30,7 @@ namespace TaliExpress.Server.Managers
             }
             else
             {
+                user = null;
                 return ReturnCode.General_Error;
             }
         }
