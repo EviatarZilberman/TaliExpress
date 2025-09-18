@@ -75,5 +75,11 @@ namespace TaliExpress.Server.Managers
                 return ReturnCode.General_Error;
             }
         }
+
+        public ReturnCode FreezeMembership([FromBody] User user)
+        {
+            user.Status = (int)UserStatus.Freezed;
+            return this.Update(user);
+        }
     }
 }

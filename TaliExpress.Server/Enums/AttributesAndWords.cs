@@ -3,6 +3,6 @@
     public enum AttributesAndWords
     {
         Email,
-
+        Username,
     }
 }

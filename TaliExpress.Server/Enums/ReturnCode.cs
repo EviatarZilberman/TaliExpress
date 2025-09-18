@@ -7,5 +7,7 @@
         Incorrect_password,
         No_parameters_entered,
         No_user_found,
+        No_cart_found,
+        Id_is_null_or_empty,
     }
 }
