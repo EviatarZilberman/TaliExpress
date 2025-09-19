@@ -12,7 +12,10 @@ namespace TaliExpress.Server.Managers
     {
         public override ReturnCode Delete([FromBody] string userId)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(userId)) return ReturnCode.Parameter_is_null_or_empty;
+            if (MongoDBServiceManager<User>.Instance(ConfigurationsKeeper.Instance().GetValue(Utils.DB_name.ToString()), CollectionNames.Users.ToString()).Delete(userId) == MongoDBReturnCodes.Success) return ReturnCode.Success;
+            return ReturnCode.General_Error;
+
         }
 
         public override ReturnCode Get([FromBody] string userId, out User? user)

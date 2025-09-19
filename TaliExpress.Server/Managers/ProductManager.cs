@@ -12,7 +12,7 @@ namespace TaliExpress.Server.Managers
     {
         public override ReturnCode Delete([FromBody] string productId)
         {
-            if (string.IsNullOrEmpty(productId)) return ReturnCode.Id_is_null_or_empty;
+            if (string.IsNullOrEmpty(productId)) return ReturnCode.Parameter_is_null_or_empty;
             if (MongoDBServiceManager<User>.Instance(ConfigurationsKeeper.Instance().GetValue(Utils.DB_name.ToString()), CollectionNames.Products.ToString()).Delete(productId) == MongoDBReturnCodes.Success) return ReturnCode.Success;
             return ReturnCode.General_Error;
 
