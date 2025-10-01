@@ -92,5 +92,17 @@ namespace TaliExpress.Server.Managers
             }
             return ReturnCode.General_Error;
         }
+
+        public ReturnCode RemoveAllProducts(string cartId)
+        {
+            if (MongoDBServiceManager<Cart>.Instance(ConfigurationsKeeper.Instance().GetValue(Utils.DB_name.ToString()), CollectionNames.Carts.ToString()).Get(cartId, out Cart? cart) == MongoDBReturnCodes.Success)
+            {
+                if (cart == null) return ReturnCode.No_cart_found;
+                cart.Products.Clear();
+                this.Update(cart);
+                return ReturnCode.Success;
+            }
+            return ReturnCode.General_Error;
+        }
     }
 }
