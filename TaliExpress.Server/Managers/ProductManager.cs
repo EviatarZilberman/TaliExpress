@@ -25,7 +25,7 @@ namespace TaliExpress.Server.Managers
                 product = null;
                 return ReturnCode.General_Error;
             }
-            FilterDefinition<Product> filter = FilterCreator<Product>.CreateFilter(AttributesAndWords.Username.ToString(), productId);
+            FilterDefinition<Product> filter = FilterCreator<Product>.CreateEqualFilter(AttributesAndWords.Username.ToString(), productId);
             if (MongoDBServiceManager<Product>.Instance(ConfigurationsKeeper.Instance().GetValue(Utils.DB_name.ToString()), CollectionNames.Products.ToString()).Get(filter, out Product? tempProduct) == MongoDBReturnCodes.Success)
             {
                 product = tempProduct;

@@ -16,7 +16,7 @@ namespace TaliExpress.Server.Managers
             {
                 return ReturnCode.General_Error;
             }
-            FilterDefinition<Cart> filter = FilterCreator<Cart>.CreateFilter(AttributesAndWords.Username.ToString(), id);
+            FilterDefinition<Cart> filter = FilterCreator<Cart>.CreateEqualFilter(AttributesAndWords.Username.ToString(), id);
             if (MongoDBServiceManager<Cart>.Instance(ConfigurationsKeeper.Instance().GetValue(Utils.DB_name.ToString()), CollectionNames.Carts.ToString()).Delete(id) == MongoDBReturnCodes.Success)
             {
                 return ReturnCode.Success;

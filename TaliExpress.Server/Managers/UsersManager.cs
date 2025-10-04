@@ -25,7 +25,7 @@ namespace TaliExpress.Server.Managers
                 user = null;
                 return ReturnCode.General_Error;
             }
-            FilterDefinition<User> filter = FilterCreator<User>.CreateFilter(AttributesAndWords.Email.ToString(), userId);
+            FilterDefinition<User> filter = FilterCreator<User>.CreateEqualFilter(AttributesAndWords.Email.ToString(), userId);
             if (MongoDBServiceManager<User>.Instance(ConfigurationsKeeper.Instance().GetValue(Utils.DB_name.ToString()), CollectionNames.Users.ToString()).Get(filter, out User? tempUser) == MongoDBReturnCodes.Success)
             {
                 user = tempUser;
