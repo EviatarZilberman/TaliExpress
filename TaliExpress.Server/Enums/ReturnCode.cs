@@ -9,5 +9,8 @@
         No_user_found,
         No_cart_found,
         Parameter_is_null_or_empty,
+        No_product_found,
+        Item_successfully_added_to_the_cart,
+        Item_successfully_removed_from_the_cart,
     }
 }

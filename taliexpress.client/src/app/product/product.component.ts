@@ -16,8 +16,24 @@ export class ProductComponent extends BaseComponent {
     super(httpClient, router);
   }
 
-  searchProduct(productDescription: string): void | Product[] {
+  public searchProduct(productDescription: string): void | Product[] {
     if (productDescription === null) return;
-    return this.apiRequester.APIReturn(productDescription, 'Products', 'searchProduct', 'g');
+    return this.apiRequester.APIReturn(productDescription, 'SearchProducts', 'SearchByParameters', 'g');
+  }
+
+  public addToCart(cartId: string, productId: string, amount: number): string {
+    if (cartId === null) return 'No cart chosen!';
+    const items: any[] = [ cartId, productId, amount ];
+    const result: string = this.apiRequester.APIReturn(items, 'Cart', 'AddProductToCart', 'p');
+
+    return result;
+  }
+
+  public RemoveFromCart(cartId: string, productId: string, amount: number): string {
+    if (cartId === null) return 'No cart chosen!';
+    const items: any[] = [cartId, productId, amount];
+    const result: string = this.apiRequester.APIReturn(items, 'Cart', 'RemoveProductFromCart', 'p');
+
+    return result;
   }
 }

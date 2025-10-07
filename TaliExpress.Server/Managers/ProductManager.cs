@@ -23,7 +23,7 @@ namespace TaliExpress.Server.Managers
             if (string.IsNullOrEmpty(productId))
             {
                 product = null;
-                return ReturnCode.General_Error;
+                return ReturnCode.No_parameters_entered;
             }
             FilterDefinition<Product> filter = FilterCreator<Product>.CreateEqualFilter(AttributesAndWords.Username.ToString(), productId);
             if (MongoDBServiceManager<Product>.Instance(ConfigurationsKeeper.Instance().GetValue(Utils.DB_name.ToString()), CollectionNames.Products.ToString()).Get(filter, out Product? tempProduct) == MongoDBReturnCodes.Success)
@@ -34,6 +34,25 @@ namespace TaliExpress.Server.Managers
             else
             {
                 product = null;
+                return ReturnCode.General_Error;
+            }
+        }
+
+        public ReturnCode GetFiltered(FilterDefinition<Product> filters, out List<Product>? products)
+        {
+            //if (string.IsNullOrEmpty(productId))
+            //{
+            //    products = null;
+            //    return ReturnCode.No_parameters_entered;
+            //}
+            if (MongoDBServiceManager<Product>.Instance(ConfigurationsKeeper.Instance().GetValue(Utils.DB_name.ToString()), CollectionNames.Products.ToString()).GetListByFilter(out List<Product>? tempProducts, filters) == MongoDBReturnCodes.Success)
+            {
+                products = tempProducts;
+                return ReturnCode.Success;
+            }
+            else
+            {
+                products = null;
                 return ReturnCode.General_Error;
             }
         }
@@ -78,7 +97,5 @@ namespace TaliExpress.Server.Managers
                 return ReturnCode.General_Error;
             }
         }
-
-
     }
 }
