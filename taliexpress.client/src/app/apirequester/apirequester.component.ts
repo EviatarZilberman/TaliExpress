@@ -6,13 +6,14 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class APIRequesterComponent {
-  private apiUrl = 'https://localhost:5001';
+  private apiUrl = 'http://localhost:5001';
 
   constructor(private http: HttpClient) { }
 
   private postCallAPI(item: any, controller: string, method: string): Observable<any> {
+    const url: string = `${this.apiUrl}/${controller}/${method}`;
     const answer: any = this.http.post<any>(
-      `${this.apiUrl}/${controller}/${method}`,
+      url,
       item, // pass the object directly
       {
         headers: {

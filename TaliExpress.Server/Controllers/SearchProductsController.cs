@@ -6,6 +6,8 @@ using TaliExpress.Server.Models;
 
 namespace TaliExpress.Server.Controllers
 {
+    [ApiController]
+    [Route("[controller]")]
     public class SearchProductsController : Controller
     {
         private readonly string CategoryAttribute = "Category";
@@ -20,8 +22,8 @@ namespace TaliExpress.Server.Controllers
         };
 
         [HttpGet]
-        [Route("searchProduct")]
-        public IActionResult SearchByParameters([FromBody] string searchWords, List<string> categories, string listOrder)
+        [Route("searchProductByParameters")]
+        public IActionResult SearchByParameters([FromBody] string searchWords, List<string> categories = null, string listOrder = null)
         {
             string[] words = searchWords.Split(' ', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
             List<FilterDefinition<Product>> filters = new List<FilterDefinition<Product>>();

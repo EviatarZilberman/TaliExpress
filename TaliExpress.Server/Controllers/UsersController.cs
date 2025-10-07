@@ -12,6 +12,7 @@ namespace TaliExpress.Server.Controllers
         private UsersManager mUsersManager { get; set; } = new UsersManager();
 
         [HttpPost("register")]
+        [Route("register")]
         public async Task<IActionResult> Register([FromBody] User user)
         {
             await this.mUsersManager.Insert(user);
@@ -20,6 +21,7 @@ namespace TaliExpress.Server.Controllers
         }
 
         [HttpGet("login")]
+        [Route("login")]
         public IActionResult? Login(string email, string password)
         {
             //return Ok();

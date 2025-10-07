@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Product } from '../../../Classes/Product';
 import { APIRequesterComponent } from '../apirequester/apirequester.component';
+import { SearchService } from '../../../Services/SearchService';
 
 @Component({
   selector: 'app-upper-nav-bar',
@@ -13,9 +14,10 @@ import { APIRequesterComponent } from '../apirequester/apirequester.component';
 })
 export class UpperNavBarComponent extends BaseComponent {
   override title: string = 'taliexpress.client.navbarComponent';
-
-  constructor(private apiRequester: APIRequesterComponent, protected override router: Router, protected httpClient: HttpClient) {
+  private searchService: SearchService | undefined;
+  constructor(private apiRequester: APIRequesterComponent, protected override router: Router, protected httpClient: HttpClient, searchService: SearchService) {
     super(httpClient, router);
+    this.searchService = searchService;
   //constructor(protected override router: Router, protected httpClient: HttpClient) {
   //  super(httpClient, router);
   };
@@ -26,6 +28,7 @@ export class UpperNavBarComponent extends BaseComponent {
 
   searchProduct(description: string): void | Product[] {
     if (description === null) return;
-    return this.apiRequester.APIReturn(description, 'SearchProducts', 'searchProduct', 'g');
+    this.searchService?.parameterObserver(description);
+    //return this.apiRequester.APIReturn(description, 'SearchProducts', 'searchProductByParameters', 'g');
   }
 }

@@ -20,6 +20,7 @@ import { ProductComponent } from './product/product.component';
   imports: [
     BrowserModule,
     HttpClientModule,
+    ProductComponent,
     AppRoutingModule,
     FormsModule
   ],
