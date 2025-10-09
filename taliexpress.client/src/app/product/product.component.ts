@@ -63,6 +63,7 @@ import { BaseComponent } from '../BaseComponent/baseComponent.component';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { SearchService } from '../../../Services/SearchService';
+import { APIReturnKeys } from '../../../Enums/APIReturnKeys';
 
 @Component({
   selector: 'app-product',
@@ -95,7 +96,7 @@ export class ProductComponent extends BaseComponent implements OnInit, OnDestroy
 
   private searchByTerm(term: string): void {
     this.apiRequester
-      .APIReturn(term, 'SearchProducts', 'SearchByParameters', 'g')
+      .APIReturn(term, 'SearchProducts', 'SearchByParameters', APIReturnKeys.Get)
       .subscribe({
         next: (result: Product[]) => {
           this.products = result;

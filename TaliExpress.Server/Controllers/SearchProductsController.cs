@@ -21,19 +21,21 @@ namespace TaliExpress.Server.Controllers
             "The", "Is", "In", "At", "Of", "On", "And", "A", "To", "It", "For", "With", "As", "By", "That", "This", "An", "What", "Where", "when", "Which", "Who", "Whom", "Why", "How"
         };
 
-        [HttpGet]
-        [Route("searchProductByParameters")]
-        public IActionResult SearchByParameters([FromBody] string searchWords, List<string> categories = null, string listOrder = null)
+        /*  [HttpGet]
+          [Route("searchProductByParameters")]*/
+        [HttpGet("searchProductByParameters")]
+        public IActionResult SearchByParameters([FromQuery] string searchWords/*, List<string> categories = null, string listOrder = null*/)
+        //public IActionResult SearchByParameters([FromBody] string searchWords/*, List<string> categories = null, string listOrder = null*/)
         {
             string[] words = searchWords.Split(' ', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
             List<FilterDefinition<Product>> filters = new List<FilterDefinition<Product>>();
-            if (categories != null && categories.Count > 0)
-            {
-                foreach (string category in categories)
-                {
-                    filters.Add(FilterCreator<Product>.CreateEqualFilter(CategoryAttribute, category));
-                }
-            }
+            //if (categories != null && categories.Count > 0)
+            //{
+            //    foreach (string category in categories)
+            //    {
+            //        filters.Add(FilterCreator<Product>.CreateEqualFilter(CategoryAttribute, category));
+            //    }
+            //}
             foreach (string word in words)
             {
                 if (CommonLowerWords.Contains(word) || CommonCapitalWords.Contains(word))
@@ -49,7 +51,8 @@ namespace TaliExpress.Server.Controllers
                 return StatusCode(500, "An error occurred while searching for products.");
             }
 
-            return Ok(ListOrder(listOrder, products));
+            return Ok(products);
+            //return Ok(ListOrder(listOrder, products));
         }
 
         private List<Product>? ListOrder(string listOrder, List<Product>? products)

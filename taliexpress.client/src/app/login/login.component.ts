@@ -5,6 +5,7 @@ import { HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { APIRequesterComponent } from '../apirequester/apirequester.component';
 import { User } from '../../../Classes/User';
+import { APIReturnKeys } from '../../../Enums/APIReturnKeys';
 
 @Component({
   selector: 'app-login',
@@ -19,11 +20,10 @@ export class LoginComponent extends BaseComponent {
   };
 
   login(user: User): void | string | undefined | User {
-
     let params = new HttpParams()
       .set('email', user.email)
       .set('password', user.password);
-    const response: any = this.apiRequester.APIReturn(params, 'users', 'login', 'g');
+    const response: any = this.apiRequester.APIReturn(params, 'users', 'login', APIReturnKeys.Get);
     return response;
   }
 }

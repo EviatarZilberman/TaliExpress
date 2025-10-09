@@ -14,13 +14,12 @@ import { ProductComponent } from './product/product.component';
     AppComponent,
     RegisterComponent,
     UpperNavBarComponent,
-    LoginComponent,
-    ProductComponent
+    LoginComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule,
     ProductComponent,
+    HttpClientModule,
     AppRoutingModule,
     FormsModule
   ],

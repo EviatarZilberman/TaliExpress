@@ -18,17 +18,12 @@ export class UpperNavBarComponent extends BaseComponent {
   constructor(private apiRequester: APIRequesterComponent, protected override router: Router, protected httpClient: HttpClient, searchService: SearchService) {
     super(httpClient, router);
     this.searchService = searchService;
-  //constructor(protected override router: Router, protected httpClient: HttpClient) {
-  //  super(httpClient, router);
   };
-
-  //searchProduct(description: string): Product[] | string {
-  //  return 'null';
-  //}
 
   searchProduct(description: string): void | Product[] {
     if (description === null) return;
-    this.searchService?.parameterObserver(description);
-    //return this.apiRequester.APIReturn(description, 'SearchProducts', 'searchProductByParameters', 'g');
+    const map: Map<string, string> = new Map<string, string>();
+    map.set('searchWords', description);
+    this.searchService?.parameterObserver(map);
   }
 }
