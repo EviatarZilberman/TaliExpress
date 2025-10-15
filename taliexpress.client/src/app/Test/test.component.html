@@ -1,0 +1,14 @@
+<h1>{{ title }}</h1> <!--// string interpolation-->
+<h2>{{ var1 + var2 }}</h2>
+
+<img [src] ="imageUrl" /> <!--// property binding -->
+
+<br />
+<input [(ngModel)] ="favoriteAnimal" /> <!--// two-way binding:
+                                          1. sets properties in the code behind
+                                          2. listens to the DOM -->
+
+<!-- ngModel: bind the properties from the back to the front and vice versa.
+              works for input tag only! -->
+
+<p>{{ favoriteAnimal }}</p>

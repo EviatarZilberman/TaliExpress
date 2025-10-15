@@ -7,18 +7,16 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class SearchService {
 
-  private searchParameter = new BehaviorSubject<string>(''); // BehaviorSubject keeps only the last parameter.
-  public data: any;
+  private searchParameter = new BehaviorSubject<any>(null); // BehaviorSubject keeps only the last parameter.
 
 
-  public listenSearchParameter(): Observable<string> {
+  public listenSearchParameter(): Observable<any> {
     return this.searchParameter.asObservable();
 
   }
 
 
   public parameterObserver(value: any) {
-    this.data = value;
     this.searchParameter.next(value);
   }
 }

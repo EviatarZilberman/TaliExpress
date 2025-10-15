@@ -86,25 +86,38 @@ export class ProductComponent extends BaseComponent implements OnInit, OnDestroy
 
   ngOnInit(): void {
     // Subscribe ONCE
-    this.searchSub = this.searchService.listenSearchParameter().subscribe(term => {
-      if (term) {
-        console.log('ProductComponent got search term:', term);
-        this.searchByTerm(term);
+    this.searchSub = this.searchService.listenSearchParameter().subscribe(params => {
+      if (params) {
+        console.log('ProductComponent got search params:', params);
+        this.searchByTerm(params);
       }
     });
   }
 
-  private searchByTerm(term: string): void {
+  private searchByTerm(params: any): void {
     this.apiRequester
-      .APIReturn(term, 'SearchProducts', 'SearchByParameters', APIReturnKeys.Get)
+      .APIReturn(params, 'SearchProducts', 'SearchByParameters', APIReturnKeys.Get)
       .subscribe({
         next: (result: Product[]) => {
           this.products = result;
           console.log('Products found:', this.products);
-        }
-        //, error: err => console.error(err)
+        },
+        error: (err: any) => console.error(err)
       });
   }
+
+
+  //private searchByTerm(term: string): void {
+  //  this.apiRequester
+  //    .APIReturn(term, 'SearchProducts', 'SearchByParameters', APIReturnKeys.Get)
+  //    .subscribe({
+  //      next: (result: Product[]) => {
+  //        this.products = result;
+  //        console.log('Products found:', this.products);
+  //      }
+  //      //, error: err => console.error(err)
+  //    });
+  //}
 
   ngOnDestroy(): void {
     this.searchSub?.unsubscribe();
