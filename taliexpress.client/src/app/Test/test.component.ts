@@ -4,7 +4,8 @@ import { FormsModule } from '@angular/forms';
 interface Pokemon {
   id: number,
   name: string,
-  type: string
+  type: string,
+isCool: boolean
 }
 
 @Component({
@@ -25,27 +26,32 @@ export class TestComponent {
     {
       id: 1,
       name: 'Bulbasaur',
-      type: 'Grass/Poison'
+      type: 'Grass/Poison',
+      isCool: true
     },
     {
       id: 2,
       name: 'Charmander',
-      type: 'Fire'
+      type: 'Fire',
+      isCool: false
     },
     {
       id: 3,
       name: 'Squirtle',
-      type: 'Water'
+      type: 'Water',
+      isCool: true
     },
     {
       id: 4,
       name: 'Pikachu',
-      type: 'Electric'
+      type: 'Electric',
+      isCool: true
     },
     {
       id: 5,
       name: 'Eevee',
-      type: 'Normal'
+      type: 'Normal',
+      isCool: false
     }]
 
 
@@ -59,4 +65,6 @@ export class TestComponent {
   public handleChange(event: any): void {
     this.pokemonName = event.target.value;
   }
+
+  
 }

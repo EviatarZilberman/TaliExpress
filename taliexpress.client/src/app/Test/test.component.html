@@ -34,6 +34,7 @@
   <h2>{{ pokemonName }}</h2>
 </ng-template>
 
+<!-- ngClass & ngFor & table & style & ngStyle -->
 <table>
   <thead>
     <tr>
@@ -44,8 +45,14 @@
   </thead>
   <tbody>
     <tr *ngFor="let pokemon of pokemons; let i = index">
-      <td>{{ pokemon.id }}</td>
-      <td>{{ pokemon.name }}</td>
+      <td [class.cool-bool]="!pokemon.isCool">{{ pokemon.id }}</td>
+      <td [style.backgroundColor]="(pokemon.id > 2 ? 'green' : 'red')">{{ pokemon.name }}</td>
+      <td>{{ pokemon.type }}</td>
+    </tr>
+    <br />
+    <tr *ngFor="let pokemon of pokemons; let i = index">
+      <td [ngClass]="{'cool-bool' : pokemon.isCool}">{{ pokemon.id }}</td>
+      <td [ngStyle]="{backgroundColor: (pokemon.isCool ? 'purple' : 'blue')}">{{ pokemon.name }}</td>
       <td>{{ pokemon.type }}</td>
     </tr>
   </tbody>
