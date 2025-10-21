@@ -38,7 +38,7 @@
             ],
             "styles": [
               "src/styles.css",
-              "src/app/upper-nav-bar/upper-nav-bar.component.css"
+              "src/app/shared-modules/upper-nav-bar/upper-nav-bar.component.css"
             ],
             "scripts": []
           },
