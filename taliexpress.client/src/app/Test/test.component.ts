@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 interface Pokemon {
@@ -15,7 +15,7 @@ isCool: boolean
   standalone: false
 })
 
-export class TestComponent {
+export class TestComponent implements OnInit {
   var1: number = 1;
   var2: number = 2;
   title: string = 'TestComponent';
@@ -66,5 +66,6 @@ export class TestComponent {
     this.pokemonName = event.target.value;
   }
 
-  
+  ngOnInit(): void {
+  }
 }
