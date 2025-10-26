@@ -4,8 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './register/register.component';
-//import { PokemonBaseModule } from './pokemon-base/pokemon-base.module';
-//import { PokemonListComponent } from './pokemon-base/pokemon-list/pokemon-list.component';
+import { PokemonBaseModule } from './pokemon-base/pokemon-base.module';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 import { ProductComponent } from './product/product.component'; 
@@ -19,7 +18,6 @@ import { SharedModulesModule } from './shared-modules/shared-modules.module';
     RegisterComponent,
     LoginComponent,
     TestComponent,
-    //PokemonBaseModule,
   ],
   imports: [
     BrowserModule,
@@ -28,8 +26,7 @@ import { SharedModulesModule } from './shared-modules/shared-modules.module';
     AppRoutingModule,
     FormsModule,
     SharedModulesModule,
-    //PokemonListComponent
-    //PokemonBaseModule,
+    PokemonBaseModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
