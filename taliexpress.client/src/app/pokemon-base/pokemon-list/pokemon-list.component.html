@@ -1,3 +1,4 @@
+
 <table>
   <thead>
     <tr>
@@ -7,16 +8,19 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let pokemon of pokemons; let i = index">
-      <td [class.cool-bool]="!pokemon.isCool">{{ pokemon.id }}</td>
-      <td [style.backgroundColor]="(pokemon.id > 2 ? 'green' : 'red')">{{ pokemon.name }}</td>
-      <td>{{ pokemon.type }}</td>
+    <tr *ngFor="let pokemon of pokemons" >
+      <app-pokemon-detail [detail]="pokemon"></app-pokemon-detail>
     </tr>
-    <br />
-    <tr *ngFor="let pokemon of pokemons; let i = index">
-      <td [ngClass]="{'cool-bool' : pokemon.isCool}">{{ pokemon.id }}</td>
-      <td [ngStyle]="{backgroundColor: (pokemon.isCool ? 'purple' : 'blue')}">{{ pokemon.name }}</td>
-      <td>{{ pokemon.type }}</td>
-    </tr>
+  <!--<tr *ngFor="let pokemon of pokemons; let i = index">
+    <td [class.cool-bool]="!pokemon.isCool">{{ pokemon.id }}</td>
+    <td [style.backgroundColor]="(pokemon.id > 2 ? 'green' : 'red')">{{ pokemon.name }}</td>
+    <td>{{ pokemon.type }}</td>
+  </tr>
+  <br />
+  <tr *ngFor="let pokemon of pokemons; let i = index">
+    <td [ngClass]="{'cool-bool' : pokemon.isCool}">{{ pokemon.id }}</td>
+    <td [ngStyle]="{backgroundColor: (pokemon.isCool ? 'purple' : 'blue')}">{{ pokemon.name }}</td>
+    <td>{{ pokemon.type }}</td>
+  </tr>-->
   </tbody>
 </table>

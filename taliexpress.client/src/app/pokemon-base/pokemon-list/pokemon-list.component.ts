@@ -1,11 +1,5 @@
 import { Component } from '@angular/core';
-
-interface Pokemon {
-  id: number,
-  name: string,
-  type: string,
-  isCool: boolean
-}
+import { Pokemon } from '../../../../Classes/Pokemon';
 
 @Component({
   selector: 'app-pokemon-list',
