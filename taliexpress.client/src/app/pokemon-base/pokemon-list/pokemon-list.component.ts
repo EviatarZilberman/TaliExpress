@@ -40,4 +40,10 @@ export class PokemonListComponent {
       isCool: false
     }]
   constructor() { }
+
+  handleRemove(event: Pokemon) {
+    this.pokemons = this.pokemons.filter((pokemon: Pokemon) => {
+      return pokemon.id !== event.id
+    });
+  }
 }

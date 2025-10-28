@@ -9,7 +9,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let pokemon of pokemons" >
-      <app-pokemon-detail [detail]="pokemon"></app-pokemon-detail>
+      <app-pokemon-detail [detail]="pokemon" (remove)="handleRemove($event)"></app-pokemon-detail>
     </tr>
   <!--<tr *ngFor="let pokemon of pokemons; let i = index">
     <td [class.cool-bool]="!pokemon.isCool">{{ pokemon.id }}</td>

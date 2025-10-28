@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Pokemon } from '../../../../Classes/Pokemon';
 
 
@@ -9,12 +9,19 @@ import { Pokemon } from '../../../../Classes/Pokemon';
   styleUrl: './pokemon-detail.component.css'
 })
 export class PokemonDetailComponent implements OnInit {
-  @Input()
+  @Input() // passes data to this component.
   detail!: Pokemon;
+
+  @Output()
+  remove: EventEmitter<any> = new EventEmitter<any>();
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  onRemove() {
+    this.remove.emit(this.detail); // Launch the output up.
   }
 
 }
