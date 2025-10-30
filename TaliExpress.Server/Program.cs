@@ -1,4 +1,4 @@
-using ConfigApp.Classes;
+﻿using ConfigApp.Classes;
 using TaliExpress.Server.Enums;
 
 var builder = WebApplication.CreateBuilder(args);
