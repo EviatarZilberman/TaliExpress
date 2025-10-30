@@ -12,7 +12,7 @@ export class PokemonDetailComponent implements OnInit {
   @Input() // passes data to this component.
   detail!: Pokemon;
 
-  @Output()
+  @Output() // Allows to emit events to the parent component.
   remove: EventEmitter<any> = new EventEmitter<any>();
 
   constructor() { }

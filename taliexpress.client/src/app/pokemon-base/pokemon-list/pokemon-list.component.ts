@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+/* Services and dependency injection */
+import { Component, OnInit } from '@angular/core';
 import { Pokemon } from '../../../../Classes/Pokemon';
+import { PokemonService } from '../../services/pokemon-service.service';
 
 @Component({
   selector: 'app-pokemon-list',
@@ -7,39 +9,16 @@ import { Pokemon } from '../../../../Classes/Pokemon';
   styleUrls: ['./pokemon-list.component.css'],
   standalone: false
 })
-export class PokemonListComponent {
-  pokemons: Pokemon[] = [
-    {
-      id: 1,
-      name: 'Bulbasaur',
-      type: 'Grass/Poison',
-      isCool: true
-    },
-    {
-      id: 2,
-      name: 'Charmander',
-      type: 'Fire',
-      isCool: false
-    },
-    {
-      id: 3,
-      name: 'Squirtle',
-      type: 'Water',
-      isCool: true
-    },
-    {
-      id: 4,
-      name: 'Pikachu',
-      type: 'Electric',
-      isCool: true
-    },
-    {
-      id: 5,
-      name: 'Eevee',
-      type: 'Normal',
-      isCool: false
-    }]
-  constructor() { }
+export class PokemonListComponent implements OnInit {
+  pokemons!: Pokemon[]
+  constructor(private pokemonService: PokemonService)
+  {
+
+  }
+
+  ngOnInit(): void {
+    this.pokemons = this.pokemonService.getPokemon();
+  }
 
   handleRemove(event: Pokemon) {
     this.pokemons = this.pokemons.filter((pokemon: Pokemon) => {
