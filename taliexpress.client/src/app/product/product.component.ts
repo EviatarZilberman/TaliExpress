@@ -58,11 +58,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Product } from '../../../Classes/Product';
-import { APIRequesterComponent } from '../apirequester/apirequester.component';
+import { APIRequesterService } from '../../../Services/APIRequesterService';
 import { BaseComponent } from '../BaseComponent/baseComponent.component';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { SearchService } from '../../../Services/SearchService';
+import { TransferDataService } from '../../../Services/TransferDataService';
 import { APIReturnKeys } from '../../../Enums/APIReturnKeys';
 
 @Component({
@@ -73,25 +73,27 @@ import { APIReturnKeys } from '../../../Enums/APIReturnKeys';
 })
 export class ProductComponent extends BaseComponent implements OnInit, OnDestroy {
   private searchSub?: Subscription;
+  public searchParam: any;
   products: Product[] = [];
 
   constructor(
-    private apiRequester: APIRequesterComponent,
+    private apiRequester: APIRequesterService,
     protected override router: Router,
     protected httpClient: HttpClient,
-    private searchService: SearchService
+    private searchService: TransferDataService
   ) {
     super(httpClient, router);
   }
 
   ngOnInit(): void {
     // Subscribe ONCE
-    this.searchSub = this.searchService.listenSearchParameter().subscribe(params => {
-      if (params) {
-        console.log('ProductComponent got search params:', params);
-        this.searchByTerm(params);
-      }
-    });
+    //this.searchSub = this.searchService.listenSearchParameter().subscribe(params => {
+    //  if (params) {
+    //    console.log('ProductComponent got search params:', params);
+    //    this.searchByTerm(params);
+    //  }
+    //});
+    this.searchService.currentDataParameter.subscribe(searchParam => this.searchParam = searchParam);
   }
 
   private searchByTerm(params: any): void {

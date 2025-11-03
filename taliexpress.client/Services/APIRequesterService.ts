@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { URLParametersCreator } from '../../../Classes/URLParametersCreator';
-import { APIReturnKeys } from '../../../Enums/APIReturnKeys';
+//import { URLParametersCreator } from '../Classes/URLParametersCreator';
+import { APIReturnKeys } from '../Enums/APIReturnKeys';
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIRequesterComponent {
+
+export class APIRequesterService {
   private apiUrl = 'http://localhost:5001';
 
   constructor(private http: HttpClient) { }

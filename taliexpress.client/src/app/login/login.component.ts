@@ -3,7 +3,7 @@ import { BaseComponent } from '../BaseComponent/baseComponent.component';
 import { HttpClient } from '@angular/common/http';
 import { HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { APIRequesterComponent } from '../apirequester/apirequester.component';
+import { APIRequesterService } from '../../../Services/APIRequesterService';
 import { User } from '../../../Classes/User';
 import { APIReturnKeys } from '../../../Enums/APIReturnKeys';
 
@@ -15,7 +15,7 @@ import { APIReturnKeys } from '../../../Enums/APIReturnKeys';
 })
 export class LoginComponent extends BaseComponent {
   public user: User = new User();
-  constructor(private apiRequester: APIRequesterComponent, protected override router: Router, protected httpClient: HttpClient) {
+  constructor(private apiRequester: APIRequesterService, protected override router: Router, protected httpClient: HttpClient) {
     super(httpClient, router);
   };
 

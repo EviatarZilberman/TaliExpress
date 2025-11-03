@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { BaseComponent } from '../BaseComponent/baseComponent.component';
-import { APIRequesterComponent } from '../apirequester/apirequester.component';
+import { APIRequesterService } from '../../../Services/APIRequesterService';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { User } from '../../../Classes/User';
@@ -17,7 +17,7 @@ export class RegisterComponent extends BaseComponent {
   override title: string = 'taliexpress.client.registerComponent';
   user: User = new User();
 
-  constructor(private apiRequester: APIRequesterComponent, protected override router: Router, protected httpClient: HttpClient) {
+  constructor(private apiRequester: APIRequesterService, protected override router: Router, protected httpClient: HttpClient) {
     super(httpClient, router);
 
   };
