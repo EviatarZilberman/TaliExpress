@@ -1,22 +1,23 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-//import { URLParametersCreator } from '../Classes/URLParametersCreator';
 import { APIReturnKeys } from '../Enums/APIReturnKeys';
+import { ConfigurationService } from '../Services/ConfigurationService';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class APIRequesterService {
-  private apiUrl = 'http://localhost:5001';
-
-  constructor(private http: HttpClient) { }
+  api!: string;
+  constructor(private http: HttpClient, configurationService: ConfigurationService) {
+    this.api = configurationService.apiBaseUrl;
+}
 
   private postCallAPI(item: any, controller: string, method: string): Observable<any> {
     var url: string = '';
-    if (item instanceof Map) url = `${this.apiUrl}/${controller}/${item}`;
-    else url = `${this.apiUrl}/${controller}/${method}`;
+    if (item instanceof Map) url = `${this.api}/${controller}/${item}`;
+    else url = `${this.api}/${controller}/${method}`;
     const answer: any = this.http.post<any>(
       url,
       item, // pass the object directly
@@ -30,7 +31,7 @@ export class APIRequesterService {
   }
 
   private getCallAPI(item: any, controller: string, method: string): Observable<any> {
-    const url = `${this.apiUrl}/${controller}/${method}?${item}`;
+    const url = `${this.api}/${controller}/${method}?${item}`;
     return this.http.get<any>(url);
   }
 
