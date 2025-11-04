@@ -11,6 +11,7 @@ import { ProductComponent } from './product/product.component';
 import { TestComponent } from './test/test.component';
 import { SharedModulesModule } from './shared-modules/shared-modules.module';
 import { ConfigurationService } from '../../Services/ConfigurationService';
+import { PokemonTemplateFormComponent } from './pokemon-template-form/pokemon-template-form.component';
 
 export function initConfig(configService: ConfigurationService) {
   return () => configService.loadConfig();
@@ -22,6 +23,7 @@ export function initConfig(configService: ConfigurationService) {
     RegisterComponent,
     LoginComponent,
     TestComponent,
+    PokemonTemplateFormComponent
   ],
   imports: [
     BrowserModule,

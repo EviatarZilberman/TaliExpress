@@ -21,6 +21,13 @@ namespace TaliExpress.Server.Controllers
             return Pokemon.GetPokemons();
         }
 
+        [HttpGet("getPokemonServerById")]
+        [Route("getPokemonServerById")]
+        public Pokemon? getPokemonServerById(int id)
+        {
+            return Pokemon.GetPokemons().Where(p => p.id == id).FirstOrDefault();
+        }
+
         public class Pokemon
         {
             public int id { get; set; } = -1;

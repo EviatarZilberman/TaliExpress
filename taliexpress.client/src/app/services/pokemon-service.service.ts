@@ -5,7 +5,8 @@ import { HttpClient } from '@angular/common/http';
 import { Pokemon } from '../../../Classes/Pokemon';
 import { Observable } from 'rxjs';
 
-const POKEMON_API_URL : string = 'http://localhost:5000/PokemonTest/getPokemonServer';
+const POKEMON_API_URL1 : string = 'http://localhost:5000/PokemonTest/getPokemonServer';
+const POKEMON_API_URL2 : string = 'http://localhost:5000/PokemonTest/getPokemonServerById';
 
 @Injectable({
   providedIn: 'root'
@@ -44,7 +45,11 @@ export class PokemonService {
   //  }]
   constructor(private http: HttpClient) { }
 
-  getPokemon(): Observable<Pokemon[]> {
-    return this.http.get<Pokemon[]>(POKEMON_API_URL);
+  getPokemon(id: number) {
+    return this.http.get<Pokemon>(`${POKEMON_API_URL2}?id=${id}`);
+  }
+
+  getPokemons(): Observable<Pokemon[]> {
+    return this.http.get<Pokemon[]>(POKEMON_API_URL1);
   }
 }
