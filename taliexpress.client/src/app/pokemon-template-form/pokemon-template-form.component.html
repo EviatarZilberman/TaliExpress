@@ -1,7 +1,16 @@
-<form>
+<form #form="ngForm">
   Pokemon ID:
-  <input [(ngModel)]="pokemon.id" name="id" />
+  <input type="text" [(ngModel)]="pokemon.name" name="name" />
+<!-- Radio button must be in a form! -->
+  <label>
+    <input type="radio" name="isCool" [value]="true" [ngModel]="pokemon.isCool" /> Pokemon is cool?
+  </label>
+  <label>
+    <input type="radio" name="isCool" [value]="false" [ngModel]="pokemon.isCool" (ngModelChange)="modelChange($event)" /> Pokemon not cool?
+  </label>
 </form>
 
-Model: {{ pokemon | json }} <!-- Pipe -->
-Form {{ pokemon.id | json }}
+<div>
+  Model: {{ pokemon | json }} <!-- Pipe -->
+  Form {{ form.value | json }}
+</div>
