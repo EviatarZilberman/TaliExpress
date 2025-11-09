@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PokemonService } from '../services/pokemon-service.service';
 import { Pokemon } from '../../../Classes/Pokemon';
+import { PokemonType } from '../../../Classes/PokemonType';
 
 @Component({
   selector: 'app-pokemon-template-form',
@@ -10,6 +11,24 @@ import { Pokemon } from '../../../Classes/Pokemon';
 })
 export class PokemonTemplateFormComponent implements OnInit {
   pokemon!: Pokemon;
+  pokemonTypes: PokemonType[] = [
+    {
+      key: 1,
+      value: "Electric"
+    },
+    {
+      key: 2,
+      value: "Fire"
+    },
+    {
+      key: 3,
+      value: "Water"
+    },
+    {
+      key: 4,
+      value: "Grass"
+    },
+  ]
   constructor(private pokemonService: PokemonService) { }
 
   modelChange(object: any) {
