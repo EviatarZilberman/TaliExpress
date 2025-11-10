@@ -3,7 +3,7 @@
   <input type="text" [(ngModel)]="pokemon.name" name="name" />
 <!-- Radio button must be in a form! -->
   <label>
-    <input type="radio" name="isCool" [value]="true" [ngModel]="pokemon.isCool" /> Pokemon is cool?
+    <input type="radio" name="isCool" #pokemonName="ngModel" [value]="true" [ngModel]="pokemon.isCool" /> Pokemon is cool?
   </label>
   <label>
     <input type="radio" name="isCool" [value]="false" [ngModel]="pokemon.isCool" (ngModelChange)="modelChange($event)" /> Pokemon not cool?
@@ -15,7 +15,7 @@
   <input type="checkbox" name="c3" value="3" /> c3?-->
   </label>
   <label>
-    <select name="pokemonType" [ngModel]="pokemon?.name">
+    <select name="pokemonType" [ngModel]="pokemon.name">
       <option *ngFor="let type of pokemonTypes" [value]="type.key"
               [selected]="type.value === pokemon.type"> {{ type.value }}</option>
     </select>
@@ -25,4 +25,12 @@
 <div>
   Model: {{ pokemon | json }} <!-- Pipe -->
   Form {{ form.value | json }}
+  <!-- Form validation:
+    1. Using #[object issuer]="ngModel"
+    2. creating the div below (or something else):-->
+  Error: <div *ngIf="!pokemonName.pristine">Pristine!</div>
+<!-- there are a few options:
+  1. valid -> invalid
+  2. pristine -> dirty
+  3. touched -> untouched-->
 </div>
