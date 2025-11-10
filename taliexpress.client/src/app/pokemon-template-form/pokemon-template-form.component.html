@@ -1,7 +1,7 @@
-<form #form="ngForm">
+<form #form="ngForm" (ngSubmit)="addToPokemons(form)">
   Pokemon ID:
   <input type="text" [(ngModel)]="pokemon.name" name="name" />
-<!-- Radio button must be in a form! -->
+  <!--Radio button must be in a form!-->
   <label>
     <input type="radio" name="isCool" #pokemonName="ngModel" [value]="true" [ngModel]="pokemon.isCool" /> Pokemon is cool?
   </label>
@@ -9,28 +9,44 @@
     <input type="radio" name="isCool" [value]="false" [ngModel]="pokemon.isCool" (ngModelChange)="modelChange($event)" /> Pokemon not cool?
   </label>
   <label>
-    <input type="checkbox" name="acceptTerms" value="true" [(ngModel)]="pokemon.acceptTerms" /> Accept terms?
-    <!--<input type="checkbox" name="c1" value="1" /> c1?
-  <input type="checkbox" name="c2" value="2" /> c2?
-  <input type="checkbox" name="c3" value="3" /> c3?-->
-  </label>
-  <label>
     <select name="pokemonType" [ngModel]="pokemon.name">
       <option *ngFor="let type of pokemonTypes" [value]="type.key"
-              [selected]="type.value === pokemon.type"> {{ type.value }}</option>
+              [selected]="type.value === pokemon.type">
+        {{ type.value }}
+      </option>
     </select>
   </label>
+  <button type="submit" [disabled]="!form.valid">Save!</button>
 </form>
 
 <div>
-  Model: {{ pokemon | json }} <!-- Pipe -->
+  <!--Pipe-->
+  Model: {{ pokemon | json }}
   Form {{ form.value | json }}
-  <!-- Form validation:
-    1. Using #[object issuer]="ngModel"
-    2. creating the div below (or something else):-->
+  <!--Form validation:
+   1. Using #[object issuer]="ngModel"
+   2. creating the div below (or something else):-->
   Error: <div *ngIf="!pokemonName.pristine">Pristine!</div>
-<!-- there are a few options:
-  1. valid -> invalid
-  2. pristine -> dirty
-  3. touched -> untouched-->
+  <!--there are a few options:
+   1. valid -> invalid
+   2. pristine -> dirty
+   3. touched -> untouched-->
 </div>
+
+<!--<form #form="ngForm" (ngSubmit)="addToPokemons(form)">
+  <label>
+    ID:
+    <input type="number" min="0" max="150" name="id" />
+</label>
+  <label>Name:
+  <input type="text" name="name" />
+  </label>
+  <label> Is Cool?
+    <input type="radio" value="true" name="isCool" />
+  </label>
+  <label>
+    Type:
+    <input type="text" name="type" />
+  </label>
+  <button type="submit">Save!</button>
+</form>-->

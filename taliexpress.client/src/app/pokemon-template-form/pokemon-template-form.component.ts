@@ -41,4 +41,11 @@ export class PokemonTemplateFormComponent implements OnInit {
       this.pokemon = data;
     });
   }
+
+  addToPokemons(object: any) {
+    //let newPokemon: Pokemon = new Pokemon();
+    //newPokemon.id = object.id;
+
+    console.log(object);
+  }
 }
