@@ -17,3 +17,7 @@ table {
   padding: 5%;
   padding-top: 7%;
 }
+
+.active{
+    background: red;
+}
