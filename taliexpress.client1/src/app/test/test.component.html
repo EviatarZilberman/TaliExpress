@@ -1,0 +1,63 @@
+
+<!--<h1>{{ title }}</h1>--> <!--// string interpolation-->
+<!--<h2>{{ var1 + var2 }}</h2>
+
+<img [src]="imageUrl" />-->
+<!--// property binding -->
+<!--<br />
+<input [(ngModel)]="favoriteAnimal" />-->
+<!--// two-way binding:
+  1. sets properties in the code behind
+  2. listens to the DOM -->
+<!-- ngModel: bind the properties from the back to the front and vice versa.
+              works for input tag only! -->
+<!--<p>{{ favoriteAnimal }}</p>
+
+<br />
+<br />
+<br />-->
+<!-- template reference variable: like js function that uses the DOM -->
+<!--<input type="text" #pokemonName />
+<button (click)="handleClick(pokemonName.value)">Click</button>-->
+<!-- *ngIf='' is a way to use if statement in angular.
+     the value in the '' must be true/false to do something.
+     then = else if, else = else. each statement is separated by ;
+    <div *ngIf="...; then ...; else ...;"></div>
+    the then and else must get ng-template to display. -->
+
+<input type="text" [value]="pokemonName" (input)="handleChange($event)" />
+
+<div *ngIf="!pokemonName; else showPokemon;">
+  <h2>No Pokemon Name!</h2>
+</div>
+
+<app-pokemon-list></app-pokemon-list>
+<app-pokemon-detail></app-pokemon-detail>
+<ng-template #showPokemon>
+  <h2>{{ pokemonName }}</h2>
+</ng-template>
+
+<!-- ngClass & ngFor & table & style & ngStyle -->
+<!--<table>
+  <thead>
+    <tr>
+      <th>Index</th>
+      <th>Name</th>
+      <th>Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let pokemon of pokemons; let i = index">
+      <td [class.cool-bool]="!pokemon.isCool">{{ pokemon.id }}</td>
+      <td [style.backgroundColor]="(pokemon.id > 2 ? 'green' : 'red')">{{ pokemon.name }}</td>
+      <td>{{ pokemon.type }}</td>
+    </tr>
+    <br />
+    <tr *ngFor="let pokemon of pokemons; let i = index">
+      <td [ngClass]="{'cool-bool' : pokemon.isCool}">{{ pokemon.id }}</td>
+      <td [ngStyle]="{backgroundColor: (pokemon.isCool ? 'purple' : 'blue')}">{{ pokemon.name }}</td>
+      <td>{{ pokemon.type }}</td>
+    </tr>
+  </tbody>
+</table>-->
+
