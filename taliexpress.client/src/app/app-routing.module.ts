@@ -8,13 +8,15 @@ import { NotFoundComponent } from './not-found/not-found.component';
 const routes: Routes = [
   { path: "", component: HomeComponent, pathMatch: "full" },
   { path: "**", component: NotFoundComponent },
-  { path: 'app-login', component: LoginComponent },
+  { path: 'login', component: LoginComponent },
   {
     path: 'pokemon', loadChildren:
       () => import('./pokemon-base/pokemon-base.module')
       .then(m => m.PokemonBaseModule)
   },
-  { path: 'app-register', component: RegisterComponent }
+  { path: 'register', component: RegisterComponent }
+  //,
+  //{ path: 'users/:id/:aaa', component: UsersComponent, data:  }
 ];
 
 @NgModule({
