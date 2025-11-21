@@ -6,28 +6,32 @@
       <div>
         <label for="email">Email</label>
         <input type="text" class="form-control" id="email" name="email"
-               [(ngModel)]="user.email" required>
-        <div *ngIf="userForm.controls['email']?.touched && userForm.controls['email']?.invalid"
-             class="text-danger">
-          Email is required.
+          [(ngModel)]="user.email" required>
+          @if (userForm.controls['email']?.touched && userForm.controls['email']?.invalid) {
+            <div
+              class="text-danger">
+              Email is required.
+            </div>
+          }
         </div>
-      </div>
 
-      <div>
-        <label for="password">Password</label>
-        <input type="text" class="form-control" id="password" name="password"
-               [(ngModel)]="user.password" required>
-        <div *ngIf="userForm.controls['password']?.touched && userForm.controls['password']?.invalid"
-             class="text-danger">
-          Password is required.
+        <div>
+          <label for="password">Password</label>
+          <input type="text" class="form-control" id="password" name="password"
+            [(ngModel)]="user.password" required>
+            @if (userForm.controls['password']?.touched && userForm.controls['password']?.invalid) {
+              <div
+                class="text-danger">
+                Password is required.
+              </div>
+            }
+          </div>
+
+          <div>
+            <input type="submit" value="submit" />
+            <!--<button type="submit" class="btn btn-primary">Submit</button>-->
+          </div>
         </div>
-      </div>
-
-      <div>
-        <input type="submit" value="submit" />
-        <!--<button type="submit" class="btn btn-primary">Submit</button>-->
-      </div>
+      </form>
     </div>
-  </form>
-</div>
 

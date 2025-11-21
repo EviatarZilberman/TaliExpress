@@ -2,18 +2,20 @@
 
 <div class="page-content">
   <app-product></app-product>-->
-<!-- router-outlet - makes the magic of routing available -->
-<router-outlet></router-outlet>
-<div>
-  <a *ngFor="let item of nav"
-     [routerLink]="item.link"
-     routerLinkActive="active"
-     [routerLinkActiveOptions]="{ exact: item.exact }"> <!-- Light with color from the css the current chosen option -->
-    {{ item.name }}
-  </a>
-</div>
+  <!-- router-outlet - makes the magic of routing available -->
+  <router-outlet></router-outlet>
+  <div>
+    @for (item of nav; track item) {
+      <a
+        [routerLink]="item.link"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: item.exact }"> <!-- Light with color from the css the current chosen option -->
+        {{ item.name }}
+      </a>
+    }
+  </div>
 
-<!--<app-test></app-test>-->
-<!--<app-pokemon-list></app-pokemon-list>-->
-<!--<app-pokemon-template-form></app-pokemon-template-form>-->
+  <!--<app-test></app-test>-->
+  <!--<app-pokemon-list></app-pokemon-list>-->
+  <!--<app-pokemon-template-form></app-pokemon-template-form>-->
 <!--</div>-->
