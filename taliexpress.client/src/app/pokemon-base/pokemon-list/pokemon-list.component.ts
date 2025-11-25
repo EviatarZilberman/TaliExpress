@@ -1,5 +1,5 @@
 /* Services and dependency injection */
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef, ViewChild, ViewChildren } from '@angular/core';
 import { Pokemon } from '../../../../Classes/Pokemon';
 import { PokemonService } from '../../services/pokemon-service.service';
 
@@ -9,8 +9,10 @@ import { PokemonService } from '../../services/pokemon-service.service';
   styleUrls: ['./pokemon-list.component.css'],
   standalone: false
 })
-export class PokemonListComponent implements OnInit {
+export class PokemonListComponent implements OnInit, AfterViewInit {
   pokemons!: Pokemon[]
+  //@ViewChild('pokemonRef') pokemonRef!: ElementRef
+  @ViewChildren('pokemonRef') pokemonRef!: ElementRef
   constructor(private pokemonService: PokemonService)
   {
 
@@ -27,5 +29,9 @@ export class PokemonListComponent implements OnInit {
     this.pokemons = this.pokemons.filter((pokemon: Pokemon) => {
       return pokemon.id !== event.id
     });
+  }
+
+  ngAfterViewInit(): void {
+    console.log(this.pokemonRef);
   }
 }
