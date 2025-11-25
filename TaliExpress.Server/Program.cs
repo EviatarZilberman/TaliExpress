@@ -9,9 +9,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(ConfigurationsKeeper.Instance().GetValue(ConfigurationsKeys.Allow_frontend.ToString()), builder =>
+    //options.AddPolicy(ConfigurationsKeeper.Instance().GetValue(ConfigurationsKeys.Allow_frontend.ToString()), builder =>
+    options.AddPolicy("AllowAngular", builder =>
     {
-        builder.WithOrigins(ConfigurationsKeeper.Instance().GetValue(ConfigurationsKeys.client_location.ToString()))
+        //builder.WithOrigins(ConfigurationsKeeper.Instance().GetValue(ConfigurationsKeys.client_location.ToString()))
+        builder.WithOrigins("http://localhost:4200")
                .AllowAnyHeader()
                .AllowAnyMethod();
     });
@@ -24,7 +26,8 @@ app.UseStaticFiles();
 app.UseHttpsRedirection();
 
 app.UseRouting();
-app.UseCors(ConfigurationsKeeper.Instance().GetValue(ConfigurationsKeys.Allow_frontend.ToString()));
+app.UseCors("AllowAngular");
+//app.UseCors(ConfigurationsKeeper.Instance().GetValue(ConfigurationsKeys.Allow_frontend.ToString()));
 
 app.UseAuthorization();
 

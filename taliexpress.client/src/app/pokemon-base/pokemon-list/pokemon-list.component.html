@@ -10,7 +10,9 @@
   <tbody>
     @for (pokemon of pokemons; track pokemon) {
       <tr >
-        <app-pokemon-detail [detail]="pokemon" (remove)="handleRemove($event)"></app-pokemon-detail>
+        <app-pokemon-detail [detail]="pokemon" (remove)="handleRemove($event)">
+          <h1>--------------------------------------</h1>
+        </app-pokemon-detail>
       </tr>
     }
     <!--<tr *ngFor="let pokemon of pokemons; let i = index">

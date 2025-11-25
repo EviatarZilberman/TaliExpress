@@ -34,6 +34,7 @@ namespace TaliExpress.Server.Controllers
             public string type { get; set; } = string.Empty;
             public string name { get; set; } = string.Empty;
             public bool isCool { get; set; } = false;
+            public bool acceptTerms { get; set; } = false;
 
             public static Pokemon[] GetPokemons()
             {
@@ -42,31 +43,36 @@ namespace TaliExpress.Server.Controllers
       id = 1,
       name = "Bulbasaur",
       type =  "Grass/Poison",
-      isCool = true
+      isCool = true,
+      acceptTerms = false
     },
     new Pokemon() {
       id = 2,
       name = "Charmander",
       type = "Fire",
-      isCool = false
+      isCool = false,
+      acceptTerms = true
     },
     new Pokemon() {
       id = 3,
       name = "Squirtle",
       type = "Water",
-      isCool = true
+      isCool = true,
+      acceptTerms = false
     },
     new Pokemon() {
       id = 4,
       name = "Pikachu",
       type = "Electric",
-      isCool = true
+      isCool = true,
+      acceptTerms = true
     },
    new Pokemon()  {
       id = 5,
       name = "Eevee",
       type = "Normal",
-      isCool = false
+      isCool = false,
+      acceptTerms = false
    }
                 };
             }
