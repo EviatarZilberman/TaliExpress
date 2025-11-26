@@ -1,5 +1,5 @@
 /* Services and dependency injection */
-import { Component, OnInit, AfterViewInit, ElementRef, ViewChild, ViewChildren } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef, ViewChild, ViewChildren, Renderer2 } from '@angular/core';
 import { Pokemon } from '../../../../Classes/Pokemon';
 import { PokemonService } from '../../services/pokemon-service.service';
 
@@ -14,7 +14,7 @@ export class PokemonListComponent implements OnInit, AfterViewInit {
   //@ViewChild('pokemonRef') pokemonRef!: ElementRef
   @ViewChildren('pokemonRef') pokemonRef!: ElementRef
   @ViewChild('pokemonTh') pokemonTh!: ElementRef
-  constructor(private pokemonService: PokemonService)
+  constructor(private pokemonService: PokemonService, private renderer: Renderer2)
   {
 
   }
@@ -36,5 +36,9 @@ export class PokemonListComponent implements OnInit, AfterViewInit {
     //console.log(this.pokemonRef);
     console.log(this.pokemonTh);
     this.pokemonTh.nativeElement.innerText = "Pokemon name:";
+    const div = this.renderer.createElement('div');
+    const text = this.renderer.createText('Pokemon list');
+    this.renderer.appendChild(div, text);
+    this.renderer.appendChild(this.pokemonTh.nativeElement, div);
   }
 }
