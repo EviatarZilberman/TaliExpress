@@ -13,6 +13,7 @@ export class PokemonListComponent implements OnInit, AfterViewInit {
   pokemons!: Pokemon[]
   //@ViewChild('pokemonRef') pokemonRef!: ElementRef
   @ViewChildren('pokemonRef') pokemonRef!: ElementRef
+  @ViewChild('pokemonTh') pokemonTh!: ElementRef
   constructor(private pokemonService: PokemonService)
   {
 
@@ -20,7 +21,7 @@ export class PokemonListComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.pokemonService.getPokemons().subscribe((data: Pokemon[]) => {
-      console.log(data);
+      //console.log(data);
       this.pokemons = data;
     });
   }
@@ -32,6 +33,8 @@ export class PokemonListComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    console.log(this.pokemonRef);
+    //console.log(this.pokemonRef);
+    console.log(this.pokemonTh);
+    this.pokemonTh.nativeElement.innerText = "Pokemon name:";
   }
 }
