@@ -7,7 +7,7 @@ import { APIRequesterService } from '../../../../Services/APIRequesterService';
 import { TransferDataService } from '../../../../Services/TransferDataService';
 
 @Component({
-  selector: 'app-upper-nav-bar',
+  selector: 'upper-nav-bar',
   templateUrl: './upper-nav-bar.component.html',
   styleUrl: './upper-nav-bar.component.css',
   standalone: false

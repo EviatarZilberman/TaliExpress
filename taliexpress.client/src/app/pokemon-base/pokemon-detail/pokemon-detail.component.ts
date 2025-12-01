@@ -1,27 +1,27 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Pokemon } from '../../../../Classes/Pokemon';
+//import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+//import { Pokemon } from '../../../../Classes/Pokemon';
 
 
-@Component({
-  selector: 'app-pokemon-detail',
-  standalone: false,
-  templateUrl: './pokemon-detail.component.html',
-  styleUrl: './pokemon-detail.component.css'
-})
-export class PokemonDetailComponent implements OnInit {
-  @Input() // passes data to this component.
-  detail!: Pokemon;
+//@Component({
+//  selector: 'app-pokemon-detail',
+//  standalone: false,
+//  templateUrl: './pokemon-detail.component.html',
+//  styleUrl: './pokemon-detail.component.css'
+//})
+//export class PokemonDetailComponent implements OnInit {
+//  @Input() // passes data to this component.
+//  detail!: Pokemon;
 
-  @Output() // Allows to emit events to the parent component.
-  remove: EventEmitter<any> = new EventEmitter<any>();
+//  @Output() // Allows to emit events to the parent component.
+//  remove: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor() { }
+//  constructor() { }
 
-  ngOnInit(): void {
-  }
+//  ngOnInit(): void {
+//  }
 
-  onRemove() {
-    this.remove.emit(this.detail); // Launch the output up.
-  }
+//  onRemove() {
+//    this.remove.emit(this.detail); // Launch the output up.
+//  }
 
-}
+//}

@@ -4,12 +4,12 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { PokemonTemplateFormComponent } from './pokemon-base/pokemon-template-form/pokemon-template-form.component';
+//import { PokemonTemplateFormComponent } from './pokemon-base/pokemon-template-form/pokemon-template-form.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: "full" },
   { path: 'login', component: LoginComponent },
-  { path: 'pokemon/:id', component: PokemonTemplateFormComponent },
+  //{ path: 'pokemon/:id', component: PokemonTemplateFormComponent },
   //{
   //  path: 'pokemon', loadChildren:
   //    () => import('./pokemon-base/pokemon-base.module')

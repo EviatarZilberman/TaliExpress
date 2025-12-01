@@ -1,8 +1,8 @@
-<form #form="ngForm" (ngSubmit)="addToPokemons(form)">
+<!--<form #form="ngForm" (ngSubmit)="addToPokemons(form)">
   Pokemon ID:
-  <input type="text" [(ngModel)]="pokemon.name" name="name" />
+  <input type="text" [(ngModel)]="pokemon.name" name="name" />-->
   <!--Radio button must be in a form!-->
-  <label>
+  <!--<label>
     <input type="radio" name="isCool" #pokemonName="ngModel" [value]="true" [ngModel]="pokemon.isCool" /> Pokemon is cool?
   </label>
   <label>
@@ -22,21 +22,21 @@
   <button type="button" (click)="back()">Go Back!</button>
 </form>
 
-<div>
+<div>-->
   <!--Pipe-->
-  Model: {{ pokemon | json }}
-  Form {{ form.value | json }}
+  <!--Model: {{ pokemon | json }}
+  Form {{ form.value | json }}-->
   <!--Form validation:
   1. Using #[object issuer]="ngModel"
   2. creating the div below (or something else):-->
-  Error: @if (!pokemonName.pristine) {
+  <!--Error: @if (!pokemonName.pristine) {
   <div>Pristine!</div>
-}
+}-->
 <!--there are a few options:
 1. valid -> invalid
 2. pristine -> dirty
 3. touched -> untouched-->
-</div>
+<!--</div>-->
 
 <!--<form #form="ngForm" (ngSubmit)="addToPokemons(form)">
 <label>
