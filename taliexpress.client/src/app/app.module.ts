@@ -13,6 +13,8 @@ import { SharedModulesModule } from './shared-modules/shared-modules.module';
 import { ConfigurationService } from '../../Services/ConfigurationService';
 import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { CustomifDirective } from './directives/customif/customif.directive';
+import { HighlighttextDirective } from './directives/highlighttext/highlighttext.directive';
 //import { PokemonTemplateFormComponent } from './pokemon-template-form/pokemon-template-form.component';
 
 export function initConfig(configService: ConfigurationService) {
@@ -27,6 +29,8 @@ export function initConfig(configService: ConfigurationService) {
     TestComponent,
     HomeComponent,
     NotFoundComponent,
+    CustomifDirective,
+    HighlighttextDirective,
     //PokemonTemplateFormComponent
   ],
   imports: [
@@ -45,6 +49,9 @@ export function initConfig(configService: ConfigurationService) {
       deps: [ConfigurationService],
     multi: true
     }],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent,
+    HighlighttextDirective,
+    CustomifDirective
+  ]
 })
 export class AppModule { }
