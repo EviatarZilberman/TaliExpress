@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { BaseComponent } from '../../BaseComponent/baseComponent.component';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Product } from '../../../../Classes/Product';
 import { APIRequesterService } from '../../../../Services/APIRequesterService';
 import { TransferDataService } from '../../../../Services/TransferDataService';
 

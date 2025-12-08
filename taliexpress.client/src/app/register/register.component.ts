@@ -7,7 +7,7 @@ import { User } from '../../../Classes/User';
 import { APIReturnKeys } from '../../../Enums/APIReturnKeys';
 
 @Component({
-  selector: 'app-register',
+  selector: 'register',
   standalone: false,
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'

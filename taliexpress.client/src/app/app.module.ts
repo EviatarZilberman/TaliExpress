@@ -46,13 +46,14 @@ export function initConfig(configService: ConfigurationService) {
     {
     provide: APP_INITIALIZER,
     useFactory: initConfig,
-      deps: [ConfigurationService],
+    deps: [ConfigurationService],
     multi: true
     }]
-  //,
-  //bootstrap: [AppComponent,
-  //  HighlighttextDirective,
-  //  CustomifDirective
-  //]
+  ,
+  bootstrap: [
+    AppComponent,
+    //HighlighttextDirective,
+    //CustomifDirective
+  ]
 })
 export class AppModule { }

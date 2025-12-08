@@ -8,7 +8,7 @@ import { User } from '../../../Classes/User';
 import { APIReturnKeys } from '../../../Enums/APIReturnKeys';
 
 @Component({
-  selector: 'app-login',
+  selector: 'login',
   standalone: false,
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'

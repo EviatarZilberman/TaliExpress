@@ -17,7 +17,7 @@ export class ConfigurationService {
     return this.config ? this.config[key] : null;
   }
 
-  get apiBaseUrl(): string {
-    return this.get('apiBaseUrl');
+  getApiBaseUrl(): string {
+    return this.get('apiBaseURL');
   }
 }

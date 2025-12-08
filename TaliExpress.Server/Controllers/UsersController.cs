@@ -14,9 +14,9 @@ namespace TaliExpress.Server.Controllers
 
         [HttpPost("register")]
         [Route("register")]
-        public async Task<IActionResult> Register([FromBody] User user)
+        public IActionResult Register([FromBody] User user)
         {
-            await this.mUsersManager.Insert(user);
+            this.mUsersManager.Insert(user);
             //-- TODO =  Send verification email (not implemented)
             return Ok();
         }

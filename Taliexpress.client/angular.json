@@ -38,7 +38,7 @@
               {
                 "glob": "**/*",
                 "input": "src/assets",
-                "output": "/assets"
+                "output": "/assets/"
               }
             ],
             "styles": [

@@ -11,7 +11,7 @@ import { ConfigurationService } from '../Services/ConfigurationService';
 export class APIRequesterService {
   api!: string;
   constructor(private http: HttpClient, configurationService: ConfigurationService) {
-    this.api = configurationService.apiBaseUrl;
+    this.api = configurationService.getApiBaseUrl();
 }
 
   private postCallAPI(item: any, controller: string, method: string): Observable<any> {
