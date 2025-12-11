@@ -10,7 +10,7 @@ namespace TaliExpress.Server.Managers
 {
     public class UsersManager : AManager<User>
     {
-        public override ReturnCode Delete([FromBody] string userId)
+        public override ReturnCode Delete(string userId)
         {
             if (string.IsNullOrEmpty(userId)) return ReturnCode.Parameter_is_null_or_empty;
             if (MongoDBServiceManager<User>.Instance(ConfigurationsKeeper.Instance().GetValue(Utils.DB_name.ToString()), CollectionNames.Users.ToString()).Delete(userId) == MongoDBReturnCodes.Success) return ReturnCode.Success;
@@ -18,7 +18,7 @@ namespace TaliExpress.Server.Managers
 
         }
 
-        public override ReturnCode Get([FromBody] string userId, out User? user)
+        public override ReturnCode Get(string userId, out User? user)
         {
             if (string.IsNullOrEmpty(userId))
             {
@@ -66,7 +66,7 @@ namespace TaliExpress.Server.Managers
             }
         }
 
-        public override ReturnCode Update([FromBody] User user)
+        public override ReturnCode Update(User user)
         {
             try
             {
@@ -79,10 +79,16 @@ namespace TaliExpress.Server.Managers
             }
         }
 
-        public ReturnCode FreezeMembership([FromBody] User user)
+        public ReturnCode FreezeMembership(User user)
         {
             user.Status = (int)UserStatus.Freezed;
             return this.Update(user);
+        }
+
+        public ReturnCode FindByEmail(string email, out User user)
+        {
+            MongoDBServiceManager<User>.Instance(ConfigurationsKeeper.Instance().GetValue(Utils.DB_name.ToString()), CollectionNames.Users.ToString()).FindByField("Email", email, out user);
+            return ReturnCode.Success;
         }
     }
 }

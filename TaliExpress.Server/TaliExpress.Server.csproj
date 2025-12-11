@@ -18,10 +18,10 @@
       <Version>8.*-*</Version>
     </PackageReference>
     <PackageReference Include="MongoDB.Bson" Version="3.4.3" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\EmailSender\EmailSender.csproj" />
     <ProjectReference Include="..\..\MongoDBServiceApp\MongoDBService\MongoDBService.csproj" />
     <ProjectReference Include="..\taliexpress.client\taliexpress.client.esproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
@@ -29,7 +29,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Interfaces\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 

@@ -12,5 +12,10 @@
         No_product_found,
         Item_successfully_added_to_the_cart,
         Item_successfully_removed_from_the_cart,
+        User_is_null,
+        User_exist,
+        Invalid_parameters,
+        Unmatched_passwords,
+        Cannot_insert_to_DB,
     }
 }
