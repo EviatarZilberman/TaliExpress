@@ -66,7 +66,7 @@ export class APIRequesterService {
         }
       },
       error: (err) => {
-        alert('API failed');
+        console.error('API failed to process the request. The error:', err);
       }
     });
     return undefined;

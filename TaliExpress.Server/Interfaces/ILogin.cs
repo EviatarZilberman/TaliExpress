@@ -5,6 +5,6 @@ namespace TaliExpress.Server.Interfaces
 {
     public interface ILogin
     {
-        public (ReturnCode result, User? user) Login(string email, string password);
+        public (ReturnCode result, string user) Login(string email, string password);
     }
 }

@@ -24,6 +24,6 @@ export class RegisterComponent extends BaseComponent {
 
   registerUser(user: User): void | string {
     if (user === null) return 'User data is null';
-    return this.apiRequester.APIReturn(user, 'users', 'register', APIReturnKeys.Post);
+    return this.apiRequester.APIReturn(user, 'register', 'register', APIReturnKeys.Post);
   }
 }

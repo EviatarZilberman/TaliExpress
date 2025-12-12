@@ -24,6 +24,7 @@
     <ProjectReference Include="..\..\EmailSender\EmailSender.csproj" />
     <ProjectReference Include="..\..\MongoDBServiceApp\MongoDBService\MongoDBService.csproj" />
     <ProjectReference Include="..\Eviatar.Zilberman.Validators\Eviatar.Zilberman.Validators.csproj" />
+    <ProjectReference Include="..\JsonHandler\Eviatar.Zilberman.JsonHandler.csproj" />
     <ProjectReference Include="..\taliexpress.client\taliexpress.client.esproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
