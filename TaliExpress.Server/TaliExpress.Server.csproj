@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <SpaRoot>..\taliexpress.client</SpaRoot>
@@ -23,6 +23,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\EmailSender\EmailSender.csproj" />
     <ProjectReference Include="..\..\MongoDBServiceApp\MongoDBService\MongoDBService.csproj" />
+    <ProjectReference Include="..\Eviatar.Zilberman.Validators\Eviatar.Zilberman.Validators.csproj" />
     <ProjectReference Include="..\taliexpress.client\taliexpress.client.esproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>

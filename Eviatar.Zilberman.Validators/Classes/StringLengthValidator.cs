@@ -1,6 +1,6 @@
-﻿using TaliExpress.Server.Interfaces;
+﻿using Eviatar.Zilberman.Validators.Interfaces;
 
-namespace TaliExpress.Server.Validators
+namespace Eviatar.Zilberman.Validators.Classes
 {
     public class StringLengthValidator : IValidate
     {

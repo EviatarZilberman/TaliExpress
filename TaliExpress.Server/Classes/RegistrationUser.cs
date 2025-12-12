@@ -1,4 +1,5 @@
-﻿using TaliExpress.Server.Validators;
+﻿
+using Eviatar.Zilberman.Validators.Classes;
 
 namespace TaliExpress.Server.Classes
 {

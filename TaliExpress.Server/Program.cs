@@ -1,4 +1,5 @@
 ﻿using ConfigApp.Classes;
+using TaliExpress.Server.Classes;
 using TaliExpress.Server.Enums;
 using TaliExpress.Server.Interfaces;
 using TaliExpress.Server.Workers;
@@ -21,6 +22,7 @@ builder.Services.AddCors(options =>
     });
 });
 builder.Services.AddScoped<IRegister, RegistrationWorker>();
+builder.Services.AddScoped<ILogin, LoginWorker>();
 var app = builder.Build();
 
 app.UseDefaultFiles();

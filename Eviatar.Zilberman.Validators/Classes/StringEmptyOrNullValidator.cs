@@ -1,10 +1,10 @@
-﻿using TaliExpress.Server.Interfaces;
+﻿using Eviatar.Zilberman.Validators.Interfaces;
 
-namespace TaliExpress.Server.Validators
+namespace Eviatar.Zilberman.Validators.Classes
 {
     public class StringEmptyOrNullValidator : IValidate
     {
-        public bool Validate(object value)
+        public bool Validate(object? value)
         {
             if (string.IsNullOrEmpty(value as string)) return false;
             if (string.IsNullOrWhiteSpace(value as string)) return false;
