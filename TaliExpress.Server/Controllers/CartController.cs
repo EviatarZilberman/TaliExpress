@@ -21,6 +21,7 @@ namespace TaliExpress.Server.Controllers
             return BadRequest(EnumMessagesConverter.Convert(result));
         }
 
+        [HttpPost]
         public IActionResult RemoveProductFromCart(string cartId, string productId, int amount = 1)
         {
             if (string.IsNullOrEmpty(cartId) || string.IsNullOrEmpty(productId)) return BadRequest(EnumMessagesConverter.Convert(ReturnCode.Parameter_is_null_or_empty));

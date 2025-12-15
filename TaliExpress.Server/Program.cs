@@ -1,11 +1,19 @@
-﻿using ConfigApp.Classes;
-using TaliExpress.Server.Enums;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using TaliExpress.Server.Interfaces;
 using TaliExpress.Server.Workers;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddAuthentication(
+    CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(option => {
+        option.LoginPath = "/Login/Login";
+        option.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+
+    });
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
