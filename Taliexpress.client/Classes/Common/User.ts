@@ -3,7 +3,6 @@ export class User {
   lastName: string = '';
   email: string = '';
   password: string = '';
-  tempPassword: string = '';
   phoneNumber: string = '';
   loginTries: number = 0;
 }

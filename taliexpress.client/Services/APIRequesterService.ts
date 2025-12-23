@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { APIReturnKeys } from '../Enums/APIReturnKeys';
@@ -10,9 +10,10 @@ import { ConfigurationService } from '../Services/ConfigurationService';
 
 export class APIRequesterService {
   api!: string;
+  httpClient = inject(HttpClient);
   constructor(private http: HttpClient, configurationService: ConfigurationService) {
     this.api = configurationService.getApiBaseUrl();
-}
+  }
 
   private postCallAPI(item: any, controller: string, method: string): Observable<any> {
     var url: string = '';
@@ -70,5 +71,17 @@ export class APIRequesterService {
       }
     });
     return undefined;
+  }
+
+  public post<T>(aaa: T): any {
+    this.httpClient.post<T>(this.api, aaa).subscribe(
+      {
+        next: (result: any) => {
+          debugger;
+
+        },
+        error: (error: any) => {
+        }
+      })
   }
 }

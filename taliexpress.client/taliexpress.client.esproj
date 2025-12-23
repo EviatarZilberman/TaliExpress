@@ -8,6 +8,8 @@
     <BuildOutputFolder>$(MSBuildProjectDirectory)\dist\Taliexpress.client\browser\</BuildOutputFolder>
   </PropertyGroup>
   <ItemGroup>
+    <Folder Include="Classes\ApiRequests\" />
+    <Folder Include="Classes\ApiResponse\" />
     <Folder Include="Resolvers\" />
   </ItemGroup>
 </Project>
