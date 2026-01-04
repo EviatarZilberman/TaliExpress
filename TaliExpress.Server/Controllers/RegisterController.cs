@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TaliExpress.Server.Classes;
+using TaliExpress.Server.Classes.Common;
 using TaliExpress.Server.Interfaces;
 
 namespace TaliExpress.Server.Controllers

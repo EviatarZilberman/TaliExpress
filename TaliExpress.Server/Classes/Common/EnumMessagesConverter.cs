@@ -1,6 +1,6 @@
 ﻿using TaliExpress.Server.Enums;
 
-namespace TaliExpress.Server.Classes
+namespace TaliExpress.Server.Classes.Common
 {
     public static class EnumMessagesConverter
     {

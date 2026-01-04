@@ -1,7 +1,7 @@
 
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Product } from '../../../Classes/Product';
+import { Product } from '../../../Classes/Common/Product';
 import { APIRequesterService } from '../../../Services/APIRequesterService';
 import { BaseComponent } from '../BaseComponent/baseComponent.component';
 import { HttpClient } from '@angular/common/http';

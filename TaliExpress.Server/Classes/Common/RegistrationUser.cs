@@ -1,7 +1,7 @@
 ﻿
 using Eviatar.Zilberman.Validators.Classes;
 
-namespace TaliExpress.Server.Classes
+namespace TaliExpress.Server.Classes.Common
 {
     public sealed class RegistrationUser
     {

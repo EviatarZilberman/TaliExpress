@@ -3,7 +3,7 @@ import { BaseComponent } from '../BaseComponent/baseComponent.component';
 import { APIRequesterService } from '../../../Services/APIRequesterService';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { User } from '../../../Classes/User';
+import { User } from '../../../Classes/Common/User';
 import { APIReturnKeys } from '../../../Enums/APIReturnKeys';
 
 @Component({

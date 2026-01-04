@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
 import { BaseComponent } from '../BaseComponent/baseComponent.component';
-import { HttpClient } from '@angular/common/http';
-import { HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { APIRequesterService } from '../../../Services/APIRequesterService';
-import { User } from '../../../Classes/User';
+import { User } from '../../../Classes/Common/User';
 import { APIReturnKeys } from '../../../Enums/APIReturnKeys';
-import { URLParametersCreator } from '../../../Classes/URLParametersCreator';
+import { ComponentSubscriber } from '../../../Classes/Common/ComponentSubscriber';
+//import { URLParametersCreator } from '../../../Classes/URLParametersCreator';
+import { LoginResponse } from '../../../Classes/ApiResponse/LoginResponse';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'login',
@@ -16,11 +18,13 @@ import { URLParametersCreator } from '../../../Classes/URLParametersCreator';
 })
 export class LoginComponent extends BaseComponent {
   public user: User = new User();
-  constructor(private apiRequester: APIRequesterService, protected override router: Router, protected httpClient: HttpClient) {
+  public componentSubscriber: ComponentSubscriber = new ComponentSubscriber();
+  constructor(private apiRequester: APIRequesterService, protected override router: Router, protected httpClient: HttpClient, componentSubscriber: ComponentSubscriber) {
     super(httpClient, router);
+    this.componentSubscriber = componentSubscriber;
   };
 
-  login(user: User): void | string | undefined | User {
+  login(user: User): void | string | undefined | User | any {
     let params = new HttpParams()
       .set('email', user.email)
       .set('password', user.password);
@@ -28,6 +32,11 @@ export class LoginComponent extends BaseComponent {
     //map.set('email', user.email);
     //map.set('password', user.password);
     //let params = URLParametersCreator.createURLParametersFromObject(map);
+    //const response: Observable<LoginResponse> = this.apiRequester.login(params);
+    //const finalResponse: LoginResponse = this.componentSubscriber.subscribeData<LoginResponse>(response);
+    //console.log(finalResponse.code);
+    //console.log(finalResponse.message);
+    //return finalResponse;
     const response: any = this.apiRequester.APIReturn(params, 'login', 'login', APIReturnKeys.Get);
     return response;
   }

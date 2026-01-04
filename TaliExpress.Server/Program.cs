@@ -5,7 +5,7 @@ using TaliExpress.Server.Workers;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddHttpContextAccessor();
-builder.Services.AddControllersWithViews();
+//builder.Services.AddControllersWithViews();
 
 builder.Services.AddAuthentication(
     CookieAuthenticationDefaults.AuthenticationScheme)
@@ -25,7 +25,8 @@ builder.Services.AddCors(options =>
         //builder.WithOrigins(ConfigurationsKeeper.Instance().GetValue(ConfigurationsKeys.client_location.ToString()))
         builder.WithOrigins("http://localhost:4200")
                .AllowAnyHeader()
-               .AllowAnyMethod();
+               .AllowAnyMethod()
+               .AllowCredentials();
     });
 });
 builder.Services.AddScoped<IRegister, RegistrationWorker>();
@@ -35,13 +36,19 @@ var app = builder.Build();
 app.UseDefaultFiles();
 app.UseStaticFiles();
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseRouting();
 app.UseCors("AllowAngular");
 //app.UseCors(ConfigurationsKeeper.Instance().GetValue(ConfigurationsKeys.Allow_frontend.ToString()));
 
+app.UseAuthentication();
 app.UseAuthorization();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+}
 
 app.MapControllers();
 

@@ -1,8 +1,9 @@
-import { inject, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { APIReturnKeys } from '../Enums/APIReturnKeys';
 import { ConfigurationService } from '../Services/ConfigurationService';
+import { LoginResponse } from '../Classes/ApiResponse/LoginResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -10,10 +11,9 @@ import { ConfigurationService } from '../Services/ConfigurationService';
 
 export class APIRequesterService {
   api!: string;
-  httpClient = inject(HttpClient);
   constructor(private http: HttpClient, configurationService: ConfigurationService) {
     this.api = configurationService.getApiBaseUrl();
-  }
+}
 
   private postCallAPI(item: any, controller: string, method: string): Observable<any> {
     var url: string = '';
@@ -21,25 +21,29 @@ export class APIRequesterService {
     else url = `${this.api}/${controller}/${method}`;
     const answer: any = this.http.post<any>(
       url,
-      item, // pass the object directly
+      item/*, // pass the object directly
       {
         headers: {
           'Content-Type': 'application/json'
         }
-      }
+      }*/
     );
     return answer;
   }
 
   private getCallAPI(item: any, controller: string, method: string): Observable<any> {
     const url = `${this.api}/${controller}/${method}?${item}`;
-    return this.http.get<any>(url);
+    return this.http.get<any>(url, { withCredentials: true });
   }
 
+  public login(params: HttpParams): Observable<LoginResponse> {
+    const url = `${this.api}/login/login?${params}`;
+    return this.http.get<any>(url);
+    }
+
   public APIReturn(item: any, controller: string, method: string, type: APIReturnKeys): any | undefined {
-    var answer: Observable<any> = new Observable<any>();
     if (type === APIReturnKeys.Post) {
-      answer = this.postCallAPI(item, controller, method);
+     var answer = this.postCallAPI(item, controller, method);
       return this.APIReturnSubscribe(answer);
     }
     else if (type === APIReturnKeys.Post_no_subscribe) {
@@ -71,17 +75,5 @@ export class APIRequesterService {
       }
     });
     return undefined;
-  }
-
-  public post<T>(aaa: T): any {
-    this.httpClient.post<T>(this.api, aaa).subscribe(
-      {
-        next: (result: any) => {
-          debugger;
-
-        },
-        error: (error: any) => {
-        }
-      })
   }
 }
