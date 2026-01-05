@@ -14,6 +14,7 @@ builder.Services.AddAuthentication(
         option.ExpireTimeSpan = TimeSpan.FromMinutes(20);
 
     });
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -32,7 +33,7 @@ builder.Services.AddCors(options =>
 builder.Services.AddScoped<IRegister, RegistrationWorker>();
 builder.Services.AddScoped<ILogin, LoginWorker>();
 var app = builder.Build();
-
+app.UseCookiePolicy();
 app.UseDefaultFiles();
 app.UseStaticFiles();
 

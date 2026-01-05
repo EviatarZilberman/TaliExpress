@@ -9,6 +9,7 @@ import { ComponentSubscriber } from '../../../Classes/Common/ComponentSubscriber
 //import { URLParametersCreator } from '../../../Classes/URLParametersCreator';
 import { LoginResponse } from '../../../Classes/ApiResponse/LoginResponse';
 import { Observable } from 'rxjs';
+import { LoginRequest } from '../../../Classes/ApiRequests/LoginRequest';
 
 @Component({
   selector: 'login',
@@ -19,15 +20,12 @@ import { Observable } from 'rxjs';
 export class LoginComponent extends BaseComponent {
   public user: User = new User();
   public componentSubscriber: ComponentSubscriber = new ComponentSubscriber();
-  constructor(private apiRequester: APIRequesterService, protected override router: Router, protected httpClient: HttpClient, componentSubscriber: ComponentSubscriber) {
+  constructor(protected apiRequester: APIRequesterService, protected override router: Router, protected httpClient: HttpClient, componentSubscriber: ComponentSubscriber) {
     super(httpClient, router);
     this.componentSubscriber = componentSubscriber;
   };
 
-  login(user: User): void | string | undefined | User | any {
-    let params = new HttpParams()
-      .set('email', user.email)
-      .set('password', user.password);
+  login(user: User): void {
     //let map = new Map();
     //map.set('email', user.email);
     //map.set('password', user.password);
@@ -37,7 +35,11 @@ export class LoginComponent extends BaseComponent {
     //console.log(finalResponse.code);
     //console.log(finalResponse.message);
     //return finalResponse;
-    const response: any = this.apiRequester.APIReturn(params, 'login', 'login', APIReturnKeys.Get);
-    return response;
+    //const response: any = this.apiRequester.APIReturn(params, 'login', 'login', APIReturnKeys.Get);
+    let loginRequest: LoginRequest = {
+      email: user.email,
+      password: user.password
+    }
+    const response: any = this.apiRequester.APIReturn(loginRequest, 'login', 'login', APIReturnKeys.Post);
   }
 }

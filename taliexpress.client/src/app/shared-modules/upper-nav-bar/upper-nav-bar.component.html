@@ -42,7 +42,7 @@
   </div>
 </div>-->
 <!-- Register or login modal -->
-<div id="registerOrLogin" class="modal" (click)="hideModal('registerOrLogin')">
+<!--<div id="registerOrLogin" class="modal" (click)="hideModal('registerOrLogin')">
   <div class="modal-content" (click)="$event.stopPropagation()">
     <span class="close" (click)="hideModal('registerOrLogin')">&times;</span>
     <div class="container" style="align-items:center">
@@ -53,4 +53,27 @@
       </div>
     </div>
   </div>
+</div>-->
+<div id="registerOrLogin" class="modal">
+  <div class="modal-backdrop" (click)="hideModal('registerOrLogin')"></div>
+
+  <div class="modal-content">
+    <span class="close" (click)="hideModal('registerOrLogin')">&times;</span>
+
+    <div class="container">
+      <h2>Login OR Register</h2>
+      <div class="button-row">
+        <button class="button"
+                (click)="redirectByPath('login', 'registerOrLogin')">
+          Login
+        </button>
+
+        <button class="button"
+                (click)="redirectByPath('register', 'registerOrLogin')">
+          Register
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
+

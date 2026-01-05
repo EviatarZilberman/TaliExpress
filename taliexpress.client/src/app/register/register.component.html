@@ -1,12 +1,12 @@
-<!--<div class="container">
+<div class="container">
   <h2 class="heading">Template Driven Form</h2>
-  <form #userForm="ngForm" (ngSubmit)="registerUser(user)">
+  <form #userForm="ngForm" (ngSubmit)="registerUser(tempUser)">
 
     <div class="form-group">
       <div>
         <label for="firstName">First Name</label>
         <input type="text" class="form-control" id="firstName" name="firstName"
-          [(ngModel)]="user.firstName" required>
+          [(ngModel)]="tempUser.firstName" required>
           @if (userForm.controls['firstName']?.touched && userForm.controls['firstName']?.invalid) {
             <div
               class="text-danger">
@@ -18,7 +18,7 @@
         <div>
           <label for="lastName">Last Name</label>
           <input type="text" class="form-control" id="lastName" name="lastName"
-            [(ngModel)]="user.lastName" required>
+            [(ngModel)]="tempUser.lastName" required>
             @if (userForm.controls['lastName']?.touched && userForm.controls['lastName']?.invalid) {
               <div
                 class="text-danger">
@@ -30,7 +30,7 @@
           <div>
             <label for="phoneNumber">Phone Number</label>
             <input type="text" class="form-control" id="phoneNumber" name="phoneNumber"
-              [(ngModel)]="user.phoneNumber" required>
+              [(ngModel)]="tempUser.phoneNumber" required>
               @if (userForm.controls['phoneNumber']?.touched && userForm.controls['phoneNumber']?.invalid) {
                 <div
                   class="text-danger">
@@ -41,7 +41,7 @@
               <div>
                 <label for="email">Email</label>
                 <input type="text" class="form-control" id="email" name="email"
-                  [(ngModel)]="user.email" required>
+                  [(ngModel)]="tempUser.email" required>
                   @if (userForm.controls['email']?.touched && userForm.controls['email']?.invalid) {
                     <div
                       class="text-danger">
@@ -53,7 +53,7 @@
                 <div>
                   <label for="password">Password</label>
                   <input type="text" class="form-control" id="password" name="password"
-                    [(ngModel)]="user.password" required>
+                    [(ngModel)]="tempUser.password" required>
                     @if (userForm.controls['password']?.touched && userForm.controls['password']?.invalid) {
                       <div
                         class="text-danger">
@@ -65,7 +65,7 @@
                   <div>
                     <label for="confirmPassword">Confirm Password</label>
                     <input type="text" class="form-control" id="tempPassword" name="tempPassword"
-                      [(ngModel)]="user.tempPassword" required>
+                      [(ngModel)]="tempUser.tempPassword" required>
                       @if (userForm.controls['tempPassword']?.touched && userForm.controls['tempPassword']?.invalid) {
                         <div
                           class="text-danger">
@@ -77,8 +77,8 @@
                 </div>
 
                 <div>
-                  <input type="submit" value="submit" />-->
-                  <!--<button type="submit" class="btn btn-primary">Submit</button>-->
-                <!--</div>
+                  <input type="submit" value="submit" />
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
               </form>
-            </div>-->
+            </div>

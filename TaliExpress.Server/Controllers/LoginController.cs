@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using TaliExpress.Server.Classes.API.Responses;
@@ -15,19 +16,19 @@ namespace TaliExpress.Server.Controllers
     public class LoginController : ControllerBase
     {
         private readonly ILogin LoginWorker;
-        private readonly HttpContextAccessor ContextAccessor;
-        public LoginController(ILogin loginWorker, HttpContextAccessor contextAccessor)
+        private readonly IHttpContextAccessor ContextAccessor;
+        public LoginController(ILogin loginWorker, IHttpContextAccessor contextAccessor)
         {
             this.LoginWorker = loginWorker;
             this.ContextAccessor = contextAccessor;
         }
 
-        [HttpGet("login")]
-        [Route("login")]
-        public async Task<LoginResponse>? Login(string email, string password/*, bool stayLoggedIn = false*/)
+        [HttpPost("login")]
+        //[Route("login")]
+        public async Task<LoginResponse>? Login(LoginRequest loginRequest/*string email, string password*//*, bool stayLoggedIn = false*/)
         {
             LoginResponse loginResponse = new LoginResponse();
-            (ReturnCode result, string user) = await this.LoginWorker.Login(email, password, this.ContextAccessor.HttpContext!/*, stayLoggedIn*/);
+            (ReturnCode result, string user) = await this.LoginWorker.Login(loginRequest.Email, loginRequest.Password, this.ContextAccessor.HttpContext!/*, stayLoggedIn*/);
             if (result == ReturnCode.Success)
             {
                 loginResponse.code = 0;

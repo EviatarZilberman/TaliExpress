@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { User } from '../../../Classes/Common/User';
 import { APIReturnKeys } from '../../../Enums/APIReturnKeys';
+import { RegisreationUser } from '../../../Classes/Common/RegisreationUser';
 
 @Component({
   selector: 'register',
@@ -15,15 +16,15 @@ import { APIReturnKeys } from '../../../Enums/APIReturnKeys';
 
 export class RegisterComponent extends BaseComponent {
   override title: string = 'taliexpress.client.registerComponent';
-  user: User = new User();
+  tempUser!: RegisreationUser;
 
   constructor(private apiRequester: APIRequesterService, protected override router: Router, protected httpClient: HttpClient) {
     super(httpClient, router);
 
   };
 
-  registerUser(user: User): void | string {
-    if (user === null) return 'User data is null';
-    return this.apiRequester.APIReturn(user, 'register', 'register', APIReturnKeys.Post);
+  registerUser(tempUser: RegisreationUser): void {
+    //if (user === null) return 'User data is null';
+    this.apiRequester.APIReturn(tempUser, 'register', 'register', APIReturnKeys.Post);
   }
 }
