@@ -1,5 +1,5 @@
 import { User } from "./User";
 
-export class RegisreationUser extends User {
+export class RegistrationUser extends User {
   tempPassword: string = '';
 }

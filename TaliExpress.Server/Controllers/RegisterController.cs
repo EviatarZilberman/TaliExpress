@@ -16,7 +16,7 @@ namespace TaliExpress.Server.Controllers
         
 
         [HttpPost("register")]
-        [Route("register")]
+        //[Route("register")]
         public IActionResult Register([FromBody] RegistrationUser user)
         {
             this.RegistrationWorker.Register(user);

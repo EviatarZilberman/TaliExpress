@@ -1,4 +1,4 @@
-<div class="container">
+<!--<div class="container">
   <h2 class="heading">Template Driven Form</h2>
   <form #userForm="ngForm" (ngSubmit)="registerUser(tempUser)">
 
@@ -81,4 +81,39 @@
                   <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
               </form>
-            </div>
+            </div>-->
+
+<div class="container">
+  <h2 class="heading">Register</h2>
+  <form #form="ngForm" (ngSubmit)="registerUser()">
+    <div class="form-group">
+      <div>
+        <label>First Name</label>
+        <input type="text" class="form-control" name="firstName" [(ngModel)]="tempUser.firstName" />
+      </div>
+      <div>
+        <label>Last Name</label>
+        <input type="text" class="form-control" name="lastName" [(ngModel)]="tempUser.lastName" />
+      </div>
+      <div>
+        <label>Email</label>
+        <input type="text" class="form-control" name="email" [(ngModel)]="tempUser.email" />
+      </div>
+      <div>
+        <label>Phone Number</label>
+        <input type="text" class="form-control" name="phoneNumber" [(ngModel)]="tempUser.phoneNumber" />
+      </div>
+      <div>
+        <label>Password</label>
+        <input class="form-control" name="password" [(ngModel)]="tempUser.password" type="text" />
+      </div>
+      <div>
+        <label>Confirm Password</label>
+        <input class="form-control" name="tempPassword" [(ngModel)]="tempUser.tempPassword" type="text" />
+      </div>
+      <div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </form>
+</div>
