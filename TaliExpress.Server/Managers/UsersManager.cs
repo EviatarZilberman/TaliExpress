@@ -87,8 +87,9 @@ namespace TaliExpress.Server.Managers
 
         public ReturnCode FindByEmail(string email, out User user)
         {
-            MongoDBServiceManager<User>.Instance(ConfigurationsKeeper.Instance().GetValue(Utils.DB_name.ToString()), CollectionNames.Users.ToString()).FindByField("Email", email, out user);
-            return ReturnCode.Success;
+            int res = (int)MongoDBServiceManager<User>.Instance(ConfigurationsKeeper.Instance().GetValue(Utils.DB_name.ToString()), CollectionNames.Users.ToString()).FindByField("Email", email, out user);
+            if (res == (int)ReturnCode.Success) return ReturnCode.Success;
+            return ReturnCode.No_user_found;
         }
     }
 }

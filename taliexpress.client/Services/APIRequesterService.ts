@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { APIReturnKeys } from '../Enums/APIReturnKeys';
 import { ConfigurationService } from '../Services/ConfigurationService';
 import { LoginResponse } from '../Classes/ApiResponse/LoginResponse';
+import { LoginRequest } from '../Classes/ApiRequests/LoginRequest';
 
 @Injectable({
   providedIn: 'root'
@@ -36,10 +37,19 @@ export class APIRequesterService {
     return this.http.get<any>(url, { withCredentials: true });
   }
 
-  public login(params: HttpParams): Observable<LoginResponse> {
-    const url = `${this.api}/login/login?${params}`;
-    return this.http.get<any>(url);
-    }
+  public login(item: LoginRequest): Observable<LoginResponse> {
+    const url = `${this.api}/login/login`;
+    const answer: any = this.http.post<any>(
+      url,
+      item/*, // pass the object directly
+      {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }*/
+    );
+    return answer;
+  }
 
   public APIReturn(item: any, controller: string, method: string, type: APIReturnKeys): any | undefined {
     if (type === APIReturnKeys.Post) {

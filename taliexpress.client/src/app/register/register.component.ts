@@ -24,8 +24,6 @@ export class RegisterComponent extends BaseComponent {
   };
 
   registerUser(): void {
-    //if (user === null) return 'User data is null';
-    console.log(this.tempUser.firstName);
     this.apiRequester.APIReturn(this.tempUser, 'register', 'register', APIReturnKeys.Post);
   }
 }

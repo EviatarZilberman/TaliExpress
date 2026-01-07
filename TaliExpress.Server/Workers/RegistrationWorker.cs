@@ -17,7 +17,7 @@ namespace TaliExpress.Server.Workers
             {
                 return ReturnCode.User_exist;
             }
-            if (!RegistrationUser.Validate(user)) return ReturnCode.Invalid_parameters;
+            //if (!RegistrationUser.Validate(user)) return ReturnCode.Invalid_parameters;
             if (user.TempPassword != user.Password) return ReturnCode.Unmatched_passwords; User modelUser = new User()
             {
                 Email = user.Email,
@@ -28,6 +28,7 @@ namespace TaliExpress.Server.Workers
             ReturnCode result = await usersManager.Insert(modelUser);
             if (result == ReturnCode.Success)
             {
+                //TODO = CHECK MAIL SENDING.
                 EmailModel email = new EmailModel(modelUser.Email, "Seccussfully Registration", "Thank you for registering to TaliExpress!");
                 await EmailManager.Instance().SendEmailModelAsync(email);
                 return result;

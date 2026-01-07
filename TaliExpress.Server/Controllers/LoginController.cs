@@ -24,7 +24,6 @@ namespace TaliExpress.Server.Controllers
         }
 
         [HttpPost("login")]
-        //[Route("login")]
         public async Task<LoginResponse>? Login(LoginRequest loginRequest/*string email, string password*//*, bool stayLoggedIn = false*/)
         {
             LoginResponse loginResponse = new LoginResponse();
