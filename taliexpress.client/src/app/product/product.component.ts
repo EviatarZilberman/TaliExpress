@@ -30,14 +30,8 @@ export class ProductComponent extends BaseComponent implements OnInit, OnDestroy
   }
 
   ngOnInit(): void {
-    // Subscribe ONCE
-    //this.searchSub = this.searchService.listenSearchParameter().subscribe(params => {
-    //  if (params) {
-    //    console.log('ProductComponent got search params:', params);
-    //    this.searchByTerm(params);
-    //  }
-    //});
     this.searchService.currentDataParameter.subscribe(searchParam => this.searchParam = searchParam);
+    console.log('Search param: ', this.searchParam);
   }
 
   private searchByTerm(params: any): void {

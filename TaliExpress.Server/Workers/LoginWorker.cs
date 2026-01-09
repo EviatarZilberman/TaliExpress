@@ -12,7 +12,7 @@ namespace TaliExpress.Server.Workers
 {
     public class LoginWorker : ILogin
     {
-        public async Task<(ReturnCode result, string user)> Login(string email, string password, HttpContext httpContext, bool stayLoggedIn = false)
+        public async Task<(ReturnCode result, User user)> Login(string email, string password, HttpContext httpContext, bool stayLoggedIn = false)
         {
             ClaimsPrincipal claimUser = httpContext.User;
 
@@ -20,16 +20,16 @@ namespace TaliExpress.Server.Workers
             {
                 //return RedirectToAction("Index", "Home");
             }
-            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password)) return (ReturnCode.No_parameters_entered, string.Empty);
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password)) return (ReturnCode.No_parameters_entered, new User());
             UsersManager usersManager = new UsersManager();
-            if (usersManager.Get(email, out User? user) != Enums.ReturnCode.Success) return (ReturnCode.No_user_found, string.Empty);
+            if (usersManager.Get(email, out User? user) != Enums.ReturnCode.Success) return (ReturnCode.No_user_found, new User());
             if (user != null)
             {
                 if (user.Password != password)
                 {
                     user.LoginTries++;
                     usersManager.Update(user);
-                    return (ReturnCode.Incorrect_password, string.Empty);
+                    return (ReturnCode.Incorrect_password, new User());
                 }
                 user.LoginTries = 0;
                 user.LastLogin = DateTime.Now;
@@ -53,9 +53,9 @@ namespace TaliExpress.Server.Workers
                     new ClaimsPrincipal(claimsIdentity), properties);
 
                 string jsonUser = SerializeHandler<User>.Serialize(user);
-                return (ReturnCode.Success, jsonUser);
+                return (ReturnCode.Success, user);
             }
-            return (ReturnCode.No_user_found, string.Empty);
+            return (ReturnCode.No_user_found, new User());
         }
 
         public async Task<ReturnCode> LogOut(HttpContext httpContext)

@@ -7,6 +7,7 @@ using System.Security.Claims;
 using TaliExpress.Server.Classes.API.Responses;
 using TaliExpress.Server.Enums;
 using TaliExpress.Server.Interfaces;
+using TaliExpress.Server.Models;
 
 namespace TaliExpress.Server.Controllers
 {
@@ -27,11 +28,12 @@ namespace TaliExpress.Server.Controllers
         public async Task<LoginResponse>? Login(LoginRequest loginRequest/*string email, string password*//*, bool stayLoggedIn = false*/)
         {
             LoginResponse loginResponse = new LoginResponse();
-            (ReturnCode result, string user) = await this.LoginWorker.Login(loginRequest.Email, loginRequest.Password, this.ContextAccessor.HttpContext!/*, stayLoggedIn*/);
+            (ReturnCode result, User user) = await this.LoginWorker.Login(loginRequest.Email, loginRequest.Password, this.ContextAccessor.HttpContext!/*, stayLoggedIn*/);
             if (result == ReturnCode.Success)
             {
                 loginResponse.code = 0;
                 loginResponse.message = "Successfully Login!";
+                loginResponse.Data = user;
                 return loginResponse;
             }
             return loginResponse;

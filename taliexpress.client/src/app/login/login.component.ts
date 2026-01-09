@@ -5,10 +5,9 @@ import { Router } from '@angular/router';
 import { APIRequesterService } from '../../../Services/APIRequesterService';
 import { User } from '../../../Classes/Common/User';
 import { APIReturnKeys } from '../../../Enums/APIReturnKeys';
-//import { URLParametersCreator } from '../../../Classes/URLParametersCreator';
 import { LoginResponse } from '../../../Classes/ApiResponse/LoginResponse';
-import { Observable } from 'rxjs';
 import { LoginRequest } from '../../../Classes/ApiRequests/LoginRequest';
+import { TransferDataService } from '../../../Services/TransferDataService';
 
 @Component({
   selector: 'login',
@@ -18,6 +17,7 @@ import { LoginRequest } from '../../../Classes/ApiRequests/LoginRequest';
 })
 export class LoginComponent extends BaseComponent {
   public user: User = new User();
+  public dataTransferer: TransferDataService = new TransferDataService();
   constructor(protected apiRequester: APIRequesterService, protected override router: Router, protected httpClient: HttpClient) {
     super(httpClient, router);
   };
@@ -25,14 +25,19 @@ export class LoginComponent extends BaseComponent {
   login(user: User): void {
     let loginRequest: LoginRequest = {
       email: user.email,
-      password: user.password
+      password: user.password,
+      data: null
     }
-    const response: any = this.apiRequester.login(loginRequest).subscribe({
+    const response: any = this.apiRequester.APIReturn(loginRequest, 'login', 'login', APIReturnKeys.Post).subscribe({
       next: (res: LoginResponse) => {
-        console.log(res.code);
-        console.log(res.message);
+        this.user = res.data;
+        console.log("Login successful: ", res.code, this.user);
+        //this.dataTransferer.processDataParameter(res.data);
+        this.router.navigate(['/']).then(() => {
+          this.dataTransferer.processDataParameter(res.data);
+        });
       },
-      error: err => {
+      error: (err: any) => {
         console.error("Login failed", err);
       }
     });
