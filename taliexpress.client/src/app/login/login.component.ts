@@ -17,8 +17,7 @@ import { TransferDataService } from '../../../Services/TransferDataService';
 })
 export class LoginComponent extends BaseComponent {
   public user: User = new User();
-  public dataTransferer: TransferDataService = new TransferDataService();
-  constructor(protected apiRequester: APIRequesterService, protected override router: Router, protected httpClient: HttpClient) {
+constructor(public dataTransferer: TransferDataService, protected apiRequester: APIRequesterService, protected override router: Router, protected httpClient: HttpClient) {
     super(httpClient, router);
   };
 

@@ -10,7 +10,8 @@ import { TransferDataService } from '../../../Services/TransferDataService';
 })
 export class HomeComponent implements OnInit {
   public user!: User;
-  public dataTransferer: TransferDataService = new TransferDataService();
+
+  constructor(public dataTransferer: TransferDataService) { }
 
 
   ngOnInit(): void {
