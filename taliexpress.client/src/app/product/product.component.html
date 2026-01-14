@@ -1,1 +1,10 @@
-<p>product works! {{ searchParam }}</p>
+<h1>Products!</h1>
+
+<div class="page-content">
+  <h3>Results for: {{ searchParam1 }}</h3>
+  <div *ngFor="let product of products; let i = index">
+    <h2>{{ product.name }}</h2>
+    <h6>{{ product.description }}</h6>
+    <p>{{ product.price }}</p>
+    </div>
+  </div>

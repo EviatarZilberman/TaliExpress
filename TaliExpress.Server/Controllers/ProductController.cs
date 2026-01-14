@@ -7,9 +7,8 @@ namespace TaliExpress.Server.Controllers
     [Route("[controller]")]
     public class ProductController : Controller
     {
-        [HttpGet]
-        [Route("searchProduct")]
-        public IActionResult SearchProduct([FromBody] string productDescription)
+        [HttpGet("searchProduct")]
+        public IActionResult SearchProduct([FromQuery] string productDescription)
         {
             List<Product> products = new List<Product>();
             products.Add(new Product()

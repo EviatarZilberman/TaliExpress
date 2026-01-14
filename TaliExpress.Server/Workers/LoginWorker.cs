@@ -27,7 +27,7 @@ namespace TaliExpress.Server.Workers
             {
                 if (user.Password != password)
                 {
-                    user.LoginTries++;
+                    user.LoginTries++;//TODO = BLOCK USERS AFTERS SOME FAILED LOGINS.
                     usersManager.Update(user);
                     return (ReturnCode.Incorrect_password, new User());
                 }
@@ -52,7 +52,6 @@ namespace TaliExpress.Server.Workers
                 await httpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
                     new ClaimsPrincipal(claimsIdentity), properties);
 
-                string jsonUser = SerializeHandler<User>.Serialize(user);
                 return (ReturnCode.Success, user);
             }
             return (ReturnCode.No_user_found, new User());

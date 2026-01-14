@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { TransferDataService } from '../../../Services/TransferDataService';
 import { APIReturnKeys } from '../../../Enums/APIReturnKeys';
+import { QueryAranger } from '../../../Classes/Solvers/QueryAranger';
 
 @Component({
   selector: 'product',
@@ -30,7 +31,22 @@ export class ProductComponent extends BaseComponent implements OnInit, OnDestroy
 
   ngOnInit(): void {
     this.searchService.currentDataParameter.subscribe(searchParam => this.searchParam = searchParam);
-    console.log('Search param: ', this.searchParam);
+
+    if (this.searchParam !== null) {
+      const map: Map<string, any> = new Map<string, any>();
+      map.set('productDescription', this.searchParam);
+      const query: string = QueryAranger.Arange(map);
+      const answer = this.apiRequester.APIReturn(query, 'Product', 'SearchProduct', APIReturnKeys.Get);
+      answer.subscribe({
+        next: (result: Product[]) => {
+          this.products = result;
+          console.log('products length is: ', this.products.length);
+        },
+        error: (error: any) => {
+          console.log('Error fetching products:', error);
+        }
+      });
+    }
   }
 
   private searchByTerm(params: any): void {

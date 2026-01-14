@@ -41,12 +41,8 @@ export class APIRequesterService {
     const url = `${this.api}/login/login`;
     const answer: any = this.http.post<any>(
       url,
-      item/*, // pass the object directly
-      {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }*/
+      item,
+      { withCredentials: true }
     );
     return answer;
   }

@@ -21,7 +21,7 @@ export class UpperNavBarComponent extends BaseComponent/* implements OnInit*/ {
 
   searchProduct(value: string): void {
     //this.dataService.processDataParameter(value);
-    this.router.navigate(['/products']).then(() => {
+    this.router.navigate(['/product']).then(() => {
       this.dataService.processDataParameter(value);
     });
   }

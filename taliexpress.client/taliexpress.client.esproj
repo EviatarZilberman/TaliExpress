@@ -10,6 +10,7 @@
   <ItemGroup>
     <Folder Include="Classes\ApiRequests\" />
     <Folder Include="Classes\ApiResponse\" />
+    <Folder Include="Classes\Solvers\" />
     <Folder Include="Resolvers\" />
   </ItemGroup>
 </Project>

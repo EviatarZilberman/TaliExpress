@@ -1,6 +1,7 @@
 import { Image } from "./Image";
 
 export class Product {
+  name: string = '';
   description: string = '';
   amountInInvenotry: number = 0;
   seller: string = '';
