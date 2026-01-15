@@ -1,4 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { Product } from '../../../Classes/Common/Product';
 import { APIRequesterService } from '../../../Services/APIRequesterService';
@@ -13,7 +14,8 @@ import { QueryAranger } from '../../../Classes/Solvers/QueryAranger';
   selector: 'product',
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.css'],
-  standalone: true
+  standalone: true,
+  imports: [CommonModule]
 })
 export class ProductComponent extends BaseComponent implements OnInit, OnDestroy {
   private searchSub?: Subscription;
@@ -24,7 +26,8 @@ export class ProductComponent extends BaseComponent implements OnInit, OnDestroy
     private apiRequester: APIRequesterService,
     protected override router: Router,
     protected httpClient: HttpClient,
-    private searchService: TransferDataService
+    private searchService: TransferDataService,
+    private cd: ChangeDetectorRef
   ) {
     super(httpClient, router);
   }
@@ -40,7 +43,7 @@ export class ProductComponent extends BaseComponent implements OnInit, OnDestroy
       answer.subscribe({
         next: (result: Product[]) => {
           this.products = result;
-          console.log('products length is: ', this.products.length);
+          this.cd.markForCheck();
         },
         error: (error: any) => {
           console.log('Error fetching products:', error);
