@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { APIRequesterService } from '../../../../Services/APIRequesterService';
 import { TransferDataService } from '../../../../Services/TransferDataService';
 import { User } from '../../../../Classes/Common/User';
+import { KeepAliveData } from '../../keep-alive-data/keep-alive-data.component';
 
 @Component({
   selector: 'upper-nav-bar',
@@ -15,7 +16,11 @@ import { User } from '../../../../Classes/Common/User';
 export class UpperNavBarComponent extends BaseComponent/* implements OnInit*/ {
   override title: string = 'taliexpress.client.navbarComponent';
   public user!: User;
-  constructor(private apiRequester: APIRequesterService, protected override router: Router, protected httpClient: HttpClient, private dataService: TransferDataService) {
+  constructor(private apiRequester: APIRequesterService,
+    protected override router: Router,
+    protected httpClient: HttpClient,
+    private dataService: TransferDataService,
+    private keepData: KeepAliveData) {
     super(httpClient, router);
   };
 
