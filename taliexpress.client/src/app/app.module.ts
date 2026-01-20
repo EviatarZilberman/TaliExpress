@@ -14,7 +14,8 @@ import { ConfigurationService } from '../../Services/ConfigurationService';
 import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ErrorComponent } from './error/error.component';
-import { KeepAliveData } from './keep-alive-data/keep-alive-data.component';
+import { KeepAliveDataService } from '../../Services/KeepAliveDataService';
+import { PersonalAreaComponent } from './personal-area/personal-area.component';
 //import { CustomifDirective } from './directives/customif/customif.directive';
 //import { HighlighttextDirective } from './directives/highlighttext/highlighttext.directive';
 //import { PokemonTemplateFormComponent } from './pokemon-template-form/pokemon-template-form.component';
@@ -31,14 +32,14 @@ export function initConfig(configService: ConfigurationService) {
     //TestComponent,
     HomeComponent,
     NotFoundComponent,
-    ErrorComponent
+    ErrorComponent,
+    PersonalAreaComponent
     //CustomifDirective,
     //HighlighttextDirective,
     //PokemonTemplateFormComponent
   ],
   imports: [
     BrowserModule,
-    KeepAliveData,
     ProductComponent,
     HttpClientModule,
     AppRoutingModule,

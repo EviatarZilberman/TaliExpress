@@ -4,8 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { APIRequesterService } from '../../../../Services/APIRequesterService';
 import { TransferDataService } from '../../../../Services/TransferDataService';
-import { User } from '../../../../Classes/Common/User';
-import { KeepAliveData } from '../../keep-alive-data/keep-alive-data.component';
+import { KeepAliveDataService } from '../../../../Services/KeepAliveDataService';
 
 @Component({
   selector: 'upper-nav-bar',
@@ -13,36 +12,22 @@ import { KeepAliveData } from '../../keep-alive-data/keep-alive-data.component';
   styleUrl: './upper-nav-bar.component.css',
   standalone: false
 })
-export class UpperNavBarComponent extends BaseComponent/* implements OnInit*/ {
+export class UpperNavBarComponent extends BaseComponent implements OnInit {
   override title: string = 'taliexpress.client.navbarComponent';
-  public user!: User;
   constructor(private apiRequester: APIRequesterService,
     protected override router: Router,
     protected httpClient: HttpClient,
     private dataService: TransferDataService,
-    private keepData: KeepAliveData) {
+    public keepData: KeepAliveDataService) {
     super(httpClient, router);
   };
 
   searchProduct(value: string): void {
-    //this.dataService.processDataParameter(value);
     this.router.navigate(['/product']).then(() => {
       this.dataService.processDataParameter(value);
     });
   }
 
-  //ngOnInit(): void {
-  //  this.dataService.currentDataParameter.subscribe(user => this.user = user);
-  //  if (this.user) {
-  //    console.error('The user name is: ', this.user.firstName, this.user.lastName);
-  //  }
-  //}
-  
-
-  //searchProduct(description: string): void | Product[] {
-  //  if (description === null) return;
-  //  const map: Map<string, string> = new Map<string, string>();
-  //  map.set('searchWords', description);
-  //  this.searchService?.parameterObserver(map);
-  //}
-}
+  ngOnInit(): void {
+    }
+  }

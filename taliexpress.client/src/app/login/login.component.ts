@@ -7,7 +7,7 @@ import { User } from '../../../Classes/Common/User';
 import { APIReturnKeys } from '../../../Enums/APIReturnKeys';
 import { LoginResponse } from '../../../Classes/ApiResponse/LoginResponse';
 import { LoginRequest } from '../../../Classes/ApiRequests/LoginRequest';
-import { KeepAliveData } from '../../../src/app/keep-alive-data/keep-alive-data.component';
+import { KeepAliveDataService } from '../../../Services/KeepAliveDataService';
 import { TransferDataService } from '../../../Services/TransferDataService';
 
 @Component({
@@ -22,7 +22,7 @@ export class LoginComponent extends BaseComponent {
     protected apiRequester: APIRequesterService,
     protected override router: Router,
     protected httpClient: HttpClient,
-    private keepData: KeepAliveData) {
+    private keepData: KeepAliveDataService) {
     super(httpClient, router);
   };
 
@@ -34,10 +34,7 @@ export class LoginComponent extends BaseComponent {
     }
     const response: any = this.apiRequester.APIReturn(loginRequest, 'login', 'login', APIReturnKeys.Post).subscribe({
       next: (res: LoginResponse) => {
-        this.user = res.data;
         this.keepData.user = res.data;
-        //console.log("Login successful: ", res.code, this.user);
-        //this.dataTransferer.processDataParameter(res.data);
         this.router.navigate(['/']).then(() => {
           this.dataTransferer.processDataParameter(res.data);
         });

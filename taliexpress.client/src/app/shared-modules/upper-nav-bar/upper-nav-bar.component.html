@@ -6,6 +6,9 @@
         <li>
           <a href="#">Home</a>
         </li>
+        <li *ngIf="keepData.user.email">
+          <a href="#">Personal Area</a>
+        </li>
         <li>
           <a href="#">About</a>
           <ul>
@@ -36,24 +39,6 @@
   </div>
 </div>
 
-<!-- //-- right side login and register button-->
-<!--<div style="margin-left: 90%; width: 10%; display: inline-block;">
-    <button class="button btn btn-primary" (click)="showModal('registerOrLogin')">Connect</button>
-  </div>
-</div>-->
-<!-- Register or login modal -->
-<!--<div id="registerOrLogin" class="modal" (click)="hideModal('registerOrLogin')">
-  <div class="modal-content" (click)="$event.stopPropagation()">
-    <span class="close" (click)="hideModal('registerOrLogin')">&times;</span>
-    <div class="container" style="align-items:center">
-      <h2 class="heading" style="text-align:center">Login OR Register</h2>
-      <div class="button-row">
-        <button class="button" (click)="redirectByPath('login', 'registerOrLogin')">Login</button>
-        <button class="button" (click)="redirectByPath('register', 'registerOrLogin')">Register</button>
-      </div>
-    </div>
-  </div>
-</div>-->
 <div id="registerOrLogin" class="modal">
   <div class="modal-backdrop" (click)="hideModal('registerOrLogin')"></div>
 
@@ -76,4 +61,3 @@
     </div>
   </div>
 </div>
-
