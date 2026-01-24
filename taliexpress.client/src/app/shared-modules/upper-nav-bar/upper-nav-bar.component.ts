@@ -28,6 +28,10 @@ export class UpperNavBarComponent extends BaseComponent implements OnInit {
     });
   }
 
+  public navigateToUpdatePersonalData(): void {
+    this.router.navigate(['/personal-area']);
+  }
+
   ngOnInit(): void {
     }
   }

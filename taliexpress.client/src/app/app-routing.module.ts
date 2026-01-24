@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'product', component: ProductComponent },
-  { path: 'personal_area', component: PersonalAreaComponent },
+  { path: 'personal-area', component: PersonalAreaComponent },
   //{ path: 'pokemon/:id', component: PokemonTemplateFormComponent },
   //{
   //  path: 'pokemon', loadChildren:

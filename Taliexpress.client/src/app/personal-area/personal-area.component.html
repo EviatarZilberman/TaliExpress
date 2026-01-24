@@ -1,1 +1,9 @@
-<p>personal-area works!</p>
+<form #form="ngForm" (ngSubmit)="updateUser()">
+  First Name:
+  <input type="text" [(ngModel)]="user.firstName" name="firstName" />
+  Last Name:
+  <input type="text" [(ngModel)]="user.lastName" name="lastName" />
+  Phone Number:
+  <input type="text" [(ngModel)]="user.phoneNumber" name="phoneNumber" />
+  <button type="submit">save</button>
+</form>

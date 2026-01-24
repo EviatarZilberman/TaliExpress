@@ -7,6 +7,6 @@ import { Injectable } from '@angular/core';
 
 export class KeepAliveDataService {
   public user!: User;
-  public Cart!: Cart;
+  public cart!: Cart;
   public store!: Store;
 }

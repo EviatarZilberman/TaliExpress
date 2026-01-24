@@ -31,8 +31,11 @@ builder.Services.AddCors(options =>
                .AllowCredentials();
     });
 });
+
 builder.Services.AddScoped<IRegister, RegistrationWorker>();
 builder.Services.AddScoped<ILogin, LoginWorker>();
+builder.Services.AddScoped<IAccount, AccountWorker>();
+
 var app = builder.Build();
 app.UseCookiePolicy();
 app.UseDefaultFiles();
