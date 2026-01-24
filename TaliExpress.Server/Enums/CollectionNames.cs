@@ -5,5 +5,6 @@
         Users,
         Carts,
         Products,
+        Stores,
     }
 }

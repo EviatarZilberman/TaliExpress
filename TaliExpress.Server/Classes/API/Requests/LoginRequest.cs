@@ -2,7 +2,7 @@
 
 namespace TaliExpress.Server.Classes.API.Requests
 {
-    public sealed class LoginRequest : BaseApiRequest<User>
+    public sealed class LoginRequest : BaseApiRequest
     {
         public string Email { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;

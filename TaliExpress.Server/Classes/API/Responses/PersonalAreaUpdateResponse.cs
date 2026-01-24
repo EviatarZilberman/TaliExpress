@@ -1,7 +1,9 @@
-﻿namespace TaliExpress.Server.Classes.API.Responses
+﻿using TaliExpress.Server.Models;
+
+namespace TaliExpress.Server.Classes.API.Responses
 {
-    public class PersonalAreaUpdateResponse
+    public class PersonalAreaUpdateResponse : BaseApiResponse
     {
-        public int code { get; set; } = -1;
+        public User ReturnedUser { get; set; } = null!;
     }
 }

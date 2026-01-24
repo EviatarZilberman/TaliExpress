@@ -31,9 +31,9 @@ namespace TaliExpress.Server.Controllers
             (ReturnCode result, User user) = await this.LoginWorker.Login(loginRequest.Email, loginRequest.Password, this.ContextAccessor.HttpContext!/*, stayLoggedIn*/);
             if (result == ReturnCode.Success)
             {
-                loginResponse.code = 0;
-                loginResponse.message = "Successfully Login!";
-                loginResponse.Data = user;
+                loginResponse.Code = 0;
+                loginResponse.Message = "Successfully Login!";
+                loginResponse.ReturnedUser = user;
                 return loginResponse;
             }
             return loginResponse;

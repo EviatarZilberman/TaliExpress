@@ -2,9 +2,8 @@
 
 namespace TaliExpress.Server.Classes.API.Responses
 {
-    public sealed class LoginResponse : BaseApiResponse<User>
+    public sealed class LoginResponse : BaseApiResponse
     {
-        public int code { get; set; } = -1;
-        public string message { get; set; } = string.Empty;
+        public User ReturnedUser { get; set; } = null!;
     }
 }

@@ -1,7 +1,8 @@
 ﻿namespace TaliExpress.Server.Classes.API.Responses
 {
-    public abstract class BaseApiResponse<T> where T: class, new()
+    public abstract class BaseApiResponse
     {
-        public T Data { get; set; } = new T();
+        public int Code { get; set; } = 200;
+        public string Message { get; set; } = "OK";
     }
 }

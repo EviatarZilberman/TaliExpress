@@ -59,4 +59,8 @@ export class PersonalAreaComponent extends BaseComponent implements OnInit {
         this.router.navigate(['/'])
       });
   }
+
+  openStore(): void {
+
+  }
 }

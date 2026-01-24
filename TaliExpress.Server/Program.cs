@@ -35,6 +35,7 @@ builder.Services.AddCors(options =>
 builder.Services.AddScoped<IRegister, RegistrationWorker>();
 builder.Services.AddScoped<ILogin, LoginWorker>();
 builder.Services.AddScoped<IAccount, AccountWorker>();
+builder.Services.AddScoped<IStore, StoreWorker>();
 
 var app = builder.Build();
 app.UseCookiePolicy();
