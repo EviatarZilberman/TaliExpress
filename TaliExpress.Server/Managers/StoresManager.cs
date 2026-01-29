@@ -10,14 +10,14 @@ namespace TaliExpress.Server.Managers
 {
     public class StoresManager : AManager<Store>
     {
-        public override ReturnCode Delete([FromBody] string id)
+        public override ReturnCode Delete(string id)
         {
             throw new NotImplementedException();
         }
 
-        public override ReturnCode Get([FromBody] string commonId, out Store? item)
+        public override ReturnCode Get(string commonId, out Store? item)
         {
-            throw new NotImplementedException();
+            return this.Get(commonId, out item);
         }
 
         public override ReturnCode GetAll(ref List<Store>? items)
@@ -43,7 +43,7 @@ namespace TaliExpress.Server.Managers
             }
         }
 
-        public override ReturnCode Update([FromBody] Store item)
+        public override ReturnCode Update(Store item)
         {
             throw new NotImplementedException();
         }

@@ -1,8 +1,7 @@
-﻿using Eviatar.Zilberman.JsonHandler.Classes;
-using Microsoft.AspNetCore.Authentication;
+﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using TaliExpress.Server.Classes.API.Responses;
 using TaliExpress.Server.Enums;
 using TaliExpress.Server.Interfaces;
 using TaliExpress.Server.Managers;
@@ -12,7 +11,7 @@ namespace TaliExpress.Server.Workers
 {
     public class LoginWorker : ILogin
     {
-        public async Task<(ReturnCode result, User user)> Login(string email, string password, HttpContext httpContext, bool stayLoggedIn = false)
+        public async Task<LoginResponse> Login(string email, string password, HttpContext httpContext, bool stayLoggedIn = false)
         {
             ClaimsPrincipal claimUser = httpContext.User;
 
@@ -20,16 +19,40 @@ namespace TaliExpress.Server.Workers
             {
                 //return RedirectToAction("Index", "Home");
             }
-            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password)) return (ReturnCode.No_parameters_entered, new User());
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+            {
+                return new LoginResponse()
+                {
+                    User = new User(),
+                    Store = new Store(),
+                    Code = (int)ReturnCode.Parameter_is_null_or_empty,
+                    Message = "Email or password is invalid"
+                };
+            }
             UsersManager usersManager = new UsersManager();
-            if (usersManager.Get(email, out User? user) != Enums.ReturnCode.Success) return (ReturnCode.No_user_found, new User());
+            if (usersManager.Get(email, out User? user) != Enums.ReturnCode.Success)
+            {
+                return new LoginResponse()
+                {
+                    User = new User(),
+                    Store = new Store(),
+                    Code = (int)ReturnCode.No_user_found,
+                    Message = "Email or password is invalid"
+                };
+            }
             if (user != null)
             {
                 if (user.Password != password)
                 {
                     user.LoginTries++;//TODO = BLOCK USERS AFTERS SOME FAILED LOGINS.
                     usersManager.Update(user);
-                    return (ReturnCode.Incorrect_password, new User());
+                    return new LoginResponse()
+                    {
+                        User = new User(),
+                        Store = new Store(),
+                        Code = (int)ReturnCode.Invalid_parameters,
+                        Message = "Email or password is invalid"
+                    };
                 }
                 user.LoginTries = 0;
                 user.LastLogin = DateTime.Now;
