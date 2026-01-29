@@ -1,0 +1,7 @@
+<form *ngIf="!keepData.store" #form="ngForm" (ngSubmit)="openStore()">
+  Store Name:
+  <input type="text" [(ngModel)]="store.storeName" name="name" />
+  <button type="submit">save</button>
+</form>
+
+<div *ngIf="keepData.store">{{ keepData.store.storeName }}</div>

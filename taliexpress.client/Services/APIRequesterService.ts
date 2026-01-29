@@ -17,9 +17,7 @@ export class APIRequesterService {
 }
 
   private postCallAPI(item: any, controller: string, method: string): Observable<any> {
-    var url: string = '';
-    if (item instanceof Map) url = `${this.api}/${controller}/${item}`;
-    else url = `${this.api}/${controller}/${method}`;
+    let url = `${this.api}/${controller}/${method}`;
     const answer: any = this.http.post<any>(
       url,
       item/*, // pass the object directly

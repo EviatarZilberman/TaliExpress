@@ -6,6 +6,7 @@ using TaliExpress.Server.Interfaces;
 namespace TaliExpress.Server.Controllers
 {
     [ApiController]
+    [Route("[controller]")]
     public class StoreController : ControllerBase
     {
         private readonly IStore StoreWorker;
@@ -16,7 +17,7 @@ namespace TaliExpress.Server.Controllers
         }
 
         [HttpPost("openStore")]
-        public async Task<OpenStoreResponse> Insert(OpenStoreRequest request)
+        public async Task<OpenStoreResponse> OpenStore(OpenStoreRequest request)
         {
             return await StoreWorker.OpenStore(request);
         }

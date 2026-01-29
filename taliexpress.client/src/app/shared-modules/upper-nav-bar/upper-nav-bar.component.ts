@@ -32,6 +32,10 @@ export class UpperNavBarComponent extends BaseComponent implements OnInit {
     this.router.navigate(['/personal-area']);
   }
 
+  public navigateToStore(): void {
+    this.router.navigate(['/store']);
+  }
+
   ngOnInit(): void {
     }
   }

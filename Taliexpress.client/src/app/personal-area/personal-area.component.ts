@@ -20,7 +20,7 @@ export class PersonalAreaComponent extends BaseComponent implements OnInit {
 
   constructor(private keepData: KeepAliveDataService,
     private apiRequester: APIRequesterService,
-    private cd: ChangeDetectorRef,
+    //private cd: ChangeDetectorRef,
     override http: HttpClient,
     override router: Router)
   {
@@ -58,9 +58,5 @@ export class PersonalAreaComponent extends BaseComponent implements OnInit {
       }).then(() => {
         this.router.navigate(['/'])
       });
-  }
-
-  openStore(): void {
-
   }
 }

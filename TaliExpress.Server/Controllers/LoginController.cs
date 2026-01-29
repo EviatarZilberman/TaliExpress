@@ -33,7 +33,7 @@ namespace TaliExpress.Server.Controllers
             {
                 loginResponse.Code = 0;
                 loginResponse.Message = "Successfully Login!";
-                loginResponse.ReturnedUser = user;
+                loginResponse.Data = user;
                 return loginResponse;
             }
             return loginResponse;
