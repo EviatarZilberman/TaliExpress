@@ -16,11 +16,11 @@ namespace TaliExpress.Server.Workers
             try
             {
                 UsersManager usersManager = new UsersManager();
-                if (usersManager.Get(request.OriginEmail, out User? user) != Enums.ReturnCode.Success) return reply;
+                if (!usersManager.FindByEmail(request.OriginEmail, out User? user)) return reply;
                 user!.FirstName = request.FirstName;
                 user!.LastName = request.LastName;
                 user!.PhoneNumber = request.PhoneNumber;
-                if (usersManager.Update(user) != Enums.ReturnCode.Success) return reply;
+                if (!usersManager.Update(user)) return reply;
                 reply.Code = (int)ReturnCode.Success;
                 return reply;
             }

@@ -1,5 +1,6 @@
 ﻿using TaliExpress.Server.Classes.API.Requests;
 using TaliExpress.Server.Classes.API.Responses;
+using TaliExpress.Server.Enums;
 using TaliExpress.Server.Interfaces;
 using TaliExpress.Server.Managers;
 using TaliExpress.Server.Models;
@@ -8,7 +9,7 @@ namespace TaliExpress.Server.Workers
 {
     public class StoreWorker : IStore
     {
-        public Task<OpenStoreResponse> OpenStore(OpenStoreRequest request)
+        public OpenStoreResponse OpenStore(OpenStoreRequest request)
         {
             Store store = new Store
             {
@@ -16,13 +17,14 @@ namespace TaliExpress.Server.Workers
                 Username = request.OwnerEmail,
             };
 
+            OpenStoreResponse response = new OpenStoreResponse();
             StoresManager storesManager = new StoresManager();
-            return storesManager.Insert(store).ContinueWith(task =>
+            if (storesManager.Insert(store))
             {
-                OpenStoreResponse response = new OpenStoreResponse();
-                response.Code = (int)task.Result;
+                response.Code = (int)ReturnCode.Success;
                 return response;
-            });
+            }
+            return response;
         }
     }
 }

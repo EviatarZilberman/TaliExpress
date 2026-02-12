@@ -5,6 +5,6 @@ namespace TaliExpress.Server.Interfaces
 {
     public interface IStore
     {
-        public Task<OpenStoreResponse> OpenStore(OpenStoreRequest request);
+        public OpenStoreResponse OpenStore(OpenStoreRequest request);
     }
 }

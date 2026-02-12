@@ -30,7 +30,7 @@ namespace TaliExpress.Server.Workers
                 };
             }
             UsersManager usersManager = new UsersManager();
-            if (usersManager.Get(email, out User? user) != Enums.ReturnCode.Success)
+            if (usersManager.FindByEmail(email, out User? user))
             {
                 return new LoginResponse()
                 {
@@ -44,7 +44,7 @@ namespace TaliExpress.Server.Workers
             {
                 if (user.Password != password)
                 {
-                    user.LoginTries++;//TODO = BLOCK USERS AFTERS SOME FAILED LOGINS.
+                    user.LoginTries++;//TODO = BLOCK USERS AFTER SOME FAILED LOGINS.
                     usersManager.Update(user);
                     return new LoginResponse()
                     {
@@ -75,9 +75,24 @@ namespace TaliExpress.Server.Workers
                 await httpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
                     new ClaimsPrincipal(claimsIdentity), properties);
 
-                return (ReturnCode.Success, user);
+                StoresManager storesManager = new StoresManager();
+                storesManager.GetByUserId(user.Id.ToString(), out Store? store);
+                return new LoginResponse()
+                {
+                    User = user,
+                    Store = store!,
+                    Code = (int)ReturnCode.Success,
+                    Message = "Login successful"
+                };
             }
-            return (ReturnCode.No_user_found, new User());
+            return new LoginResponse()
+            {
+                Message = "User was not found",
+                Cart = new Cart(),
+                Code = (int)ReturnCode.No_user_found,
+                Store = new Store(),
+                User = new User()
+            };
         }
 
         public async Task<ReturnCode> LogOut(HttpContext httpContext)

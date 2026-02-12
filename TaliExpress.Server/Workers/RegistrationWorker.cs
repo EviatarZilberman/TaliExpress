@@ -13,7 +13,7 @@ namespace TaliExpress.Server.Workers
         {
             if (user == null) return ReturnCode.User_is_null;
             UsersManager usersManager = new UsersManager();
-            if (usersManager.FindByEmail(user.Email, out User? temp) == ReturnCode.Success)
+            if (usersManager.FindByEmail(user.Email, out User? temp))
             {
                 return ReturnCode.User_exist;
             }
@@ -25,13 +25,12 @@ namespace TaliExpress.Server.Workers
                 LastName = user.LastName,
                 Password = user.Password,
             };
-            ReturnCode result = await usersManager.Insert(modelUser);
-            if (result == ReturnCode.Success)
+            if (usersManager.Insert(modelUser))
             {
                 //TODO = CHECK MAIL SENDING.
                 EmailModel email = new EmailModel(modelUser.Email, "Seccussfully Registration", "Thank you for registering to TaliExpress!");
                 await EmailManager.Instance().SendEmailModelAsync(email);
-                return result;
+            return ReturnCode.Success;
             }
             return ReturnCode.Cannot_insert_to_DB;
         }

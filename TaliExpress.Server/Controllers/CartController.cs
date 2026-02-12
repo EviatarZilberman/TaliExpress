@@ -13,12 +13,11 @@ namespace TaliExpress.Server.Controllers
         {
             if (string.IsNullOrEmpty(cartId) || string.IsNullOrEmpty(productId)) return BadRequest(EnumMessagesConverter.Convert(ReturnCode.Parameter_is_null_or_empty)); 
             ProductManager productManager = new ProductManager();
-            productManager.Get(productId, out Product? product);
+            productManager.GetById(productId, out Product? product);
             if (product == null) return BadRequest(EnumMessagesConverter.Convert(ReturnCode.No_product_found));
             CartManager cartManager = new CartManager();
-            ReturnCode result = cartManager.AddProduct(cartId, product, amount);
-            if (result == ReturnCode.Success) return Ok(EnumMessagesConverter.Convert(ReturnCode.Item_successfully_added_to_the_cart));
-            return BadRequest(EnumMessagesConverter.Convert(result));
+            if (cartManager.AddProduct(cartId, product, amount)) return Ok(EnumMessagesConverter.Convert(ReturnCode.Item_successfully_added_to_the_cart));
+            return BadRequest(ReturnCode.Item_failed_to_be_added_to_the_cart);
         }
 
         [HttpPost]
@@ -26,12 +25,11 @@ namespace TaliExpress.Server.Controllers
         {
             if (string.IsNullOrEmpty(cartId) || string.IsNullOrEmpty(productId)) return BadRequest(EnumMessagesConverter.Convert(ReturnCode.Parameter_is_null_or_empty));
             ProductManager productManager = new ProductManager();
-            productManager.Get(productId, out Product? product);
+            productManager.GetById(productId, out Product? product);
             if (product == null) return BadRequest(EnumMessagesConverter.Convert(ReturnCode.No_product_found));
             CartManager cartManager = new CartManager();
-            ReturnCode result = cartManager.RemoveProduct(cartId, product, amount);
-            if (result == ReturnCode.Success) return Ok(EnumMessagesConverter.Convert(ReturnCode.Item_successfully_removed_from_the_cart));
-            return BadRequest(EnumMessagesConverter.Convert(result));
+            if (cartManager.RemoveProduct(cartId, product, amount)) return Ok(EnumMessagesConverter.Convert(ReturnCode.Item_successfully_removed_from_the_cart));
+            return BadRequest(ReturnCode.Item_successfully_removed_from_the_cart);
         }
     }
 }

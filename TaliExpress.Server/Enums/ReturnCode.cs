@@ -17,5 +17,6 @@
         Invalid_parameters,
         Unmatched_passwords,
         Cannot_insert_to_DB,
+        Item_failed_to_be_added_to_the_cart,
     }
 }
