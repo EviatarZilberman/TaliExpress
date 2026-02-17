@@ -8,35 +8,35 @@ using TaliExpress.Server.Models;
 
 namespace TaliExpress.Server.Managers
 {
-    public class CartManager : MongoDBServiceManager<Cart>
+    public class CartManager : MongoDBServiceManager
     {
-        public new bool Delete(string id) => base.Delete(id);
+        public bool Delete(string id) => base.Delete<Cart>(this.GetCollectionName(), id);
 
-        public bool GetByOwnerId(string commonId, out Cart? item) => base.FindOneByProperty("Username", commonId, out item);
+        public bool GetByOwnerId(string commonId, out Cart? item) => base.FindOneByProperty<Cart>(this.GetCollectionName(), "Username", commonId, out item);
 
-        public new bool GetAll(out List<Cart> items) => base.GetAll(out items);
+        public bool GetAll(out List<Cart> items) => base.GetAll(this.GetCollectionName(), out items);
 
-        public new bool Insert(Cart item) => base.Insert(item);
+        public bool Insert(Cart item) => base.Insert(this.GetCollectionName(), item);
 
         public bool AddProduct(string cartId, Product product, int amount = 0)
         { 
-            if (!this.GetById(cartId, out Cart cart)) return false;
+            if (!this.GetById(this.GetCollectionName(), cartId, out Cart cart)) return false;
             cart.Products.Add(product.Id, amount);
-            return this.Replace(cart);
+            return this.Replace(this.GetCollectionName(), cart);
         }
 
         public bool RemoveProduct(string cartId, Product product, int amount = 0)
         {
-            if (!this.GetById(cartId, out Cart cart)) return false;
+            if (!this.GetById(this.GetCollectionName(), cartId, out Cart cart)) return false;
             cart.Products.Remove(product.Id);
-            return this.Replace(cart);
+            return this.Replace(this.GetCollectionName(), cart);
         }
 
         public bool RemoveAllProducts(string cartId)
         {
-            if (!this.GetById(cartId, out Cart cart)) return false;
+            if (!this.GetById(this.GetCollectionName(), cartId, out Cart cart)) return false;
             cart.Products.Clear();
-            return this.Replace(cart);
+            return this.Replace(this.GetCollectionName(), cart);
         }
     }
 }

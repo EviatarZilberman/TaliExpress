@@ -13,7 +13,7 @@ namespace TaliExpress.Server.Controllers
         {
             if (string.IsNullOrEmpty(cartId) || string.IsNullOrEmpty(productId)) return BadRequest(EnumMessagesConverter.Convert(ReturnCode.Parameter_is_null_or_empty)); 
             ProductManager productManager = new ProductManager();
-            productManager.GetById(productId, out Product? product);
+            productManager.GetById(productManager.GetCollectionName(), productId, out Product? product);
             if (product == null) return BadRequest(EnumMessagesConverter.Convert(ReturnCode.No_product_found));
             CartManager cartManager = new CartManager();
             if (cartManager.AddProduct(cartId, product, amount)) return Ok(EnumMessagesConverter.Convert(ReturnCode.Item_successfully_added_to_the_cart));
@@ -25,7 +25,7 @@ namespace TaliExpress.Server.Controllers
         {
             if (string.IsNullOrEmpty(cartId) || string.IsNullOrEmpty(productId)) return BadRequest(EnumMessagesConverter.Convert(ReturnCode.Parameter_is_null_or_empty));
             ProductManager productManager = new ProductManager();
-            productManager.GetById(productId, out Product? product);
+            productManager.GetById<Product>(productManager.GetCollectionName(), productId, out Product? product);
             if (product == null) return BadRequest(EnumMessagesConverter.Convert(ReturnCode.No_product_found));
             CartManager cartManager = new CartManager();
             if (cartManager.RemoveProduct(cartId, product, amount)) return Ok(EnumMessagesConverter.Convert(ReturnCode.Item_successfully_removed_from_the_cart));

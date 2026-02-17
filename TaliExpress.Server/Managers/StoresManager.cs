@@ -8,10 +8,10 @@ using TaliExpress.Server.Models;
 
 namespace TaliExpress.Server.Managers
 {
-    public class StoresManager : MongoDBServiceManager<Store>
+    public class StoresManager : MongoDBServiceManager
     {
         public new string GetCollectionName() => "stores";
-        public new bool Insert(Store store) => base.Insert(store);
-        public bool GetByUserId(string id, out Store store) => base.FindOneByProperty("Username", id, out store);
+        public bool Insert(Store store) => base.Insert(this.GetCollectionName(), store);
+        public bool GetByUserId(string id, out Store store) => base.FindOneByProperty(this.GetCollectionName(), "Username", id, out store);
     }
 }

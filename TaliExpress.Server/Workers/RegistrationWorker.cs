@@ -27,6 +27,7 @@ namespace TaliExpress.Server.Workers
                 FirstName = request.FirstName,
                 LastName = request.LastName,
                 Password = request.Password,
+                PhoneNumber = request.PhoneNumber
             };
             if (usersManager.Insert(modelUser))
             {

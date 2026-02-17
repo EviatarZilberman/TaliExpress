@@ -3,7 +3,6 @@ import { BaseComponent } from '../BaseComponent/baseComponent.component';
 import { APIRequesterService } from '../../../Services/APIRequesterService';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { User } from '../../../Classes/Common/User';
 import { APIReturnKeys } from '../../../Enums/APIReturnKeys';
 import { RegistrationUser } from '../../../Classes/Common/RegistrationUser';
 import { RegisterResponse } from '../../../Classes/ApiResponse/RegisterResponse';
@@ -28,11 +27,11 @@ export class RegisterComponent extends BaseComponent {
     this.apiRequester.APIReturn(this.tempUser, 'register', 'register', APIReturnKeys.Post).subscribe({
       next: (res: RegisterResponse) => {
         if (res.code === 0) {
-
+          this.router.navigate(['/']);
         }
+      }, error: (err: any) => {
+        console.error("Register failed", err);
       }
-    }).then(() => {
-      this.router.navigate(['/store'])
     });
-  };
+  }
 }

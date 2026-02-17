@@ -8,7 +8,7 @@ using TaliExpress.Server.Models;
 
 namespace TaliExpress.Server.Managers
 {
-    public class ProductManager : MongoDBServiceManager<Product>
+    public class ProductManager : MongoDBServiceManager
     {
         public new string GetCollectionName() => "products";
         public ReturnCode GetFiltered(FilterDefinition<Product> filters, out List<Product>? products)
@@ -18,7 +18,7 @@ namespace TaliExpress.Server.Managers
             //    products = null;
             //    return ReturnCode.No_parameters_entered;
             //}
-            if (this.FindManyByProperty("Name", "aaa", out products))
+            if (this.FindManyByProperty(this.GetCollectionName(), "Name", "aaa", out products))
             {
                 return ReturnCode.Success;
             }
