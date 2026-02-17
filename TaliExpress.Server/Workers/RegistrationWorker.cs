@@ -1,4 +1,6 @@
 ﻿using EmailSender;
+using TaliExpress.Server.Classes.API.Requests;
+using TaliExpress.Server.Classes.API.Responses;
 using TaliExpress.Server.Classes.Common;
 using TaliExpress.Server.Enums;
 using TaliExpress.Server.Interfaces;
@@ -9,30 +11,31 @@ namespace TaliExpress.Server.Workers
 {
     public class RegistrationWorker : IRegister
     {
-        public async Task<ReturnCode> Register(RegistrationUser user)
+        public async Task<RegisterResponse> Register(RegisterRequest request)
         {
-            if (user == null) return ReturnCode.User_is_null;
+            if (request == null) return new RegisterResponse { Code = -1 };
             UsersManager usersManager = new UsersManager();
-            if (usersManager.FindByEmail(user.Email, out User? temp))
+            if (usersManager.FindByEmail(request.Email, out User? temp))
             {
-                return ReturnCode.User_exist;
+                return new RegisterResponse { Code = -1 };
             }
             //if (!RegistrationUser.Validate(user)) return ReturnCode.Invalid_parameters;
-            if (user.TempPassword != user.Password) return ReturnCode.Unmatched_passwords; User modelUser = new User()
+            if (request.TempPassword != request.Password) return new RegisterResponse { Code = -1 };
+            User modelUser = new User()
             {
-                Email = user.Email,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                Password = user.Password,
+                Email = request.Email,
+                FirstName = request.FirstName,
+                LastName = request.LastName,
+                Password = request.Password,
             };
             if (usersManager.Insert(modelUser))
             {
                 //TODO = CHECK MAIL SENDING.
                 EmailModel email = new EmailModel(modelUser.Email, "Seccussfully Registration", "Thank you for registering to TaliExpress!");
                 await EmailManager.Instance().SendEmailModelAsync(email);
-            return ReturnCode.Success;
+            return new RegisterResponse();
             }
-            return ReturnCode.Cannot_insert_to_DB;
+            return new RegisterResponse { Code = -1 };
         }
     }
 }

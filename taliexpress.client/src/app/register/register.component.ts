@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { User } from '../../../Classes/Common/User';
 import { APIReturnKeys } from '../../../Enums/APIReturnKeys';
 import { RegistrationUser } from '../../../Classes/Common/RegistrationUser';
+import { RegisterResponse } from '../../../Classes/ApiResponse/RegisterResponse';
 
 @Component({
   selector: 'register',
@@ -24,6 +25,14 @@ export class RegisterComponent extends BaseComponent {
   };
 
   registerUser(): void {
-    this.apiRequester.APIReturn(this.tempUser, 'register', 'register', APIReturnKeys.Post);
-  }
+    this.apiRequester.APIReturn(this.tempUser, 'register', 'register', APIReturnKeys.Post).subscribe({
+      next: (res: RegisterResponse) => {
+        if (res.code === 0) {
+
+        }
+      }
+    }).then(() => {
+      this.router.navigate(['/store'])
+    });
+  };
 }

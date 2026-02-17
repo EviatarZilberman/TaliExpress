@@ -1,11 +1,10 @@
-﻿using TaliExpress.Server.Classes.Common;
-using TaliExpress.Server.Enums;
-using TaliExpress.Server.Models;
+﻿using TaliExpress.Server.Classes.API.Requests;
+using TaliExpress.Server.Classes.API.Responses;
 
 namespace TaliExpress.Server.Interfaces
 {
     public interface IRegister
     {
-        public Task<ReturnCode> Register(RegistrationUser user);
+        public Task<RegisterResponse> Register(RegisterRequest request);
     }
 }

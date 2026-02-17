@@ -35,7 +35,6 @@ export class StoreComponent implements OnInit {
           if (res.code === 0) {
             this.keepData.store = this.store;
             this.cd.detectChanges();
-
           }
         }
       }).then(() => {

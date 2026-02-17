@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using TaliExpress.Server.Classes.Common;
+using TaliExpress.Server.Classes.API.Requests;
+using TaliExpress.Server.Classes.API.Responses;
 using TaliExpress.Server.Interfaces;
 
 namespace TaliExpress.Server.Controllers
@@ -16,10 +17,9 @@ namespace TaliExpress.Server.Controllers
         
 
         [HttpPost("register")]
-        public IActionResult Register([FromBody] RegistrationUser user)
+        public async Task<RegisterResponse> Register(RegisterRequest request)
         {
-            this.RegistrationWorker.Register(user);
-            return RedirectToAction("Index", "First");
+            return await this.RegistrationWorker.Register(request);
         }
     }
 }
