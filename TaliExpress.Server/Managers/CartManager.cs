@@ -12,7 +12,7 @@ namespace TaliExpress.Server.Managers
     {
         public bool Delete(string id) => base.Delete<Cart>(this.GetCollectionName(), id);
 
-        public bool GetByOwnerId(string commonId, out Cart? item) => base.FindOneByProperty<Cart>(this.GetCollectionName(), "Username", commonId, out item);
+        public bool GetByUserId(string userId, out Cart? item) => base.FindOneByProperty<Cart>(this.GetCollectionName(), "Username", userId, out item);
 
         public bool GetAll(out List<Cart> items) => base.GetAll(this.GetCollectionName(), out items);
 

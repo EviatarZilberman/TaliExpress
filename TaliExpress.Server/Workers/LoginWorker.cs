@@ -30,7 +30,7 @@ namespace TaliExpress.Server.Workers
                 };
             }
             UsersManager usersManager = new UsersManager();
-            if (usersManager.FindByEmail(email, out User? user))
+            if (!usersManager.FindByEmail(email, out User? user))
             {
                 return new LoginResponse()
                 {
@@ -77,10 +77,13 @@ namespace TaliExpress.Server.Workers
 
                 StoresManager storesManager = new StoresManager();
                 storesManager.GetByUserId(user.Id.ToString(), out Store? store);
+                CartManager cartsManager = new CartManager();
+                cartsManager.GetByUserId(user.Id.ToString(), out Cart? cart);
                 return new LoginResponse()
                 {
                     User = user,
                     Store = store!,
+                    Cart = cart!,
                     Code = (int)ReturnCode.Success,
                     Message = "Login successful"
                 };
