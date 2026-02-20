@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { IRedirect } from '../../../Interfaces/IRedirect';
+import { ScreenMessage } from '../../../Classes/Common/ScreenMessage';
 
 export abstract class BaseComponent implements IRedirect {
-  title: string = 'taliexpress.client.baseComponent';
+  screenMessage: ScreenMessage = new ScreenMessage();
 
   constructor(protected http: HttpClient, protected router: Router) { }
 
