@@ -13,7 +13,6 @@ import { KeepAliveDataService } from '../../../../Services/KeepAliveDataService'
   standalone: false
 })
 export class UpperNavBarComponent extends BaseComponent implements OnInit {
-  override title: string = 'taliexpress.client.navbarComponent';
   constructor(private apiRequester: APIRequesterService,
     protected override router: Router,
     protected httpClient: HttpClient,

@@ -8,6 +8,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { ErrorComponent } from './error/error.component';
 import { PersonalAreaComponent } from './personal-area/personal-area.component';
 import { StoreComponent } from './store/store.component';
+import { ScreenMessageComponent } from './screenMessage/screenMessage.component';
 //import { PokemonTemplateFormComponent } from './pokemon-base/pokemon-template-form/pokemon-template-form.component';
 
 const routes: Routes = [
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'product', component: ProductComponent },
   { path: 'personal-area', component: PersonalAreaComponent },
   { path: 'store', component: StoreComponent },
+  { path: 'screen-message', component: ScreenMessageComponent },
   //{ path: 'pokemon/:id', component: PokemonTemplateFormComponent },
   //{
   //  path: 'pokemon', loadChildren:

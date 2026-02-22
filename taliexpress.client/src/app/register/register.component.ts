@@ -4,8 +4,10 @@ import { APIRequesterService } from '../../../Services/APIRequesterService';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { APIReturnKeys } from '../../../Enums/APIReturnKeys';
+import { ScreenMessage } from '../../../Classes/Common/ScreenMessage';
 import { RegistrationUser } from '../../../Classes/Common/RegistrationUser';
 import { RegisterResponse } from '../../../Classes/ApiResponse/RegisterResponse';
+import { TransferDataService } from '../../../Services/TransferDataService';
 
 @Component({
   selector: 'register',
@@ -15,10 +17,9 @@ import { RegisterResponse } from '../../../Classes/ApiResponse/RegisterResponse'
 })
 
 export class RegisterComponent extends BaseComponent {
-  override title: string = 'taliexpress.client.registerComponent';
   tempUser: RegistrationUser = new RegistrationUser();
 
-  constructor(private apiRequester: APIRequesterService, protected override router: Router, protected httpClient: HttpClient) {
+  constructor(private apiRequester: APIRequesterService, protected override router: Router, protected httpClient: HttpClient, public messageService: TransferDataService) {
     super(httpClient, router);
 
   };
@@ -27,7 +28,14 @@ export class RegisterComponent extends BaseComponent {
     this.apiRequester.APIReturn(this.tempUser, 'register', 'register', APIReturnKeys.Post).subscribe({
       next: (res: RegisterResponse) => {
         if (res.code === 0) {
-          this.router.navigate(['/']);
+          this.screenMessage = {
+            title: 'Registration successful',
+            message: 'Your account has been created successfully. You can now log in and start shopping!',
+            color: 'green'
+          };
+          this.router.navigate(['/screen-message']).then(() => {
+            this.messageService.processDataParameter(this.screenMessage);
+          });;
         }
       }, error: (err: any) => {
         console.error("Register failed", err);

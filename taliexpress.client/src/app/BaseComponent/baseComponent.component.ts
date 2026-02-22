@@ -4,7 +4,7 @@ import { IRedirect } from '../../../Interfaces/IRedirect';
 import { ScreenMessage } from '../../../Classes/Common/ScreenMessage';
 
 export abstract class BaseComponent implements IRedirect {
-  screenMessage: ScreenMessage = new ScreenMessage();
+  public screenMessage: ScreenMessage = new ScreenMessage();
 
   constructor(protected http: HttpClient, protected router: Router) { }
 
