@@ -17,6 +17,5 @@ export class ScreenMessageComponent implements OnInit {
   ngOnInit(): void {
     this.messageService.currentDataParameter.subscribe(screenMessageParam => this.screenMessage = screenMessageParam);
     this.cd.markForCheck();
-    console.log("ScreenMessageComponent initialized with message:", this.screenMessage);
   }
 }

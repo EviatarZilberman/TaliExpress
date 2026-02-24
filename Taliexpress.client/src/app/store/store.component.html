@@ -4,4 +4,8 @@
   <button type="submit">save</button>
 </form>
 
-<div *ngIf="keepData.store">{{ keepData.store.storeName }}</div>
+<div *ngIf="keepData.store">
+  {{ keepData.store.storeName }}
+
+    <button type="submit" (click)="navigateToNewProduct()">Add Product</button>
+</div>

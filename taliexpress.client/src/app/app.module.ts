@@ -18,6 +18,7 @@ import { KeepAliveDataService } from '../../Services/KeepAliveDataService';
 import { PersonalAreaComponent } from './personal-area/personal-area.component';
 import { StoreComponent } from './store/store.component';
 import { ScreenMessageComponent } from './screenMessage/screenMessage.component';
+import { NewProductComponent } from './new-product/new-product.component';
 //import { CustomifDirective } from './directives/customif/customif.directive';
 //import { HighlighttextDirective } from './directives/highlighttext/highlighttext.directive';
 //import { PokemonTemplateFormComponent } from './pokemon-template-form/pokemon-template-form.component';
@@ -37,7 +38,8 @@ export function initConfig(configService: ConfigurationService) {
     ErrorComponent,
     PersonalAreaComponent,
     StoreComponent,
-    ScreenMessageComponent
+    ScreenMessageComponent,
+    NewProductComponent
     //CustomifDirective,
     //HighlighttextDirective,
     //PokemonTemplateFormComponent

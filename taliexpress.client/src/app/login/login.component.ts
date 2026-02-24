@@ -35,7 +35,6 @@ export class LoginComponent extends BaseComponent {
     const response: any = this.apiRequester.APIReturn(loginRequest, 'login', 'login', APIReturnKeys.Post).subscribe({
       next: (res: LoginResponse) => {
         if (res.code === 0) {
-          console.log(res.user.firstName);
           this.keepData.user = res.user;
           this.router.navigate(['/']).then(() => {
             this.dataTransferer.processDataParameter(res.user);

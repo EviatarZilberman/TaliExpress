@@ -1,11 +1,13 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { KeepAliveDataService } from '../../../Services/KeepAliveDataService';
 import { Store } from '../../../Classes/Common/Store';
+import { Product } from '../../../Classes/Common/Product';
 import { OpenStoreRequest } from '../../../Classes/ApiRequests/OpenStoreRequest';
 import { OpenStoreResponse } from '../../../Classes/ApiResponse/OpenStoreResponse';
 import { APIReturnKeys } from '../../../Enums/APIReturnKeys';
 import { APIRequesterService } from '../../../Services/APIRequesterService';
 import { Router } from '@angular/router';
+import { TransferDataService } from '../../../Services/TransferDataService';
 
 @Component({
   selector: 'store',
@@ -17,6 +19,7 @@ export class StoreComponent implements OnInit {
   public store: Store = new Store();
   constructor(public keepData: KeepAliveDataService,
     private cd: ChangeDetectorRef,
+    private dataPasser: TransferDataService,
     private apiRequester: APIRequesterService,
     private router: Router) { }
 
@@ -40,5 +43,11 @@ export class StoreComponent implements OnInit {
       }).then(() => {
         this.router.navigate(['/store'])
       });
+  }
+
+  navigateToNewProduct(): void {
+    this.router.navigate(['/addProduct']).then(() => {
+      this.dataPasser.processDataParameter(this.keepData.user.email);
+    });
   }
 }

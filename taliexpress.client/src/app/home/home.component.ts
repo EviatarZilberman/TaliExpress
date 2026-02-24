@@ -16,8 +16,5 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.dataTransferer.currentDataParameter.subscribe(user => this.user = user);
-    if (this.user) {
-      console.error('The user name is: ', this.user.firstName, this.user.lastName);
-    }
   }
 }

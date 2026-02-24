@@ -6,7 +6,7 @@
         <li>
           <a href="#">Home</a>
         </li>
-        <li *ngIf="keepData.user.email">
+        <li *ngIf="keepData.user">
           <a>Personal Area</a>
           <ul>
             <li><button type="submit" (click)="navigateToUpdatePersonalData()">Personal Data</button></li>
