@@ -25,7 +25,7 @@ namespace TaliExpress.Server.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<LoginResponse>? Login(LoginRequest loginRequest/*string email, string password*//*, bool stayLoggedIn = false*/)
+        public async Task<LoginResponse>? Login(LoginRequest loginRequest/*, bool stayLoggedIn = false*/)
         {
             return await this.LoginWorker.Login(loginRequest.Email, loginRequest.Password, this.ContextAccessor.HttpContext!/*, stayLoggedIn*/);
         }

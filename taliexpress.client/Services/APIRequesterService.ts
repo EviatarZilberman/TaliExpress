@@ -25,7 +25,7 @@ export class APIRequesterService {
         headers: {
           'Content-Type': 'application/json'
         }
-      }*/
+      }*/, { withCredentials: true }
     );
     return answer;
   }

@@ -36,6 +36,8 @@ export class LoginComponent extends BaseComponent {
       next: (res: LoginResponse) => {
         if (res.code === 0) {
           this.keepData.user = res.user;
+          this.keepData.store = res.store;
+          this.keepData.cart = res.cart;
           this.router.navigate(['/']).then(() => {
             this.dataTransferer.processDataParameter(res.user);
 

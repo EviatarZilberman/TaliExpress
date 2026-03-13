@@ -59,7 +59,8 @@ namespace TaliExpress.Server.Workers
                 usersManager.Update(user);
 
                 List<Claim> claims = new List<Claim>() {
-                    new Claim(CookiesKeys.Email.ToString(),user.Email)
+                    new Claim(CookiesKeys.Email.ToString(),user.Email),
+                    new Claim(CookiesKeys.ID.ToString() ,user.Id.ToString())
                 };
 
                 ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims,

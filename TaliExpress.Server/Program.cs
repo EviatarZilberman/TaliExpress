@@ -20,6 +20,11 @@ builder.Services.AddAuthentication(
         option.Cookie.SameSite = SameSiteMode.None;
         option.Cookie.SecurePolicy = CookieSecurePolicy.Always;
         option.SlidingExpiration = true;
+        option.Events.OnRedirectToLogin = context => // Handle the 401/403 for API endpoints
+        {
+            context.Response.StatusCode = (int)System.Net.HttpStatusCode.Unauthorized;
+            return Task.CompletedTask;
+        };
     });
 
 builder.Services.AddControllers();
@@ -34,6 +39,7 @@ builder.Services.AddCors(options =>
                .AllowCredentials();
     });
 });
+builder.Services.AddAuthorization();
 
 builder.Services.AddScoped<IRegister, RegistrationWorker>();
 builder.Services.AddScoped<ILogin, LoginWorker>();

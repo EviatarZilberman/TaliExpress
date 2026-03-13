@@ -24,6 +24,9 @@ export class StoreComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
+    console.log(this.keepData.user.email);
+    console.log(this.keepData.store.storeName);
+    console.log(this.keepData.cart.products.length);
   }
 
   openStore(): void {
@@ -46,8 +49,8 @@ export class StoreComponent implements OnInit {
   }
 
   navigateToNewProduct(): void {
-    this.router.navigate(['/addProduct']).then(() => {
+    this.router.navigate(['/new-Product']);/*.then(() => {
       this.dataPasser.processDataParameter(this.keepData.user.email);
-    });
+    });*/
   }
 }
