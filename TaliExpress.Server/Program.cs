@@ -17,7 +17,8 @@ builder.Services.AddAuthentication(
         option.ExpireTimeSpan = TimeSpan.FromMinutes(20);
         option.Cookie.Name = "TaliExpressAuth";
         option.Cookie.HttpOnly = true;
-        option.Cookie.SameSite = SameSiteMode.None;
+        //option.Cookie.SameSite = SameSiteMode.None;
+        option.Cookie.SameSite = SameSiteMode.Lax; //-- For development only
         option.Cookie.SecurePolicy = CookieSecurePolicy.Always;
         option.SlidingExpiration = true;
         option.Events.OnRedirectToLogin = context => // Handle the 401/403 for API endpoints

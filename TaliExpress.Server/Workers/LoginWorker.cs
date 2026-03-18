@@ -11,7 +11,7 @@ namespace TaliExpress.Server.Workers
 {
     public class LoginWorker : ILogin
     {
-        public async Task<LoginResponse> Login(string email, string password, HttpContext httpContext, bool stayLoggedIn = false)
+        public async Task<LoginResponse> Login(string email, string password, HttpContext httpContext, bool stayLoggedIn = true)
         {
             ClaimsPrincipal claimUser = httpContext.User;
 

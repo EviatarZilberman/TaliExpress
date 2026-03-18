@@ -1,4 +1,5 @@
-﻿using TaliExpress.Server.Classes.API.Requests;
+﻿using Microsoft.AspNetCore.Http;
+using TaliExpress.Server.Classes.API.Requests;
 using TaliExpress.Server.Classes.API.Responses;
 using TaliExpress.Server.Enums;
 using TaliExpress.Server.Interfaces;
@@ -9,8 +10,10 @@ namespace TaliExpress.Server.Workers
 {
     public class StoreWorker : IStore
     {
-        public OpenStoreResponse OpenStore(OpenStoreRequest request)
+        public OpenStoreResponse OpenStore(OpenStoreRequest request, HttpContext httpContext)
         {
+            string a = httpContext.User.FindFirst(CookiesKeys.ID.ToString())?.Value!;
+
             Store store = new Store
             {
                 Name = request.StoreName,
