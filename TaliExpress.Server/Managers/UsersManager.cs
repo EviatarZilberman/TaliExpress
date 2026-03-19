@@ -12,23 +12,23 @@ namespace TaliExpress.Server.Managers
     {
         public new string GetCollectionName() => "users";
 
-        public bool FreezeMembership(User user)
+        public bool FreezeMembership(UserDbModel user)
         {
             user.Status = (int)UserStatus.Freezed;
             return this.Replace(this.GetCollectionName(), user);
         }
 
-        public bool FindByEmail(string email, out User user)
+        public bool FindByEmail(string email, out UserDbModel user)
         {
             return this.FindOneByProperty(this.GetCollectionName(), "Email", email, out user);
         }
 
-        public bool Update(User user)
+        public bool Update(UserDbModel user)
         {
             return this.Replace(this.GetCollectionName(), user);
         }
 
-        public bool Insert(User user)
+        public bool Insert(UserDbModel user)
         {
             return this.Insert(this.GetCollectionName(), user);
         }

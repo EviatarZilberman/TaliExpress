@@ -15,13 +15,13 @@ namespace TaliExpress.Server.Workers
         {
             if (request == null) return new RegisterResponse { Code = -1 };
             UsersManager usersManager = new UsersManager();
-            if (usersManager.FindByEmail(request.Email, out User? temp))
+            if (usersManager.FindByEmail(request.Email, out UserDbModel? temp))
             {
                 return new RegisterResponse { Code = -1 };
             }
             //if (!RegistrationUser.Validate(user)) return ReturnCode.Invalid_parameters;
             if (request.TempPassword != request.Password) return new RegisterResponse { Code = -1 };
-            User modelUser = new User()
+            UserDbModel modelUser = new UserDbModel()
             {
                 Email = request.Email,
                 FirstName = request.FirstName,

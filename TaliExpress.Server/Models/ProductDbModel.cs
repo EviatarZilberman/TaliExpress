@@ -2,7 +2,7 @@
 
 namespace TaliExpress.Server.Models
 {
-    public class Product : AMongoDBItem
+    public class ProductDbModel : AMongoDBItem
     {
         public double Price { get; set; } = 0;
         public string Name { get; set; } = string.Empty;

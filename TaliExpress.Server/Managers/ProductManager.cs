@@ -11,7 +11,7 @@ namespace TaliExpress.Server.Managers
     public class ProductManager : MongoDBServiceManager
     {
         public new string GetCollectionName() => "products";
-        public ReturnCode GetFiltered(FilterDefinition<Product> filters, out List<Product>? products)
+        public ReturnCode GetFiltered(FilterDefinition<ProductDbModel> filters, out List<ProductDbModel>? products)
         {
             //if (string.IsNullOrEmpty(productId))
             //{

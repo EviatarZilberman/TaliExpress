@@ -3,7 +3,7 @@ using TaliExpress.Server.Enums;
 
 namespace TaliExpress.Server.Models
 {
-    public class User : AMongoDBItem
+    public class UserDbModel : AMongoDBItem
     {
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;

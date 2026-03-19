@@ -16,7 +16,7 @@ namespace TaliExpress.Server.Workers
             try
             {
                 UsersManager usersManager = new UsersManager();
-                if (!usersManager.FindByEmail(request.OriginEmail, out User? user)) return reply;
+                if (!usersManager.FindByEmail(request.OriginEmail, out UserDbModel? user)) return reply;
                 user!.FirstName = request.FirstName;
                 user!.LastName = request.LastName;
                 user!.PhoneNumber = request.PhoneNumber;

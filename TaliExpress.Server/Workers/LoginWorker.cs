@@ -23,19 +23,19 @@ namespace TaliExpress.Server.Workers
             {
                 return new LoginResponse()
                 {
-                    User = new User(),
-                    Store = new Store(),
+                    User = new UserDbModel(),
+                    Store = new StoreDbModel(),
                     Code = (int)ReturnCode.Parameter_is_null_or_empty,
                     Message = "Email or password is invalid"
                 };
             }
             UsersManager usersManager = new UsersManager();
-            if (!usersManager.FindByEmail(email, out User? user))
+            if (!usersManager.FindByEmail(email, out UserDbModel? user))
             {
                 return new LoginResponse()
                 {
-                    User = new User(),
-                    Store = new Store(),
+                    User = new UserDbModel(),
+                    Store = new StoreDbModel(),
                     Code = (int)ReturnCode.No_user_found,
                     Message = "Email or password is invalid"
                 };
@@ -48,8 +48,8 @@ namespace TaliExpress.Server.Workers
                     usersManager.Update(user);
                     return new LoginResponse()
                     {
-                        User = new User(),
-                        Store = new Store(),
+                        User = new UserDbModel(),
+                        Store = new StoreDbModel(),
                         Code = (int)ReturnCode.Invalid_parameters,
                         Message = "Email or password is invalid"
                     };
@@ -77,7 +77,7 @@ namespace TaliExpress.Server.Workers
                     new ClaimsPrincipal(claimsIdentity), properties);
 
                 StoresManager storesManager = new StoresManager();
-                storesManager.GetByUserId(user.Id.ToString(), out Store? store);
+                storesManager.GetByUserId(user.Id.ToString(), out StoreDbModel? store);
                 CartManager cartsManager = new CartManager();
                 cartsManager.GetByUserId(user.Id.ToString(), out Cart? cart);
                 return new LoginResponse()
@@ -94,8 +94,8 @@ namespace TaliExpress.Server.Workers
                 Message = "User was not found",
                 Cart = new Cart(),
                 Code = (int)ReturnCode.No_user_found,
-                Store = new Store(),
-                User = new User()
+                Store = new StoreDbModel(),
+                User = new UserDbModel()
             };
         }
 

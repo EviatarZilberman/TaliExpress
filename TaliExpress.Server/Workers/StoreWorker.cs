@@ -10,11 +10,28 @@ namespace TaliExpress.Server.Workers
 {
     public class StoreWorker : IStore
     {
-        public OpenStoreResponse OpenStore(OpenStoreRequest request, HttpContext httpContext)
+        public GetStoreResponse GetStore(HttpContext httpContext)
         {
-            string a = httpContext.User.FindFirst(CookiesKeys.ID.ToString())?.Value!;
+            string userId = httpContext.User.Claims.FirstOrDefault(c => c.Type == CookiesKeys.ID.ToString())?.Value!;
+            if (string.IsNullOrEmpty(userId))
+            {
+                return new GetStoreResponse();
+            }
+            StoresManager storesManager = new StoresManager();
+            if (!storesManager.GetById(storesManager.GetCollectionName(), userId, out StoreDbModel store))
+            {
+                return new GetStoreResponse();
+            }
 
-            Store store = new Store
+            return new GetStoreResponse
+            {
+                Store = store
+            };
+        }
+
+        public OpenStoreResponse OpenStore(OpenStoreRequest request)
+        {
+            StoreDbModel store = new StoreDbModel
             {
                 Name = request.StoreName,
                 Username = request.OwnerEmail,

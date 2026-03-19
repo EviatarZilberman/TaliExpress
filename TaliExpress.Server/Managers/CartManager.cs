@@ -18,14 +18,14 @@ namespace TaliExpress.Server.Managers
 
         public bool Insert(Cart item) => base.Insert(this.GetCollectionName(), item);
 
-        public bool AddProduct(string cartId, Product product, int amount = 0)
+        public bool AddProduct(string cartId, ProductDbModel product, int amount = 0)
         { 
             if (!this.GetById(this.GetCollectionName(), cartId, out Cart cart)) return false;
             cart.Products.Add(product.Id, amount);
             return this.Replace(this.GetCollectionName(), cart);
         }
 
-        public bool RemoveProduct(string cartId, Product product, int amount = 0)
+        public bool RemoveProduct(string cartId, ProductDbModel product, int amount = 0)
         {
             if (!this.GetById(this.GetCollectionName(), cartId, out Cart cart)) return false;
             cart.Products.Remove(product.Id);

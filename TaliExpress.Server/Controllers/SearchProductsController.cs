@@ -28,7 +28,7 @@ namespace TaliExpress.Server.Controllers
         //public IActionResult SearchByParameters([FromBody] string searchWords/*, List<string> categories = null, string listOrder = null*/)
         {
             string[] words = searchWords.Split(' ', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
-            List<FilterDefinition<Product>> filters = new List<FilterDefinition<Product>>();
+            List<FilterDefinition<ProductDbModel>> filters = new List<FilterDefinition<ProductDbModel>>();
             //if (categories != null && categories.Count > 0)
             //{
             //    foreach (string category in categories)
@@ -42,11 +42,11 @@ namespace TaliExpress.Server.Controllers
                 {
                     continue;
                 }
-                filters.Add(FilterCreator<Product>.CreateEqualFilter(NameAttribute, word));
+                filters.Add(FilterCreator<ProductDbModel>.CreateEqualFilter(NameAttribute, word));
             }
-            FilterDefinition<Product> finalFilter = FilterCreator<Product>.CreateMultiOrConditionsFilter(filters.ToArray());
+            FilterDefinition<ProductDbModel> finalFilter = FilterCreator<ProductDbModel>.CreateMultiOrConditionsFilter(filters.ToArray());
             ProductManager productManager = new ProductManager();
-            if (productManager.GetFiltered(finalFilter, out List<Product>? products) != Enums.ReturnCode.Success)
+            if (productManager.GetFiltered(finalFilter, out List<ProductDbModel>? products) != Enums.ReturnCode.Success)
             {
                 return StatusCode(500, "An error occurred while searching for products.");
             }
@@ -55,7 +55,7 @@ namespace TaliExpress.Server.Controllers
             //return Ok(ListOrder(listOrder, products));
         }
 
-        private List<Product>? ListOrder(string listOrder, List<Product>? products)
+        private List<ProductDbModel>? ListOrder(string listOrder, List<ProductDbModel>? products)
         {
             if (!string.IsNullOrEmpty(listOrder))
             {

@@ -10,8 +10,8 @@ namespace TaliExpress.Server.Controllers
         [HttpGet("searchProduct")]
         public IActionResult SearchProduct([FromQuery] string productDescription)
         {
-            List<Product> products = new List<Product>();
-            products.Add(new Product()
+            List<ProductDbModel> products = new List<ProductDbModel>();
+            products.Add(new ProductDbModel()
             {
                 IsAvailable = true,
                 Name = "1",
@@ -19,7 +19,7 @@ namespace TaliExpress.Server.Controllers
                 SellerId = "1",
                 Price = 1
             });
-            products.Add(new Product()
+            products.Add(new ProductDbModel()
             {
                 IsAvailable = true,
                 Name = "2",

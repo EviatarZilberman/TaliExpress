@@ -24,9 +24,11 @@ export class StoreComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-    console.log(this.keepData.user.email);
-    console.log(this.keepData.store.storeName);
-    console.log(this.keepData.cart.products.length);
+    this.apiRequester.APIReturn(null!, 'Store', 'GetStore', APIReturnKeys.Get).subscribe({
+      next: (res: Store) => {
+        this.store = res;
+      }
+    });
   }
 
   openStore(): void {
