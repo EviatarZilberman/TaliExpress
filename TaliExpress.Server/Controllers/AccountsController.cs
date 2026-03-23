@@ -20,5 +20,8 @@ namespace TaliExpress.Server.Controllers
 
         [HttpPost("updateAccount")]
         public PersonalAreaUpdateResponse UpdateAccount([FromBody] PersonalAreaUpdateRequest request) => this.AccountWorker.UpdateAccount(request);
+
+        [HttpGet("isConnected")]
+        public IsConnectedResponse IsConnected() => this.AccountWorker.IsConnected(this.HttpContext);
     }
 }

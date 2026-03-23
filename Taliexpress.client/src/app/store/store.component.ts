@@ -9,6 +9,7 @@ import { APIRequesterService } from '../../../Services/APIRequesterService';
 import { Router } from '@angular/router';
 import { TransferDataService } from '../../../Services/TransferDataService';
 
+
 @Component({
   selector: 'store',
   standalone: false,

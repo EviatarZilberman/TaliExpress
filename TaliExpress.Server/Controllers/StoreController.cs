@@ -29,5 +29,11 @@ namespace TaliExpress.Server.Controllers
         {
             return StoreWorker.GetStore(this.HttpContext);
         }
+
+        [HttpGet("storeExist")]
+        public StoreExistResponse StoreExist()
+        {
+            return StoreWorker.StoreExist(this.HttpContext);
+        }
     }
 }

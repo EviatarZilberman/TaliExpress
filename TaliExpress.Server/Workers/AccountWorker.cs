@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using TaliExpress.Server.Classes.API.Requests;
+﻿using TaliExpress.Server.Classes.API.Requests;
 using TaliExpress.Server.Classes.API.Responses;
 using TaliExpress.Server.Enums;
 using TaliExpress.Server.Interfaces;
@@ -10,6 +9,18 @@ namespace TaliExpress.Server.Workers
 {
     public class AccountWorker : IAccount
     {
+        public IsConnectedResponse IsConnected(HttpContext httpContext)
+        {
+            string userId = httpContext.User.Claims.FirstOrDefault(c => c.Type == CookiesKeys.ID.ToString())?.Value!;
+            UsersManager usersManager = new UsersManager();
+            if(!usersManager.GetById(usersManager.GetCollectionName(), userId, out UserDbModel userDbModel))
+            {
+                return new IsConnectedResponse() { code = (int)ReturnCode.Success, isConnected = false };
+            }
+
+            return new IsConnectedResponse() { code = (int)ReturnCode.Success, isConnected = true };
+        }
+
         public PersonalAreaUpdateResponse UpdateAccount(PersonalAreaUpdateRequest request)
         {
             PersonalAreaUpdateResponse reply = new PersonalAreaUpdateResponse();

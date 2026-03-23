@@ -18,15 +18,7 @@ export class APIRequesterService {
 
   private postCallAPI(item: any, controller: string, method: string): Observable<any> {
     let url = `${this.api}/${controller}/${method}`;
-    const answer: any = this.http.post<any>(
-      url,
-      item/*, // pass the object directly
-      {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }*/, { withCredentials: true }
-    );
+    const answer: any = this.http.post<any>(url, item, { withCredentials: true });
     return answer;
   }
 

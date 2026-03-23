@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.Extensions.Options;
 using MongoDBService.Classes;
 using TaliExpress.Server.Interfaces;
 using TaliExpress.Server.Workers;

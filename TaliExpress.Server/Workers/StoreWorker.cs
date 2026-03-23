@@ -46,5 +46,21 @@ namespace TaliExpress.Server.Workers
             }
             return response;
         }
+
+        public StoreExistResponse StoreExist(HttpContext httpContext)
+        {
+            string userId = httpContext.User.Claims.FirstOrDefault(c => c.Type == CookiesKeys.ID.ToString())?.Value!;
+            StoresManager storesManager = new StoresManager();
+            if (!storesManager.GetById(storesManager.GetCollectionName(), userId, out StoreDbModel store))
+            {
+                return new StoreExistResponse();
+            }
+
+            return new StoreExistResponse
+            {
+                code = (int)ReturnCode.Success,
+                hasStore = true
+            };
+        }
     }
 }

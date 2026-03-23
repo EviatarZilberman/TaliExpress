@@ -7,5 +7,6 @@ namespace TaliExpress.Server.Interfaces
     public interface IAccount
     {
         public PersonalAreaUpdateResponse UpdateAccount(PersonalAreaUpdateRequest request);
+        public IsConnectedResponse IsConnected(HttpContext httpContext);
     }
 }

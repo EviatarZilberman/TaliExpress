@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { BaseComponent } from '../../BaseComponent/baseComponent.component';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { APIRequesterService } from '../../../../Services/APIRequesterService';
 import { TransferDataService } from '../../../../Services/TransferDataService';
 import { KeepAliveDataService } from '../../../../Services/KeepAliveDataService';
+import { APIReturnKeys } from '../../../../Enums/APIReturnKeys';
+import { IsConnectedResponse } from '../../../../Classes/ApiResponse/IsConnectedResponse';
 
 @Component({
   selector: 'upper-nav-bar',
@@ -13,8 +15,10 @@ import { KeepAliveDataService } from '../../../../Services/KeepAliveDataService'
   standalone: false
 })
 export class UpperNavBarComponent extends BaseComponent implements OnInit {
+  isConnected: boolean = false;
   constructor(private apiRequester: APIRequesterService,
     protected override router: Router,
+    private cd: ChangeDetectorRef,
     protected httpClient: HttpClient,
     private dataService: TransferDataService,
     public keepData: KeepAliveDataService) {
@@ -36,5 +40,13 @@ export class UpperNavBarComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    }
+    this.apiRequester.APIReturn(null!, 'Store', 'StoreExist', APIReturnKeys.Post).subscribe({
+      next: (res: IsConnectedResponse) => {
+        this.isConnected = res.isConnected;
+        if (this.isConnected) {
+          this.cd.detectChanges();
+        }
+      }
+    });
   }
+}
