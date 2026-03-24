@@ -15,7 +15,7 @@ import { IsConnectedResponse } from '../../../../Classes/ApiResponse/IsConnected
   standalone: false
 })
 export class UpperNavBarComponent extends BaseComponent implements OnInit {
-  isConnected: boolean = false;
+  public isConnected: boolean = false;
   constructor(private apiRequester: APIRequesterService,
     protected override router: Router,
     private cd: ChangeDetectorRef,
@@ -40,12 +40,17 @@ export class UpperNavBarComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.apiRequester.APIReturn(null!, 'Store', 'StoreExist', APIReturnKeys.Post).subscribe({
+    this.apiRequester.APIReturn(null!, 'Account', 'isConnected', APIReturnKeys.Post).subscribe({
       next: (res: IsConnectedResponse) => {
-        this.isConnected = res.isConnected;
-        if (this.isConnected) {
-          this.cd.detectChanges();
+        if (res.code === 0) {
+          this.isConnected = res.isConnected;
+          if (this.isConnected) {
+            this.cd.detectChanges();
+          }
         }
+      },
+      error: (err: any) => {
+        console.error("Login failed", err);
       }
     });
   }

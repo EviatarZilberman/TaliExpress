@@ -40,7 +40,6 @@ export class LoginComponent extends BaseComponent {
           this.keepData.cart = res.cart;
           this.router.navigate(['/']).then(() => {
             this.dataTransferer.processDataParameter(res.user);
-
           });
         }
       },
