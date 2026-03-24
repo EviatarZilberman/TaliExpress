@@ -15,7 +15,7 @@
     //  "launchBrowser": false,
     //  "applicationUrl": "https://localhost:5001"
     //},
-    "http": {
+    "https": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": false,

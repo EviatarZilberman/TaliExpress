@@ -6,7 +6,7 @@ using TaliExpress.Server.Interfaces;
 
 namespace TaliExpress.Server.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [ApiController]
     [Route("[controller]")]
     public class AccountsController : Controller

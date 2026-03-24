@@ -40,18 +40,21 @@ export class UpperNavBarComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.apiRequester.APIReturn(null!, 'Account', 'isConnected', APIReturnKeys.Post).subscribe({
-      next: (res: IsConnectedResponse) => {
-        if (res.code === 0) {
-          this.isConnected = res.isConnected;
-          if (this.isConnected) {
-            this.cd.detectChanges();
+    this.dataService.currentDataParameter.subscribe(isConnected => this.isConnected = isConnected);
+    if (!this.isConnected) {
+      this.apiRequester.APIReturn({}, 'Accounts', 'isConnected', APIReturnKeys.Post).subscribe({
+        next: (res: IsConnectedResponse) => {
+          if (res.code === 0) {
+            this.isConnected = res.isConnected;
+            if (this.isConnected) {
+              this.cd.detectChanges();
+            }
           }
+        },
+        error: (err: any) => {
+          console.error("Login failed", err);
         }
-      },
-      error: (err: any) => {
-        console.error("Login failed", err);
-      }
-    });
+      });
+    }
   }
 }

@@ -38,17 +38,9 @@ export class APIRequesterService {
   }
 
   public APIReturn(item: any, controller: string, method: string, type: APIReturnKeys): any | undefined {
-    //if (type === APIReturnKeys.Post) {
-    // var answer = this.postCallAPI(item, controller, method);
-    //  return this.APIReturnSubscribe(answer);
-    //}
      if (type === APIReturnKeys.Post) {
        return this.postCallAPI(item, controller, method);
     }
-    //else if (type === APIReturnKeys.Get) {
-    //  answer = this.getCallAPI(item, controller, method);
-    //  return this.APIReturnSubscribe(answer);
-    //}
     else if (type === APIReturnKeys.Get) {
       return this.getCallAPI(item, controller, method);
     }

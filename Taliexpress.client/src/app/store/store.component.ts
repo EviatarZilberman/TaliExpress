@@ -25,7 +25,7 @@ export class StoreComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-    this.apiRequester.APIReturn(null!, 'Store', 'GetStore', APIReturnKeys.Get).subscribe({
+    this.apiRequester.APIReturn({}, 'Store', 'GetStore', APIReturnKeys.Get).subscribe({
       next: (res: Store) => {
         this.store = res;
       }

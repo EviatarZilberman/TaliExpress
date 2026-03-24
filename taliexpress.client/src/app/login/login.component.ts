@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { BaseComponent } from '../BaseComponent/baseComponent.component';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { APIRequesterService } from '../../../Services/APIRequesterService';
 import { User } from '../../../Classes/Common/User';
@@ -21,8 +21,8 @@ export class LoginComponent extends BaseComponent {
   constructor(public dataTransferer: TransferDataService,
     protected apiRequester: APIRequesterService,
     protected override router: Router,
-    protected httpClient: HttpClient,
-    private keepData: KeepAliveDataService) {
+    protected httpClient: HttpClient
+    /*private keepData: KeepAliveDataService*/) {
     super(httpClient, router);
   };
 
@@ -35,11 +35,8 @@ export class LoginComponent extends BaseComponent {
     const response: any = this.apiRequester.APIReturn(loginRequest, 'login', 'login', APIReturnKeys.Post).subscribe({
       next: (res: LoginResponse) => {
         if (res.code === 0) {
-          this.keepData.user = res.user;
-          this.keepData.store = res.store;
-          this.keepData.cart = res.cart;
           this.router.navigate(['/']).then(() => {
-            this.dataTransferer.processDataParameter(res.user);
+            this.dataTransferer.processDataParameter(true);
           });
         }
       },
