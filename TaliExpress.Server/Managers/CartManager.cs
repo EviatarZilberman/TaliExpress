@@ -1,9 +1,4 @@
-﻿using ConfigApp.Classes;
-using Microsoft.AspNetCore.Mvc;
-using MongoDB.Driver;
-using MongoDBService.Classes;
-using MongoDBService.Enums;
-using TaliExpress.Server.Enums;
+﻿using MongoDBService.Classes;
 using TaliExpress.Server.Models;
 
 namespace TaliExpress.Server.Managers
@@ -17,6 +12,8 @@ namespace TaliExpress.Server.Managers
         public bool GetAll(out List<Cart> items) => base.GetAll(this.GetCollectionName(), out items);
 
         public bool Insert(Cart item) => base.Insert(this.GetCollectionName(), item);
+        public new string GetCollectionName() => "carts";
+
 
         public bool AddProduct(string cartId, ProductDbModel product, int amount = 0)
         { 
