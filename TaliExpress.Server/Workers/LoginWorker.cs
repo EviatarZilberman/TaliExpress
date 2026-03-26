@@ -11,7 +11,7 @@ namespace TaliExpress.Server.Workers
 {
     public class LoginWorker : ILogin
     {
-        public async Task<LoginResponse> Login(string email, string password, HttpContext httpContext, bool stayLoggedIn = true)
+        public async Task<LoginResponse> Login(string email, string password, bool stayLoggedIn, HttpContext httpContext)
         {
             ClaimsPrincipal claimUser = httpContext.User;
 
@@ -80,6 +80,16 @@ namespace TaliExpress.Server.Workers
                 storesManager.GetByUserId(user.Id.ToString(), out StoreDbModel? store);
                 CartManager cartsManager = new CartManager();
                 cartsManager.GetByUserId(user.Id.ToString(), out Cart? cart);
+                //JwtRequest jwtRequest = new JwtRequest()
+                //{
+                //    ExpireInSeconds = 3600,
+                //    JwtPairs = new Dictionary<string, string>()
+                //    {
+                //        { CookiesKeys.Email.ToString(), user.Email },
+                //        { CookiesKeys.ID.ToString(), user.Id.ToString() }
+                //    }
+                //};
+                //JWTCreationHandler.CreateJwt(jwtRequest);
                 return new LoginResponse()
                 {
                     User = user,
@@ -99,16 +109,22 @@ namespace TaliExpress.Server.Workers
             };
         }
 
-        public async Task<ReturnCode> LogOut(HttpContext httpContext)
+        public async Task<LogoutResponse> LogOut(HttpContext httpContext)
         {
             try
             {
                 await httpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-                return ReturnCode.Success;
+                return new LogoutResponse
+                {
+                    Code = (int)ReturnCode.Success
+                };
             }
             catch
             {
-                return ReturnCode.General_Error;
+                return new LogoutResponse
+                {
+                    Code = (int)ReturnCode.General_Error
+                };
             }
         }
     }

@@ -1,12 +1,11 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using TaliExpress.Server.Classes.API.Requests;
 using TaliExpress.Server.Classes.API.Responses;
 using TaliExpress.Server.Interfaces;
 
 namespace TaliExpress.Server.Controllers
 {
-    [Authorize]
+   // [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class StoreController : ControllerBase

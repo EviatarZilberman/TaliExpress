@@ -1,11 +1,11 @@
 <div class="container">
   <h2 class="heading">Login</h2>
-  <form #userForm="ngForm" (ngSubmit)="login(user)">
+  <form #userForm="ngForm" (ngSubmit)="login(loginRequest)">
     <div class="form-group">
       <div>
         <label for="email">Email</label>
         <input type="text" class="form-control" id="email" name="email"
-          [(ngModel)]="user.email" required>
+          [(ngModel)]="loginRequest.email" required>
           @if (userForm.controls['email']?.touched && userForm.controls['email']?.invalid) {
             <div
               class="text-danger">
@@ -17,7 +17,7 @@
         <div>
           <label for="password">Password</label>
           <input type="text" class="form-control" id="password" name="password"
-            [(ngModel)]="user.password" required>
+            [(ngModel)]="loginRequest.password" required>
             @if (userForm.controls['password']?.touched && userForm.controls['password']?.invalid) {
               <div
                 class="text-danger">
@@ -25,6 +25,12 @@
               </div>
             }
           </div>
+
+        <div>
+          <label for="password">Stay Logged In</label>
+          <input type="checkbox" class="form-control" id="stayLoggedIn" name="stayLoggedIn"
+                 [(ngModel)]="loginRequest.stayLoggedIn">
+        </div>
 
           <div>
             <input type="submit" value="submit" />

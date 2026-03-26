@@ -1,13 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using TaliExpress.Server.Classes.API.Responses;
-using TaliExpress.Server.Enums;
-using TaliExpress.Server.Models;
+﻿using TaliExpress.Server.Classes.API.Responses;
 
 namespace TaliExpress.Server.Interfaces
 {
     public interface ILogin
     {
-        public Task<LoginResponse> Login(string email, string password, HttpContext context, bool stayLoggedIn = false);
-        public Task<ReturnCode> LogOut(HttpContext httpContext);
+        public Task<LoginResponse> Login(string email, string password, bool stayLoggedIn, HttpContext context);
+        public Task<LogoutResponse> LogOut(HttpContext httpContext);
     }
 }

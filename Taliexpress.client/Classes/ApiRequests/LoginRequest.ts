@@ -1,6 +1,5 @@
-import { BaseApiRequest } from "./BaseApiRequest";
-
-export class LoginRequest extends BaseApiRequest<null> {
+export class LoginRequest {
   email: string = "";
   password: string = "";
+  stayLoggedIn: boolean = false;
   }

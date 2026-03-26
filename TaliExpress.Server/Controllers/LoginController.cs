@@ -1,13 +1,9 @@
-﻿using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.Identity.Data;
+﻿using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
+using TaliExpress.Server.Classes.API.Requests;
 using TaliExpress.Server.Classes.API.Responses;
 using TaliExpress.Server.Enums;
 using TaliExpress.Server.Interfaces;
-using TaliExpress.Server.Models;
 
 namespace TaliExpress.Server.Controllers
 {
@@ -17,28 +13,22 @@ namespace TaliExpress.Server.Controllers
     public class LoginController : ControllerBase
     {
         private readonly ILogin LoginWorker;
-        private readonly IHttpContextAccessor ContextAccessor;
-        public LoginController(ILogin loginWorker, IHttpContextAccessor contextAccessor)
+
+        public LoginController(ILogin loginWorker)
         {
             this.LoginWorker = loginWorker;
-            this.ContextAccessor = contextAccessor;
         }
 
         [HttpPost("login")]
-        public async Task<LoginResponse>? Login(LoginRequest loginRequest/*, bool stayLoggedIn = false*/)
+        public async Task<LoginResponse>? Login([FromBody] LoginRequest loginRequest)
         {
-            return await this.LoginWorker.Login(loginRequest.Email, loginRequest.Password, this.ContextAccessor.HttpContext!/*, stayLoggedIn*/);
+            return await this.LoginWorker.Login(loginRequest.Email, loginRequest.Password, loginRequest.StayLoggedIn, this.HttpContext);
         }
 
         [HttpGet("logout")]
-        [Route("logout")]
-        public async Task<IActionResult> LogOut()
+        public async Task<LogoutResponse> LogOut()
         {
-            return await this.LoginWorker.LogOut(HttpContext)
-                == ReturnCode.Success
-                ? RedirectToAction("Index", "Home")
-                : RedirectToAction("Index", "Error");
-
+            return await this.LoginWorker.LogOut(HttpContext);
         }
     }
 }
