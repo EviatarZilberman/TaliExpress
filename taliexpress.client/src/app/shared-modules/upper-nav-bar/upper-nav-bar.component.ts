@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { APIRequesterService } from '../../../../Services/APIRequesterService';
 import { TransferDataService } from '../../../../Services/TransferDataService';
 import { KeepAliveDataService } from '../../../../Services/KeepAliveDataService';
+import { AuthenticationService } from '../../../../Services/AuthenticationService';
 import { APIReturnKeys } from '../../../../Enums/APIReturnKeys';
 import { IsConnectedResponse } from '../../../../Classes/ApiResponse/IsConnectedResponse';
 
@@ -16,12 +17,14 @@ import { IsConnectedResponse } from '../../../../Classes/ApiResponse/IsConnected
 })
 export class UpperNavBarComponent extends BaseComponent implements OnInit {
   public isConnected: boolean = false;
+
   constructor(private apiRequester: APIRequesterService,
     protected override router: Router,
     private cd: ChangeDetectorRef,
     protected httpClient: HttpClient,
     private dataService: TransferDataService,
-    public keepData: KeepAliveDataService) {
+    public keepData: KeepAliveDataService,
+    private authenticationService: AuthenticationService) {
     super(httpClient, router);
   };
 
@@ -46,9 +49,8 @@ export class UpperNavBarComponent extends BaseComponent implements OnInit {
         next: (res: IsConnectedResponse) => {
           if (res.code === 0) {
             this.isConnected = res.isConnected;
-            if (this.isConnected) {
-              this.cd.detectChanges();
-            }
+            //if (this.isConnected) {
+            //}
           }
         },
         error: (err: any) => {
@@ -56,5 +58,11 @@ export class UpperNavBarComponent extends BaseComponent implements OnInit {
         }
       });
     }
+    this.cd.detectChanges();
+  }
+
+  onSubmitLogout(): void {
+    this.hideModal('logout')
+    this.authenticationService.logout();
   }
 }
