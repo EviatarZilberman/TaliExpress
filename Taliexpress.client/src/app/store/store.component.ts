@@ -1,7 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { KeepAliveDataService } from '../../../Services/KeepAliveDataService';
 import { Store } from '../../../Classes/Common/Store';
-import { Product } from '../../../Classes/Common/Product';
 import { OpenStoreRequest } from '../../../Classes/ApiRequests/OpenStoreRequest';
 import { OpenStoreResponse } from '../../../Classes/ApiResponse/OpenStoreResponse';
 import { APIReturnKeys } from '../../../Enums/APIReturnKeys';
@@ -18,8 +16,8 @@ import { TransferDataService } from '../../../Services/TransferDataService';
 })
 export class StoreComponent implements OnInit {
   public store: Store = new Store();
-  constructor(public keepData: KeepAliveDataService,
-    private cd: ChangeDetectorRef,
+  public hasStore!: boolean;
+  constructor(private cd: ChangeDetectorRef,
     private dataPasser: TransferDataService,
     private apiRequester: APIRequesterService,
     private router: Router) { }
@@ -35,14 +33,13 @@ export class StoreComponent implements OnInit {
   openStore(): void {
     let request: OpenStoreRequest = {
       storeName: this.store.storeName,
-      ownerEmail: this.keepData.user.email,
       data: null!
     }
     const response: any = this.apiRequester.APIReturn(request, 'Store', 'OpenStore', APIReturnKeys.Post)
       .subscribe({
         next: (res: OpenStoreResponse) => {
           if (res.code === 0) {
-            this.keepData.store = this.store;
+            this.store = res.data;
             this.cd.detectChanges();
           }
         }

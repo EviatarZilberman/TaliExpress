@@ -1,10 +1,14 @@
-import { Image } from "./Image";
 
 export class Product {
+  id: string = '';
+  creationDate!: Date;
   name: string = '';
   description: string = '';
   amountInInvenotry: number = 0;
   seller: string = '';
   price: number = 0;
-  images: Image = new Image();
+  //images: Image = new Image();
+  categories: string[] = [];
+  asAvailable: boolean = false;
+  discountId: number = 0;
 }

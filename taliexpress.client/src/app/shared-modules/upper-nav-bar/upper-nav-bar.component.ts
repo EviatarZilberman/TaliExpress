@@ -24,7 +24,7 @@ export class UpperNavBarComponent extends BaseComponent implements OnInit {
     protected httpClient: HttpClient,
     private dataService: TransferDataService,
     public keepData: KeepAliveDataService,
-    private authenticationService: AuthenticationService) {
+    public authenticationService: AuthenticationService) {
     super(httpClient, router);
   };
 
@@ -44,13 +44,11 @@ export class UpperNavBarComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
     this.dataService.currentDataParameter.subscribe(isConnected => this.isConnected = isConnected);
-    if (!this.isConnected) {
+      if (!this.isConnected) {
       this.apiRequester.APIReturn({}, 'Accounts', 'isConnected', APIReturnKeys.Post).subscribe({
         next: (res: IsConnectedResponse) => {
           if (res.code === 0) {
             this.isConnected = res.isConnected;
-            //if (this.isConnected) {
-            //}
           }
         },
         error: (err: any) => {

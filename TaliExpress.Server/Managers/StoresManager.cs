@@ -12,6 +12,6 @@ namespace TaliExpress.Server.Managers
     {
         public new string GetCollectionName() => "stores";
         public bool Insert(StoreDbModel store) => base.Insert(this.GetCollectionName(), store);
-        public bool GetByUserId(string id, out StoreDbModel store) => base.FindOneByProperty(this.GetCollectionName(), "Username", id, out store);
+        public bool GetByUserId(string id, out StoreDbModel store) => base.FindOneByProperty(this.GetCollectionName(), "UserId", id, out store);
     }
 }

@@ -29,12 +29,20 @@ namespace TaliExpress.Server.Workers
             };
         }
 
-        public OpenStoreResponse OpenStore(OpenStoreRequest request)
+        public OpenStoreResponse OpenStore(HttpContext httpContext, OpenStoreRequest request)
         {
+            string userId = httpContext.User.Claims.FirstOrDefault(c => c.Type == CookiesKeys.ID.ToString())?.Value!;
+            if (string.IsNullOrEmpty(userId))
+            {
+                return new OpenStoreResponse
+                {
+                    Code = -1
+                };
+            }
             StoreDbModel store = new StoreDbModel
             {
-                Name = request.StoreName,
-                Username = request.OwnerEmail,
+                StoreName = request.StoreName,
+                UserId = userId,
             };
 
             OpenStoreResponse response = new OpenStoreResponse();

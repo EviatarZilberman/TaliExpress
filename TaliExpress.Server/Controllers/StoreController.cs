@@ -20,7 +20,7 @@ namespace TaliExpress.Server.Controllers
         [HttpPost("openStore")]
         public OpenStoreResponse OpenStore(OpenStoreRequest request)
         {
-            return StoreWorker.OpenStore(request);
+            return StoreWorker.OpenStore(this.HttpContext, request);
         }
 
         [HttpGet("getStore")]
