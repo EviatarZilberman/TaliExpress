@@ -1,9 +1,4 @@
-﻿using ConfigApp.Classes;
-using Microsoft.AspNetCore.Mvc;
-using MongoDB.Driver;
-using MongoDBService.Classes;
-using MongoDBService.Enums;
-using TaliExpress.Server.Enums;
+﻿using MongoDBService.Classes;
 using TaliExpress.Server.Models;
 
 namespace TaliExpress.Server.Managers

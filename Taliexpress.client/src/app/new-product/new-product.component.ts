@@ -17,7 +17,7 @@ export class NewProductComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dataPasser.currentDataParameter.subscribe(userId => this.dataPasser = userId);
+   // this.dataPasser.currentDataParameter.subscribe(userId => this.dataPasser = userId);
   }
 
   addProduct(): void {

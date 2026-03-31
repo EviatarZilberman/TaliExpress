@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Store } from '../../../Classes/Common/Store';
 import { OpenStoreRequest } from '../../../Classes/ApiRequests/OpenStoreRequest';
 import { OpenStoreResponse } from '../../../Classes/ApiResponse/OpenStoreResponse';
+import { GetStoreResponse } from '../../../Classes/ApiResponse/GetStoreResponse';
 import { APIReturnKeys } from '../../../Enums/APIReturnKeys';
 import { APIRequesterService } from '../../../Services/APIRequesterService';
 import { Router } from '@angular/router';
@@ -24,8 +25,12 @@ export class StoreComponent implements OnInit {
 
   ngOnInit(): void {
     this.apiRequester.APIReturn({}, 'Store', 'GetStore', APIReturnKeys.Get).subscribe({
-      next: (res: Store) => {
-        this.store = res;
+      next: (res: GetStoreResponse) => {
+        if (res.code === 0) {
+          this.store = res.store;
+          this.hasStore = true;
+          this.cd.detectChanges();
+        }
       }
     });
   }
@@ -49,7 +54,7 @@ export class StoreComponent implements OnInit {
   }
 
   navigateToNewProduct(): void {
-    this.router.navigate(['/new-Product']);/*.then(() => {
+    this.router.navigate(['/new-product']);/*.then(() => {
       this.dataPasser.processDataParameter(this.keepData.user.email);
     });*/
   }

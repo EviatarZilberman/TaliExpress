@@ -18,13 +18,14 @@ namespace TaliExpress.Server.Workers
                 return new GetStoreResponse();
             }
             StoresManager storesManager = new StoresManager();
-            if (!storesManager.GetById(storesManager.GetCollectionName(), userId, out StoreDbModel store))
+            if (!storesManager.GetByUserId(userId, out StoreDbModel store))
             {
                 return new GetStoreResponse();
             }
 
             return new GetStoreResponse
             {
+                Code = 0,
                 Store = store
             };
         }
@@ -50,6 +51,7 @@ namespace TaliExpress.Server.Workers
             if (storesManager.Insert(store))
             {
                 response.Code = (int)ReturnCode.Success;
+                response.store = store;
                 return response;
             }
             return response;
