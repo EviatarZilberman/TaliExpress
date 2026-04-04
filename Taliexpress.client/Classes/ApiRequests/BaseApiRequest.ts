@@ -1,3 +1,2 @@
-export abstract class BaseApiRequest<T> {
-  data!: T;
+export abstract class BaseApiRequest {
 }

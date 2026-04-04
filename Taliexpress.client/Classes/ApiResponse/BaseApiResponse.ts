@@ -1,5 +1,4 @@
-export abstract class BaseApiResponse<T> {
-  data!: T;
+export abstract class BaseApiResponse {
   code!: number;
   message!: string;
 }

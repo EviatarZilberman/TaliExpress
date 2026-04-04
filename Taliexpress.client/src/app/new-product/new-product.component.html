@@ -1,12 +1,12 @@
 <div class="container">
   <h2 class="heading">New Product</h2>
-  <form #userForm="ngForm" (ngSubmit)="addProduct()">
+  <form #productForm="ngForm" (ngSubmit)="addProduct()">
     <div class="form-group">
       <div>
         <label for="name">Name</label>
         <input type="text" class="form-control" id="name" name="name"
                [(ngModel)]="product.name" required>
-        @if (userForm.controls['name']?.touched && userForm.controls['name']?.invalid) {
+        @if (productForm.controls['name']?.touched && productForm.controls['name']?.invalid) {
         <div class="text-danger">
           Name is required.
         </div>
@@ -17,7 +17,7 @@
         <label for="price">Price</label>
         <input type="text" class="form-control" id="price" name="price"
                [(ngModel)]="product.price" required>
-        @if (userForm.controls['price']?.touched && userForm.controls['price']?.invalid) {
+        @if (productForm.controls['price']?.touched && productForm.controls['price']?.invalid) {
         <div class="text-danger">
           Price is required.
         </div>
@@ -28,7 +28,7 @@
         <label for="amountInInvenotry">Amount</label>
         <input type="number" min="1" class="form-control" id="amountInInvenotry" name="amountInInvenotry"
                [(ngModel)]="product.amountInInvenotry" required>
-        @if (userForm.controls['amountInInvenotry']?.touched && userForm.controls['amountInInvenotry']?.invalid) {
+        @if (productForm.controls['amountInInvenotry']?.touched && productForm.controls['amountInInvenotry']?.invalid) {
         <div class="text-danger">
           Amount is required.
         </div>

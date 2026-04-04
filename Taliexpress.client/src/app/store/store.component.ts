@@ -19,7 +19,7 @@ export class StoreComponent implements OnInit {
   public store: Store = new Store();
   public hasStore!: boolean;
   constructor(private cd: ChangeDetectorRef,
-    private dataPasser: TransferDataService,
+    public dataPasser: TransferDataService,
     private apiRequester: APIRequesterService,
     private router: Router) { }
 
@@ -38,7 +38,6 @@ export class StoreComponent implements OnInit {
   openStore(): void {
     let request: OpenStoreRequest = {
       storeName: this.store.storeName,
-      data: null!
     }
     const response: any = this.apiRequester.APIReturn(request, 'Store', 'OpenStore', APIReturnKeys.Post)
       .subscribe({
@@ -54,8 +53,8 @@ export class StoreComponent implements OnInit {
   }
 
   navigateToNewProduct(): void {
-    this.router.navigate(['/new-product']);/*.then(() => {
-      this.dataPasser.processDataParameter(this.keepData.user.email);
-    });*/
+    this.router.navigate(['/new-product']).then(() => {
+      this.dataPasser.processDataParameter(this.store.userId);
+    });
   }
 }
