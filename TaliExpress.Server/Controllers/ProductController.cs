@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TaliExpress.Server.Classes.API.Requests;
+using TaliExpress.Server.Classes.API.Responses;
+using TaliExpress.Server.Interfaces;
 using TaliExpress.Server.Models;
 
 namespace TaliExpress.Server.Controllers
@@ -7,6 +10,13 @@ namespace TaliExpress.Server.Controllers
     [Route("[controller]")]
     public class ProductController : Controller
     {
+        private readonly IProduct ProductWorker;
+
+        public ProductController(IProduct productWorker)
+        {
+            this.ProductWorker = productWorker;
+        }
+
         [HttpGet("searchProduct")]
         public IActionResult SearchProduct([FromQuery] string productDescription)
         {
@@ -28,6 +38,12 @@ namespace TaliExpress.Server.Controllers
                 Price = 1
             });
             return Ok(products);
+        }
+
+        [HttpPost("addProduct")]
+        public async Task<BaseApiResponse> AddProduct([FromBody] AddProductRequest request)
+        {
+            return await this.ProductWorker.AddProduct(request);
         }
     }
 }

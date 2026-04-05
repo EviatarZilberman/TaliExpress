@@ -33,7 +33,7 @@ export class NewProductComponent extends BaseComponent implements OnInit {
     let request: AddProductRequest = {
       product: this.product,
     };
-    this.apiRequester.APIReturn(request, 'Product', 'AddProduct', APIReturnKeys.Post).subscribe({
+    this.apiRequester.APIReturn(request, 'Product', 'addProduct', APIReturnKeys.Post).subscribe({
       next: (res: BaseApiResponse) => {
         if (res.code === 0) {
           this.navigateTo('/store');
@@ -41,7 +41,6 @@ export class NewProductComponent extends BaseComponent implements OnInit {
         else {
           this.screenMessage.message = res.message;
           this.cd.detectChanges();
-
         }
       }
     });
