@@ -21,7 +21,7 @@ export class NewProductComponent extends BaseComponent implements OnInit {
   constructor(private cd: ChangeDetectorRef, public dataPasser: TransferDataService, private apiRequester: APIRequesterService, private httpClient: HttpClient, router: Router)
   {
     super(httpClient, router);
-    this.product.seller = this.ownerID;
+    this.product.userId = this.ownerID;
   }
 
   ngOnInit(): void {
@@ -29,7 +29,7 @@ export class NewProductComponent extends BaseComponent implements OnInit {
   }
 
   addProduct(): void {
-    this.product.seller = this.ownerID;
+    this.product.userId = this.ownerID;
     let request: AddProductRequest = {
       product: this.product,
     };

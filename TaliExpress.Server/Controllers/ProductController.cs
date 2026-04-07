@@ -26,7 +26,7 @@ namespace TaliExpress.Server.Controllers
                 IsAvailable = true,
                 Name = "1",
                 Description = "productDescription1",
-                SellerId = "1",
+                UserId = "1",
                 Price = 1
             });
             products.Add(new ProductDbModel()
@@ -34,7 +34,7 @@ namespace TaliExpress.Server.Controllers
                 IsAvailable = true,
                 Name = "2",
                 Description = "productDescription2",
-                SellerId = "2",
+                UserId = "2",
                 Price = 1
             });
             return Ok(products);
