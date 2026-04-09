@@ -1,14 +1,11 @@
-﻿using ConfigApp.Classes;
-using Microsoft.AspNetCore.Mvc;
-using MongoDB.Driver;
+﻿using MongoDB.Driver;
 using MongoDBService.Classes;
-using MongoDBService.Enums;
 using TaliExpress.Server.Enums;
 using TaliExpress.Server.Models;
 
 namespace TaliExpress.Server.Managers
 {
-    public class ProductManager : MongoDBServiceManager
+    public class ProductsManager : MongoDBServiceManager
     {
         public new string GetCollectionName() => "products";
         public ReturnCode GetFiltered(FilterDefinition<ProductDbModel> filters, out List<ProductDbModel>? products)
@@ -27,6 +24,11 @@ namespace TaliExpress.Server.Managers
                 products = null;
                 return ReturnCode.General_Error;
             }
+        }
+
+        public bool GetBySellerId(string sellerId, out List<ProductDbModel>? products)
+        {
+            return this.FindManyByProperty(this.GetCollectionName(), "UserId", sellerId, out products);
         }
     }
 }

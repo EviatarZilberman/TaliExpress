@@ -12,7 +12,7 @@ namespace TaliExpress.Server.Controllers
         public IActionResult AddProductToCart(string cartId, string productId, int amount = 1)
         {
             if (string.IsNullOrEmpty(cartId) || string.IsNullOrEmpty(productId)) return BadRequest(EnumMessagesConverter.Convert(ReturnCode.Parameter_is_null_or_empty)); 
-            ProductManager productManager = new ProductManager();
+            ProductsManager productManager = new ProductsManager();
             productManager.GetById(productManager.GetCollectionName(), productId, out ProductDbModel? product);
             if (product == null) return BadRequest(EnumMessagesConverter.Convert(ReturnCode.No_product_found));
             CartManager cartManager = new CartManager();
@@ -24,7 +24,7 @@ namespace TaliExpress.Server.Controllers
         public IActionResult RemoveProductFromCart(string cartId, string productId, int amount = 1)
         {
             if (string.IsNullOrEmpty(cartId) || string.IsNullOrEmpty(productId)) return BadRequest(EnumMessagesConverter.Convert(ReturnCode.Parameter_is_null_or_empty));
-            ProductManager productManager = new ProductManager();
+            ProductsManager productManager = new ProductsManager();
             productManager.GetById<ProductDbModel>(productManager.GetCollectionName(), productId, out ProductDbModel? product);
             if (product == null) return BadRequest(EnumMessagesConverter.Convert(ReturnCode.No_product_found));
             CartManager cartManager = new CartManager();

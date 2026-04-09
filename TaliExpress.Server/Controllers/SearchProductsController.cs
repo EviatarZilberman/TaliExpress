@@ -45,7 +45,7 @@ namespace TaliExpress.Server.Controllers
                 filters.Add(FilterCreator<ProductDbModel>.CreateEqualFilter(NameAttribute, word));
             }
             FilterDefinition<ProductDbModel> finalFilter = FilterCreator<ProductDbModel>.CreateMultiOrConditionsFilter(filters.ToArray());
-            ProductManager productManager = new ProductManager();
+            ProductsManager productManager = new ProductsManager();
             if (productManager.GetFiltered(finalFilter, out List<ProductDbModel>? products) != Enums.ReturnCode.Success)
             {
                 return StatusCode(500, "An error occurred while searching for products.");

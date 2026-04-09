@@ -23,6 +23,10 @@ namespace TaliExpress.Server.Workers
                 return new GetStoreResponse();
             }
 
+            ProductsManager productManager = new ProductsManager();
+            productManager.GetBySellerId(store.UserId, out List<ProductDbModel>? products);
+            store.Products = products!;
+
             return new GetStoreResponse
             {
                 Code = 0,

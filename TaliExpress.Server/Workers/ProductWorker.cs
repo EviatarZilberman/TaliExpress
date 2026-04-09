@@ -27,7 +27,7 @@ namespace TaliExpress.Server.Workers
                 UserId = request.SellerId
             };
 
-            ProductManager productManager = new ProductManager();
+            ProductsManager productManager = new ProductsManager();
             productManager.Insert(productManager.GetCollectionName(), productDbModel);
             return new BaseApiResponse();
         }

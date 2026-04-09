@@ -28,6 +28,9 @@ export class StoreComponent implements OnInit {
       next: (res: GetStoreResponse) => {
         if (res.code === 0) {
           this.store = res.store;
+          for (let i = 0; i < this.store.products.length; i++) {
+            console.log(this.store.products[i].name);
+          }
           this.hasStore = true;
           this.cd.detectChanges();
         }
