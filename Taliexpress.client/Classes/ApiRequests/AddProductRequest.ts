@@ -1,5 +1,12 @@
 import { Product } from "../Common/Product";
 
 export class AddProductRequest {
-  public product: Product = new Product();
+  name: string = '';
+  description: string = '';
+  amountInInvenotry: number = 0;
+  userId: string = '';
+  price: number = 0;
+  categories: string[] = [];
+  asAvailable: boolean = false;
+  discountId: number = 0;
 }

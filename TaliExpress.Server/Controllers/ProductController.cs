@@ -1,14 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc;
 using TaliExpress.Server.Classes.API.Requests;
 using TaliExpress.Server.Classes.API.Responses;
+using TaliExpress.Server.Controllers.Common;
 using TaliExpress.Server.Interfaces;
 using TaliExpress.Server.Models;
 
 namespace TaliExpress.Server.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class ProductController : Controller
+    public class ProductController : OriginController
     {
         private readonly IProduct ProductWorker;
 

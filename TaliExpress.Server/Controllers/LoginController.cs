@@ -2,15 +2,13 @@
 using Microsoft.AspNetCore.Mvc;
 using TaliExpress.Server.Classes.API.Requests;
 using TaliExpress.Server.Classes.API.Responses;
-using TaliExpress.Server.Enums;
+using TaliExpress.Server.Controllers.Common;
 using TaliExpress.Server.Interfaces;
 
 namespace TaliExpress.Server.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
-    [EnableCors("AllowAngular")]
-    public class LoginController : ControllerBase
+
+    public class LoginController : OriginController
     {
         private readonly ILogin LoginWorker;
 

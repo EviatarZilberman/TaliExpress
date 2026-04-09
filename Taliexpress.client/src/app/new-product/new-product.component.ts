@@ -17,11 +17,11 @@ import { Router } from '@angular/router';
 })
 export class NewProductComponent extends BaseComponent implements OnInit {
   private ownerID: string = '';
-  public product: Product = new Product();
-  constructor(private cd: ChangeDetectorRef, public dataPasser: TransferDataService, private apiRequester: APIRequesterService, private httpClient: HttpClient, router: Router)
-  {
+  public productRequest: AddProductRequest = new AddProductRequest();
+
+  public constructor(private cd: ChangeDetectorRef, public dataPasser: TransferDataService, private apiRequester: APIRequesterService, private httpClient: HttpClient, router: Router) {
     super(httpClient, router);
-    this.product.userId = this.ownerID;
+    this.productRequest.userId = this.ownerID;
   }
 
   ngOnInit(): void {
@@ -29,19 +29,19 @@ export class NewProductComponent extends BaseComponent implements OnInit {
   }
 
   addProduct(): void {
-    this.product.userId = this.ownerID;
-    let request: AddProductRequest = {
-      product: this.product,
-    };
-    this.apiRequester.APIReturn(request, 'Product', 'addProduct', APIReturnKeys.Post).subscribe({
+    this.productRequest.userId = this.ownerID;
+    this.apiRequester.APIReturn(this.productRequest, 'Product', 'addProduct', APIReturnKeys.Post).subscribe({
       next: (res: BaseApiResponse) => {
         if (res.code === 0) {
           this.navigateTo('/store');
-        }
-        else {
+        } else {
           this.screenMessage.message = res.message;
           this.cd.detectChanges();
         }
+      },
+      error: (err: any) => {
+        console.log("FULL ERROR:", err);
+        console.log("VALIDATION ERRORS:", err.error.errors);
       }
     });
   }
