@@ -3,7 +3,7 @@ using TaliExpress.Server.Models;
 
 namespace TaliExpress.Server.Managers
 {
-    public class CartManager : MongoDBServiceManager
+    public class CartManager : AManager
     {
         public bool Delete(string id) => base.Delete<Cart>(this.GetCollectionName(), id);
 
@@ -12,8 +12,6 @@ namespace TaliExpress.Server.Managers
         public bool GetAll(out List<Cart> items) => base.GetAll(this.GetCollectionName(), out items);
 
         public bool Insert(Cart item) => base.Insert(this.GetCollectionName(), item);
-        public new string GetCollectionName() => "carts";
-
 
         public bool AddProduct(string cartId, ProductDbModel product, int amount = 0)
         { 
@@ -35,5 +33,7 @@ namespace TaliExpress.Server.Managers
             cart.Products.Clear();
             return this.Replace(this.GetCollectionName(), cart);
         }
+
+        public override string GetCollectionName() => "carts";
     }
 }

@@ -5,9 +5,9 @@ using TaliExpress.Server.Models;
 
 namespace TaliExpress.Server.Managers
 {
-    public class ProductsManager : MongoDBServiceManager
+    public class ProductsManager : AManager
     {
-        public new string GetCollectionName() => "products";
+        public override string GetCollectionName() => "products";
         public ReturnCode GetFiltered(FilterDefinition<ProductDbModel> filters, out List<ProductDbModel>? products)
         {
             //if (string.IsNullOrEmpty(productId))

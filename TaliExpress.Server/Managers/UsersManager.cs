@@ -8,29 +8,20 @@ using TaliExpress.Server.Models;
 
 namespace TaliExpress.Server.Managers
 {
-    public sealed class UsersManager : MongoDBServiceManager
+    public sealed class UsersManager : AManager
     {
-        public new string GetCollectionName() => "users";
-
         public bool FreezeMembership(UserDbModel user)
         {
             user.Status = (int)UserStatus.Freezed;
             return this.Replace(this.GetCollectionName(), user);
         }
 
-        public bool FindByEmail(string email, out UserDbModel user)
-        {
-            return this.FindOneByProperty(this.GetCollectionName(), "Email", email, out user);
-        }
+        public bool FindByEmail(string email, out UserDbModel user) => this.FindOneByProperty(this.GetCollectionName(), "Email", email, out user);
 
-        public bool Update(UserDbModel user)
-        {
-            return this.Replace(this.GetCollectionName(), user);
-        }
+        public bool Update(UserDbModel user) => this.Replace(this.GetCollectionName(), user);
 
-        public bool Insert(UserDbModel user)
-        {
-            return this.Insert(this.GetCollectionName(), user);
-        }
+        public bool Insert(UserDbModel user) => this.Insert(this.GetCollectionName(), user);
+
+        public override string GetCollectionName() => "users";
     }
 }

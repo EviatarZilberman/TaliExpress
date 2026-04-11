@@ -21,7 +21,6 @@ export class NewProductComponent extends BaseComponent implements OnInit {
 
   public constructor(private cd: ChangeDetectorRef, public dataPasser: TransferDataService, private apiRequester: APIRequesterService, private httpClient: HttpClient, router: Router) {
     super(httpClient, router);
-    this.productRequest.userId = this.ownerID;
   }
 
   ngOnInit(): void {
