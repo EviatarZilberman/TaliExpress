@@ -9,6 +9,6 @@ export class Product {
   price: number = 0;
   //images: Image = new Image();
   categories: string[] = [];
-  asAvailable: boolean = false;
+  isAvailable: boolean = false;
   discountId: number = 0;
 }
