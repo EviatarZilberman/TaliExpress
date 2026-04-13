@@ -12,10 +12,6 @@
     <button type="submit" (click)="navigateToNewProduct()">Add Product</button>
   </div>
   <div class="leftProductDiv" *ngFor="let product of store.products; let i = index">
-    <input type="text" [(ngModel)]="product.name" name="name" />
-    <input type="text" [(ngModel)]="product.description" name="description" />
-    <input type="number" [(ngModel)]="product.amountInInvenotry" name="amountInInvenotry" min="0" />
-    <input type="number" [(ngModel)]="product.price" name="price" min="0" />
-
+    <store-product [product]="product"></store-product>
   </div>
 </div>

@@ -1,0 +1,22 @@
+
+  <div>
+    <label>
+      Product Name:
+      <input type="text" [(ngModel)]="product.name" name="name" />
+    </label>
+    <label>
+      Product Description:
+      <input type="text" [(ngModel)]="product.description" name="description" />
+    </label>
+    <label>
+      Amount In Inventory:
+      <input type="number" [(ngModel)]="product.amountInInvenotry" name="amountInInvenotry" min="0" />
+    </label>
+    <label>
+      Price:
+      <input type="number" [(ngModel)]="product.price" name="price" min="0" />
+    </label>
+
+    <button type="submit" (click)="updateProduct()">Save</button>
+  </div>
+
