@@ -1,17 +1,16 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace TaliExpress.Server.Classes.API.Requests
+namespace TaliExpress.Server.Classes.AngularObjects
 {
-    public class AddProductRequest
+    public sealed class ProductAng : BaseAngOwner
     {
-        [JsonPropertyName("userId")]
-        public string SellerId { get; set; } = string.Empty;
         [JsonPropertyName("price")]
         public double Price { get; set; } = 0;
         [JsonPropertyName("name")]
         public string Name { get; set; } = string.Empty;
         [JsonPropertyName("description")]
         public string Description { get; set; } = string.Empty;
+        //public string ImageUrl { get; set; } = string.Empty;
         [JsonPropertyName("categories")]
         public List<string> Categories { get; set; } = new List<string>();
         [JsonPropertyName("amountInInvenotry")]

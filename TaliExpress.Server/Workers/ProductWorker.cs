@@ -1,4 +1,5 @@
-﻿using TaliExpress.Server.Classes.API.Requests;
+﻿using Microsoft.AspNetCore.Mvc;
+using TaliExpress.Server.Classes.API.Requests;
 using TaliExpress.Server.Classes.API.Responses;
 using TaliExpress.Server.Interfaces;
 using TaliExpress.Server.Managers;
@@ -29,6 +30,35 @@ namespace TaliExpress.Server.Workers
 
             ProductsManager productManager = new ProductsManager();
             productManager.Insert(productManager.GetCollectionName(), productDbModel);
+            return new BaseApiResponse();
+        }
+
+        public async Task<BaseApiResponse> UpdateProduct([FromBody] UpdateProductRequest request)
+        {
+            if (request == null) return new BaseApiResponse
+            {
+                Code = -1
+            };
+
+            ProductsManager productManager = new ProductsManager();
+            if (!productManager.GetById(request.Id, out ProductDbModel productDbModel))
+            {
+                return new BaseApiResponse
+                {
+                    Code = -1,
+                    Message = "Product not found or you are not the owner of this product."
+                };
+            }
+
+            productDbModel.AmountInInvenotry = request.AmountInInvenotry;
+            productDbModel.Categories = request.Categories;
+            productDbModel.Description = request.Description;
+            productDbModel.Discount = request.Discount;
+            productDbModel.IsAvailable = request.IsAvailable;
+            productDbModel.Name = request.Name;
+            productDbModel.Price = request.Price;
+
+            productManager.Replace(productDbModel);
             return new BaseApiResponse();
         }
     }

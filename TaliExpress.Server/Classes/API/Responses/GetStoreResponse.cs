@@ -1,10 +1,10 @@
-﻿using TaliExpress.Server.Models;
+﻿using TaliExpress.Server.Classes.AngularObjects;
 
 namespace TaliExpress.Server.Classes.API.Responses
 {
     public class GetStoreResponse
     {
         public int Code { get; set; } = -1;
-        public StoreDbModel Store { get; set; } = new StoreDbModel();
+        public StoreAng Store { get; set; } = new StoreAng();
     }
 }

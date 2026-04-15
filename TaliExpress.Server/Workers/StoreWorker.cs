@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using TaliExpress.Server.Classes.AngularObjects;
 using TaliExpress.Server.Classes.API.Requests;
 using TaliExpress.Server.Classes.API.Responses;
 using TaliExpress.Server.Enums;
@@ -26,11 +26,12 @@ namespace TaliExpress.Server.Workers
             ProductsManager productManager = new ProductsManager();
             productManager.GetBySellerId(store.UserId, out List<ProductDbModel>? products);
             store.Products = products!;
-
+            StoreAng storeAng = new StoreAng();
+            if (store != null) storeAng.Adapt(store);
             return new GetStoreResponse
             {
                 Code = 0,
-                Store = store
+                Store = storeAng
             };
         }
 
@@ -52,10 +53,12 @@ namespace TaliExpress.Server.Workers
 
             OpenStoreResponse response = new OpenStoreResponse();
             StoresManager storesManager = new StoresManager();
+            StoreAng storeAng = new StoreAng();
+            storeAng.Adapt(store);
             if (storesManager.Insert(store))
             {
                 response.Code = (int)ReturnCode.Success;
-                response.store = store;
+                response.Store = storeAng;
                 return response;
             }
             return response;

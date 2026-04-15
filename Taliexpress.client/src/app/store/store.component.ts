@@ -45,10 +45,9 @@ export class StoreComponent implements OnInit {
           if (res.code === 0) {
             this.store = res.data;
             this.cd.detectChanges();
+            this.router.navigate(['/store'])
           }
         }
-      }).then(() => {
-        this.router.navigate(['/store'])
       });
   }
 

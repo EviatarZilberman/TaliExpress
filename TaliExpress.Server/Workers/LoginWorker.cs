@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
+using TaliExpress.Server.Classes.AngularObjects;
 using TaliExpress.Server.Classes.API.Responses;
 using TaliExpress.Server.Enums;
 using TaliExpress.Server.Interfaces;
@@ -23,8 +24,6 @@ namespace TaliExpress.Server.Workers
             {
                 return new LoginResponse()
                 {
-                    User = new UserDbModel(),
-                    Store = new StoreDbModel(),
                     Code = (int)ReturnCode.Parameter_is_null_or_empty,
                     Message = "Email or password is invalid"
                 };
@@ -34,8 +33,6 @@ namespace TaliExpress.Server.Workers
             {
                 return new LoginResponse()
                 {
-                    User = new UserDbModel(),
-                    Store = new StoreDbModel(),
                     Code = (int)ReturnCode.No_user_found,
                     Message = "Email or password is invalid"
                 };
@@ -48,8 +45,6 @@ namespace TaliExpress.Server.Workers
                     usersManager.Update(user);
                     return new LoginResponse()
                     {
-                        User = new UserDbModel(),
-                        Store = new StoreDbModel(),
                         Code = (int)ReturnCode.Invalid_parameters,
                         Message = "Email or password is invalid"
                     };
@@ -68,7 +63,6 @@ namespace TaliExpress.Server.Workers
 
                 AuthenticationProperties properties = new AuthenticationProperties()
                 {
-
                     AllowRefresh = true,
                     IsPersistent = stayLoggedIn
                 };
@@ -79,7 +73,7 @@ namespace TaliExpress.Server.Workers
                 StoresManager storesManager = new StoresManager();
                 storesManager.GetByUserId(user.Id.ToString(), out StoreDbModel? store);
                 CartManager cartsManager = new CartManager();
-                cartsManager.GetByUserId(user.Id.ToString(), out Cart? cart);
+                cartsManager.GetByUserId(user.Id.ToString(), out CartDbModel? cart);
                 //JwtRequest jwtRequest = new JwtRequest()
                 //{
                 //    ExpireInSeconds = 3600,
@@ -90,11 +84,17 @@ namespace TaliExpress.Server.Workers
                 //    }
                 //};
                 //JWTCreationHandler.CreateJwt(jwtRequest);
+                UserAng userAng = new UserAng();
+                if (userAng != null) userAng.Adapt(user);
+                StoreAng storeAng = new StoreAng();
+                if (store != null) storeAng.Adapt(store);
+                CartAng cartAng = new CartAng();
+                if (cart != null) cartAng.Adapt(cart);
                 return new LoginResponse()
                 {
-                    User = user,
-                    Store = store!,
-                    Cart = cart!,
+                    User = userAng!,
+                    Store = storeAng,
+                    Cart = cartAng,
                     Code = (int)ReturnCode.Success,
                     Message = "Login successful"
                 };
@@ -102,10 +102,7 @@ namespace TaliExpress.Server.Workers
             return new LoginResponse()
             {
                 Message = "User was not found",
-                Cart = new Cart(),
-                Code = (int)ReturnCode.No_user_found,
-                Store = new StoreDbModel(),
-                User = new UserDbModel()
+                Code = (int)ReturnCode.No_user_found
             };
         }
 

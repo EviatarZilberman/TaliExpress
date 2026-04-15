@@ -45,5 +45,11 @@ namespace TaliExpress.Server.Controllers
         {
             return await this.ProductWorker.AddProduct(request);
         }
+
+        [HttpPost("updateProduct")]
+        public async Task<BaseApiResponse> UpdateProduct([FromBody] UpdateProductRequest request)
+        {
+            return await this.ProductWorker.UpdateProduct(request);
+        }
     }
 }

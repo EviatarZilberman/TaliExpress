@@ -10,11 +10,6 @@ namespace TaliExpress.Server.Managers
         public override string GetCollectionName() => "products";
         public ReturnCode GetFiltered(FilterDefinition<ProductDbModel> filters, out List<ProductDbModel>? products)
         {
-            //if (string.IsNullOrEmpty(productId))
-            //{
-            //    products = null;
-            //    return ReturnCode.No_parameters_entered;
-            //}
             if (this.FindManyByProperty(this.GetCollectionName(), "Name", "aaa", out products))
             {
                 return ReturnCode.Success;
@@ -30,5 +25,13 @@ namespace TaliExpress.Server.Managers
         {
             return this.FindManyByProperty(this.GetCollectionName(), "UserId", sellerId, out products);
         }
+
+        public bool Replace(ProductDbModel product)
+        {
+            {
+                return this.Replace(this.GetCollectionName(), product);
+            }
+        }
     }
 }
+

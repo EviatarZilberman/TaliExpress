@@ -1,11 +1,11 @@
-﻿using TaliExpress.Server.Models;
+﻿using TaliExpress.Server.Classes.AngularObjects;
 
 namespace TaliExpress.Server.Classes.API.Responses
 {
     public sealed class LoginResponse : BaseApiResponse
     {
-        public UserDbModel User { get; set; } = new UserDbModel();
-        public StoreDbModel Store { get; set; } = new StoreDbModel();
-        public Cart Cart { get; set; } = new Cart();
+        public UserAng User { get; set; } = new UserAng();
+        public StoreAng Store { get; set; } = new StoreAng();
+        public CartAng Cart { get; set; } = new CartAng();
     }
 }

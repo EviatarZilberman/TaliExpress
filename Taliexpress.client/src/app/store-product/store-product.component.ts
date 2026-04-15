@@ -2,6 +2,9 @@ import { ChangeDetectorRef, Component, Input } from '@angular/core';
 import { Product } from '../../../Classes/Common/Product';
 import { APIRequesterService } from '../../../Services/APIRequesterService';
 import { APIReturnKeys } from '../../../Enums/APIReturnKeys';
+import { UpdateProductRequest } from '../../../Classes/ApiRequests/UpdateProductRequest';
+import { BaseApiResponse } from '../../../Classes/ApiResponse/BaseApiResponse';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'store-product',
@@ -13,14 +16,17 @@ export class StoreProductComponent {
   @Input() product!: Product;
 
   constructor(private cd: ChangeDetectorRef,
-              private apiRequester: APIRequesterService,) { }
+    private apiRequester: APIRequesterService,
+   private router: Router) { }
 
   updateProduct(product: Product): void {
-    const response: any = this.apiRequester.APIReturn(request, 'Store', 'OpenStore', APIReturnKeys.Post)
+    let productRequest: UpdateProductRequest = new UpdateProductRequest();
+    productRequest.product = product;
+    
+    const response: any = this.apiRequester.APIReturn(productRequest, 'Product', 'UpdateProduct', APIReturnKeys.Post)
       .subscribe({
-        next: (res: OpenStoreResponse) => {
+        next: (res: BaseApiResponse) => {
           if (res.code === 0) {
-            this.store = res.data;
             this.cd.detectChanges();
           }
         }
