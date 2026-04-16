@@ -41,7 +41,7 @@ namespace TaliExpress.Server.Workers
             };
 
             ProductsManager productManager = new ProductsManager();
-            if (!productManager.GetById(request.Id, out ProductDbModel productDbModel))
+            if (!productManager.GetById(request.productAng.Id, out ProductDbModel productDbModel))
             {
                 return new BaseApiResponse
                 {
@@ -50,13 +50,13 @@ namespace TaliExpress.Server.Workers
                 };
             }
 
-            productDbModel.AmountInInvenotry = request.AmountInInvenotry;
-            productDbModel.Categories = request.Categories;
-            productDbModel.Description = request.Description;
-            productDbModel.Discount = request.Discount;
-            productDbModel.IsAvailable = request.IsAvailable;
-            productDbModel.Name = request.Name;
-            productDbModel.Price = request.Price;
+            productDbModel.AmountInInvenotry = request.productAng.AmountInInvenotry;
+            productDbModel.Categories = request.productAng.Categories;
+            productDbModel.Description = request.productAng.Description;
+            productDbModel.Discount = request.productAng.Discount;
+            productDbModel.IsAvailable = request.productAng.IsAvailable;
+            productDbModel.Name = request.productAng.Name;
+            productDbModel.Price = request.productAng.Price;
 
             productManager.Replace(productDbModel);
             return new BaseApiResponse();

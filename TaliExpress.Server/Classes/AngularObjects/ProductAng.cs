@@ -1,8 +1,10 @@
 ﻿using System.Text.Json.Serialization;
+using TaliExpress.Server.Interfaces;
+using TaliExpress.Server.Models;
 
 namespace TaliExpress.Server.Classes.AngularObjects
 {
-    public sealed class ProductAng : BaseAngOwner
+    public sealed class ProductAng : BaseAngOwner, IAdapt<ProductDbModel>
     {
         [JsonPropertyName("price")]
         public double Price { get; set; } = 0;
@@ -19,5 +21,19 @@ namespace TaliExpress.Server.Classes.AngularObjects
         public bool IsAvailable { get; set; } = false;
         [JsonPropertyName("discount")]
         public double Discount { get; set; } = 0;
+
+        public void Adapt(ProductDbModel item)
+        {
+            this.Id = item.Id.ToString();
+            this.userId = item.UserId.ToString();
+            this.AmountInInvenotry = item.AmountInInvenotry;
+            this.Categories = item.Categories;
+            this.CreatedAt = item.CreationDate;
+            this.Description = item.Description;
+            this.Discount = item.Discount;
+            this.IsAvailable = item.IsAvailable;
+            this.Name = item.Name;
+            this.Price = item.Price;
+        }
     }
 }

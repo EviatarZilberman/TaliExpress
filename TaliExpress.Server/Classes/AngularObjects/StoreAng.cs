@@ -21,19 +21,10 @@ namespace TaliExpress.Server.Classes.AngularObjects
             this.StoreName = item.StoreName;
             for (int i = 0;  i < item.Products.Count; i++)
             {
-                this.Products.Add(new ProductAng
-                {
-                    Id = item.Products[i].Id.ToString(),
-                    userId = item.Products[i].UserId.ToString(),
-                    AmountInInvenotry = item.Products[i].AmountInInvenotry,
-                    Categories = item.Products[i].Categories,
-                    CreatedAt = item.Products[i].CreationDate,
-                    Description = item.Products[i].Description,
-                    Discount = item.Products[i].Discount,
-                    IsAvailable = item.Products[i].IsAvailable,
-                    Name = item.Products[i].Name,
-                    Price = item.Products[i].Price
-                });
+                ProductAng productAng = new ProductAng();
+                productAng.Adapt(item.Products[i]);
+                this.Products.Add(productAng);
+                
             }
         }
     }

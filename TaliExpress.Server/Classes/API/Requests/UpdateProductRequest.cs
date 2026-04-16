@@ -1,10 +1,11 @@
 ﻿using System.Text.Json.Serialization;
+using TaliExpress.Server.Classes.AngularObjects;
 
 namespace TaliExpress.Server.Classes.API.Requests
 {
-    public sealed class UpdateProductRequest : AddProductRequest
+    public sealed class UpdateProductRequest
     {
-        [JsonPropertyName("id")]
-        public string Id { get; set; } = string.Empty;
+        [JsonPropertyName("product")]
+        public ProductAng productAng { get; set; } = new ProductAng();
     }
 }
