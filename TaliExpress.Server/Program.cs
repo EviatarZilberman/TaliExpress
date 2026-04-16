@@ -87,6 +87,7 @@ builder.Services.AddScoped<ILogin, LoginWorker>();
 builder.Services.AddScoped<IAccount, AccountWorker>();
 builder.Services.AddScoped<IStore, StoreWorker>();
 builder.Services.AddScoped<IProduct, ProductWorker>();
+builder.Services.AddScoped<ISearch, SearchWorker>();
 
 var app = builder.Build();
 app.UseCookiePolicy();

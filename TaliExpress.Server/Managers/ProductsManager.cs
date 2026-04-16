@@ -21,9 +21,13 @@ namespace TaliExpress.Server.Managers
             }
         }
 
-        public bool GetBySellerId(string sellerId, out List<ProductDbModel>? products)
+        public bool GetAllBySellerId(string sellerId, out List<ProductDbModel> products)
         {
             return this.FindManyByProperty(this.GetCollectionName(), "UserId", sellerId, out products);
+        }
+        public bool GetAllByName(string name, out List<ProductDbModel> products)
+        {
+            return this.FindManyByProperty(this.GetCollectionName(), "Name", name, out products);
         }
 
         public bool Replace(ProductDbModel product)

@@ -24,7 +24,7 @@ namespace TaliExpress.Server.Workers
             }
 
             ProductsManager productManager = new ProductsManager();
-            productManager.GetBySellerId(store.UserId, out List<ProductDbModel>? products);
+            productManager.GetAllBySellerId(store.UserId, out List<ProductDbModel>? products);
             store.Products = products!;
             StoreAng storeAng = new StoreAng();
             if (store != null) storeAng.Adapt(store);

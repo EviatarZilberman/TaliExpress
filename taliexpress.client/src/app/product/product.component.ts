@@ -8,7 +8,8 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { TransferDataService } from '../../../Services/TransferDataService';
 import { APIReturnKeys } from '../../../Enums/APIReturnKeys';
-import { QueryAranger } from '../../../Classes/Solvers/QueryAranger';
+import { SearchRequest } from '../../../Classes/ApiRequests/SearchRequest';
+import { SearchResponse } from '../../../Classes/ApiResponse/SearchResponse';
 
 @Component({
   selector: 'product',
@@ -36,14 +37,18 @@ export class ProductComponent extends BaseComponent implements OnInit, OnDestroy
     this.searchService.currentDataParameter.subscribe(searchParam => this.searchParam = searchParam);
 
     if (this.searchParam !== null) {
-      const map: Map<string, any> = new Map<string, any>();
-      map.set('productDescription', this.searchParam);
-      const query: string = QueryAranger.Arange(map);
-      const answer = this.apiRequester.APIReturn(query, 'Product', 'SearchProduct', APIReturnKeys.Get);
+      //const map: Map<string, any> = new Map<string, any>();
+      //map.set('productDescription', this.searchParam);
+      //const query: string = QueryAranger.Arange(map);
+      let searchRequest: SearchRequest = new SearchRequest();
+      searchRequest.name = this.searchParam;
+      const answer = this.apiRequester.APIReturn(searchRequest, 'SearchProducts', 'SearchProducts', APIReturnKeys.Get);
       answer.subscribe({
-        next: (result: Product[]) => {
-          this.products = result;
-          this.cd.markForCheck();
+        next: (result: SearchResponse) => {
+          if (result.code === 0) {
+            this.products = result.products;
+            this.cd.markForCheck();
+          }
         },
         error: (error: any) => {
           console.log('Error fetching products:', error);
