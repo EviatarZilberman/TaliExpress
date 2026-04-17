@@ -32,9 +32,9 @@ namespace TaliExpress.Server.Controllers
         }
 
         [HttpGet("searchProducts")]
-        public async Task<SearchResponse> SearchProducts([FromBody] SearchRequest request)
+        public async Task<SearchResponse> SearchProducts([FromQuery] string name)
         {
-            return await this.SearchWorker.SearchProducts(request.Name);
+            return await this.SearchWorker.SearchProducts(name);
         }
 
         ///*  [HttpGet]

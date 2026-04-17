@@ -1,4 +1,4 @@
-<h1>Products!</h1>
+<!--<h1>Products!</h1>
 
 <div class="page-content">
   <h3>Results for: {{ searchParam }}</h3>
@@ -11,4 +11,14 @@
       </div>
     </div>
   </div>
+</div>-->
+
+<div *ngIf="products; else loading">
+  <div *ngFor="let product of products">
+    {{ product.name }}
+  </div>
 </div>
+
+<ng-template #loading>
+  <p>Loading...</p>
+</ng-template>

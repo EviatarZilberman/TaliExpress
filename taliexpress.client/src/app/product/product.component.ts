@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { Product } from '../../../Classes/Common/Product';
+import { AdvencedSearchParameters } from '../../../Classes/Common/AdvencedSearchParameters';
 import { APIRequesterService } from '../../../Services/APIRequesterService';
 import { BaseComponent } from '../BaseComponent/baseComponent.component';
 import { HttpClient } from '@angular/common/http';
@@ -9,7 +10,9 @@ import { Router } from '@angular/router';
 import { TransferDataService } from '../../../Services/TransferDataService';
 import { APIReturnKeys } from '../../../Enums/APIReturnKeys';
 import { SearchRequest } from '../../../Classes/ApiRequests/SearchRequest';
+import { AdvancedSearchRequest } from '../../../Classes/ApiRequests/AdvancedSearchRequest';
 import { SearchResponse } from '../../../Classes/ApiResponse/SearchResponse';
+import { QueryAranger } from '../../../Classes/Solvers/QueryAranger';
 
 @Component({
   selector: 'product',
@@ -20,7 +23,7 @@ import { SearchResponse } from '../../../Classes/ApiResponse/SearchResponse';
 })
 export class ProductComponent extends BaseComponent implements OnInit, OnDestroy {
   private searchSub?: Subscription;
-  public searchParam: any;
+  public searchParam!: string | AdvencedSearchParameters;
   products: Product[] = [];
 
   constructor(
@@ -37,12 +40,19 @@ export class ProductComponent extends BaseComponent implements OnInit, OnDestroy
     this.searchService.currentDataParameter.subscribe(searchParam => this.searchParam = searchParam);
 
     if (this.searchParam !== null) {
-      //const map: Map<string, any> = new Map<string, any>();
-      //map.set('productDescription', this.searchParam);
-      //const query: string = QueryAranger.Arange(map);
-      let searchRequest: SearchRequest = new SearchRequest();
-      searchRequest.name = this.searchParam;
-      const answer = this.apiRequester.APIReturn(searchRequest, 'SearchProducts', 'SearchProducts', APIReturnKeys.Get);
+      const map: Map<string, any> = new Map<string, any>();
+      map.set('name', this.searchParam);
+      const query: string = QueryAranger.Arange(map);
+      let searchRequest!: SearchRequest | AdvancedSearchRequest;
+      //if (typeof this.searchParam === 'string') {
+      //  searchRequest = new SearchRequest();
+      //  searchRequest.name = this.searchParam;
+      //}
+      //else {
+      //  searchRequest = new AdvancedSearchRequest();
+      //  //searchRequest.AdvancedSearchRequest = this.searchParam;
+      //}
+      const answer = this.apiRequester.APIReturn(query, 'SearchProducts', 'SearchProducts', APIReturnKeys.Get);
       answer.subscribe({
         next: (result: SearchResponse) => {
           if (result.code === 0) {
