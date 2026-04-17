@@ -11,7 +11,7 @@ namespace TaliExpress.Server.Workers
         public async Task<SearchResponse> SearchProducts(string name)
         {
             ProductsManager productsManager = new ProductsManager();
-            productsManager.GetAllByName(name, out List<ProductDbModel> products);
+            productsManager.GetAllByFilter("Name", name, out List<ProductDbModel> products);
             List<ProductAng> result = new List<ProductAng>();
             foreach (ProductDbModel product in products)
             {

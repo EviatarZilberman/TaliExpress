@@ -32,9 +32,12 @@ namespace TaliExpress.Server.Managers
 
         public bool Replace(ProductDbModel product)
         {
-            {
-                return this.Replace(this.GetCollectionName(), product);
-            }
+            return this.Replace(this.GetCollectionName(), product);
+        }
+
+        public bool GetAllByFilter(string field, string value, out List<ProductDbModel> products)
+        {
+            return this.GetAllByFilter(this.GetCollectionName(), field, value, out products);
         }
     }
 }
