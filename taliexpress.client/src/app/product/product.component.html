@@ -1,23 +1,17 @@
-<!--<h1>Products!</h1>
-
-<div class="page-content">
-  <h3>Results for: {{ searchParam }}</h3>
-  <div *ngFor="let product of products; let i = index">
-    <div class="productDataDiv">
-      <div class="leftProductDiv">
-        <h2>{{ product.name }}</h2>
-        <h6>{{ product.description }}</h6>
-        <p>{{ product.price }}</p>
+<div *ngIf="products; else loading">
+    <div class="page-content">
+      <h3>Results for: {{ searchParam }}</h3>
+      <div *ngFor="let product of products; let i = index">
+        <div class="productDataDiv">
+          <div class="leftProductDiv">
+            <h2>{{ product.name }}</h2>
+            <h6>{{ product.description }}</h6>
+            <p>{{ product.price }}</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>-->
-
-<div *ngIf="products; else loading">
-  <div *ngFor="let product of products">
-    {{ product.name }}
-  </div>
-</div>
 
 <ng-template #loading>
   <p>Loading...</p>

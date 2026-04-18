@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, Output, EventEmitter } from '@angular/core';
 import { Product } from '../../../Classes/Common/Product';
 import { APIRequesterService } from '../../../Services/APIRequesterService';
 import { APIReturnKeys } from '../../../Enums/APIReturnKeys';
@@ -17,21 +17,22 @@ export class StoreProductComponent {
 
   constructor(private cd: ChangeDetectorRef,
     private apiRequester: APIRequesterService,
-   private router: Router) { }
+    private router: Router) { }
 
   updateProduct(product: Product): void {
     let productRequest: UpdateProductRequest = new UpdateProductRequest();
     productRequest.product = product;
-    
+
     const response: any = this.apiRequester.APIReturn(productRequest, 'Product', 'UpdateProduct', APIReturnKeys.Post)
       .subscribe({
         next: (res: BaseApiResponse) => {
           if (res.code === 0) {
-            this.cd.detectChanges();
           }
+        },
+        error: (err: any) => {
+          console.log("FULL ERROR:", err);
+          this.router.navigate(['/store']);
         }
-      }).then(() => {
-        this.router.navigate(['/store'])
       });
   }
 }

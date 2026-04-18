@@ -8,5 +8,6 @@ namespace TaliExpress.Server.Interfaces
     {
         public Task<BaseApiResponse> AddProduct([FromBody] AddProductRequest request);
         public Task<BaseApiResponse> UpdateProduct([FromBody] UpdateProductRequest request);
+        public Task<BaseApiResponse> GetProduct([FromQuery] GetProductRequest request);
     }
 }
