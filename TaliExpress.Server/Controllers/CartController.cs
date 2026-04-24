@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TaliExpress.Server.Classes.API.Requests;
 using TaliExpress.Server.Classes.API.Responses;
-using TaliExpress.Server.Classes.Common;
-using TaliExpress.Server.Enums;
 using TaliExpress.Server.Interfaces;
 namespace TaliExpress.Server.Controllers
 {

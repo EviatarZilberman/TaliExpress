@@ -33,6 +33,11 @@ namespace TaliExpress.Server.Workers
             return new BaseApiResponse();
         }
 
+        public async Task<BaseApiResponse> GetProduct([FromQuery] GetProductRequest request)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<BaseApiResponse> UpdateProduct([FromBody] UpdateProductRequest request)
         {
             if (request == null) return new BaseApiResponse

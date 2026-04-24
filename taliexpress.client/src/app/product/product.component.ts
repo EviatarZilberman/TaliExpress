@@ -9,10 +9,13 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { TransferDataService } from '../../../Services/TransferDataService';
 import { APIReturnKeys } from '../../../Enums/APIReturnKeys';
+import { CartActionKeys } from '../../../Enums/CartActionKeys';
 import { SearchRequest } from '../../../Classes/ApiRequests/SearchRequest';
 import { AdvancedSearchRequest } from '../../../Classes/ApiRequests/AdvancedSearchRequest';
 import { SearchResponse } from '../../../Classes/ApiResponse/SearchResponse';
 import { QueryAranger } from '../../../Classes/Solvers/QueryAranger';
+import { AddToCart } from '../../../Classes/Common/AddToCart';
+import { CartAction } from '../../../Classes/Common/CartAction';
 
 @Component({
   selector: 'product',
@@ -30,14 +33,14 @@ export class ProductComponent extends BaseComponent implements OnInit, OnDestroy
     private apiRequester: APIRequesterService,
     protected override router: Router,
     protected httpClient: HttpClient,
-    private searchService: TransferDataService,
+    private dataService: TransferDataService,
     private cd: ChangeDetectorRef
   ) {
     super(httpClient, router);
   }
 
   ngOnInit(): void {
-    this.searchService.currentDataParameter.subscribe(searchParam => this.searchParam = searchParam);
+    this.dataService.currentDataParameter.subscribe(searchParam => this.searchParam = searchParam);
 
     if (this.searchParam !== null) {
       const map: Map<string, any> = new Map<string, any>();
@@ -94,5 +97,11 @@ export class ProductComponent extends BaseComponent implements OnInit, OnDestroy
 
   ngOnDestroy(): void {
     this.searchSub?.unsubscribe();
+  }
+
+  addToCart(id: string, amount: number): void {
+    let addToCart: AddToCart = new AddToCart(id, amount);
+    let cartAction: CartAction = new CartAction(addToCart, CartActionKeys.AddToCart);
+    this.dataService.processDataParameter(cartAction);
   }
 }

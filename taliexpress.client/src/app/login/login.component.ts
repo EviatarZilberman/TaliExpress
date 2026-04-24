@@ -24,12 +24,6 @@ export class LoginComponent extends BaseComponent /*implements OnInit*/ {
     super(httpClient, router);
   };
 
-/*  ngOnInit(): void {
-    this.authenticationService.logout$.subscribe(() => {
-    this.logout(); // your existing function
-  });
-  }*/
-
   login(loginRequest: LoginRequest): void {
     const response: any = this.apiRequester.APIReturn(this.loginRequest, 'login', 'login', APIReturnKeys.Post).subscribe({
       next: (res: LoginResponse) => {
