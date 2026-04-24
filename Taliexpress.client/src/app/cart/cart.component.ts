@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 
 
 @Component({
-  selector: 'app-cart',
+  selector: 'cart',
   standalone: false,
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css',
@@ -21,27 +21,29 @@ export class CartComponent implements OnInit {
   private productSub?: Subscription;
   public productParam!: CartAction;
 
-  constructor(private searchService: TransferDataService,
+  constructor(private dataService: TransferDataService,
     private apiRequester: APIRequesterService,
     private router: Router) {
 
   }
 
   ngOnInit(): void {
-    this.searchService.currentDataParameter.subscribe(ProductParam => this.productParam = ProductParam);
-    switch (this.productParam.actionType) {
-      case (CartActionKeys.AddToCart):
-        {
-          if (this.productParam.usingClass instanceof AddToCart) {
-            this.addToCart(this.productParam.usingClass);
+    this.productSub = this.dataService.currentDataParameter.subscribe(param => {
+      if (!param) return;
+      switch (this.productParam.actionType) {
+        case (CartActionKeys.AddToCart):
+          {
+            if (this.productParam.usingClass instanceof AddToCart) {
+              this.addToCart(this.productParam.usingClass);
+            }
+            break;
           }
-          break;
-        }
-      case (CartActionKeys.DisplayCart):
-        {
-          break;
-        }
-    }
+        case (CartActionKeys.DisplayCart):
+          {
+            break;
+          }
+      }
+    });
   }
 
   ngOnDestroy(): void {
