@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using TaliExpress.Server.Classes.API.Requests;
+﻿using TaliExpress.Server.Classes.API.Requests;
 using TaliExpress.Server.Classes.API.Responses;
 using TaliExpress.Server.Enums;
 using TaliExpress.Server.Interfaces;
@@ -19,11 +18,19 @@ namespace TaliExpress.Server.Workers
             {
                 cartDbModel = new CartDbModel();
                 cartDbModel.UserId = userId;
+                cartManager.Insert(cartDbModel);
             }
 
-            cartDbModel.Products.TryGetValue(new MongoDB.Bson.ObjectId(request.productId), out int amount);
-            cartManager.Upsert(cartDbModel);
-            return new BaseApiResponse();
+            if (cartDbModel.Products.Any(p => p.Key.ToString() == request.ProductId))
+            {
+                cartDbModel.Products[request.ProductId] += request.Amount;
+            }
+            else
+            {
+                cartDbModel.Products.Add(request.ProductId, request.Amount);
+            }
+                cartManager.Update(cartDbModel);
+                return new BaseApiResponse();
         }
     }
 }

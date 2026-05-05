@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.IdentityModel.Tokens;
 using MongoDBService.Classes;
 using TaliExpress.Server.Interfaces;
-using TaliExpress.Server.SecuritySettings.Managers;
-using TaliExpress.Server.SecuritySettings.SecuritySettingsModels;
 using TaliExpress.Server.Workers;
 
 MongoDBServiceManager.Initialize("mongodb://localhost:27017/", "TaliExpress");
@@ -21,7 +18,7 @@ builder.Services.AddAuthentication(
          option.Cookie.Name = "TaliExpressAuth";
          option.Cookie.HttpOnly = true;
          //option.Cookie.SameSite = SameSiteMode.None;
-         option.Cookie.SameSite = SameSiteMode.Lax; //-- For development only
+         option.Cookie.SameSite = SameSiteMode.None;
          option.Cookie.SecurePolicy = CookieSecurePolicy.Always;
          option.SlidingExpiration = true;
          option.Events.OnRedirectToLogin = context => // Handle the 401/403 for API endpoints
@@ -88,6 +85,13 @@ builder.Services.AddScoped<IAccount, AccountWorker>();
 builder.Services.AddScoped<IStore, StoreWorker>();
 builder.Services.AddScoped<IProduct, ProductWorker>();
 builder.Services.AddScoped<ISearch, SearchWorker>();
+builder.Services.AddScoped<ICart, CartWorker>();
+
+builder.Services.Configure<CookiePolicyOptions>(options =>
+{
+    options.MinimumSameSitePolicy = SameSiteMode.None;
+    options.Secure = CookieSecurePolicy.Always;
+});
 
 var app = builder.Build();
 app.UseCookiePolicy();

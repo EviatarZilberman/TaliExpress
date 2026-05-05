@@ -1,9 +1,7 @@
-﻿using MongoDB.Bson;
-
-namespace TaliExpress.Server.Models
+﻿namespace TaliExpress.Server.Models
 {
     public class CartDbModel : UserOwner
     {
-        public Dictionary<ObjectId, int> Products { get; set; } = new Dictionary<ObjectId, int>();
+        public Dictionary<string, int> Products { get; set; } = new Dictionary<string, int>();
     }
 }

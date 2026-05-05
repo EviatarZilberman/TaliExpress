@@ -12,10 +12,7 @@ namespace TaliExpress.Server.Classes.AngularObjects
 
         public void Adapt(CartDbModel item)
         {
-            foreach(KeyValuePair<ObjectId, int> kvp in item.Products)
-            {
-                this.Products.Add(kvp.Key.ToString(), kvp.Value);
-            }
+            this.Products = item.Products;
         }
     }
 }

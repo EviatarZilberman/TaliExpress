@@ -102,6 +102,8 @@ export class ProductComponent extends BaseComponent implements OnInit, OnDestroy
   addToCart(id: string, amount: number): void {
     let addToCart: AddToCart = new AddToCart(id, amount);
     let cartAction: CartAction = new CartAction(addToCart, CartActionKeys.AddToCart);
-    this.dataService.processDataParameter(cartAction);
+    this.router.navigate(['/cart']).then(() => {
+      this.dataService.processDataParameter(cartAction);
+    });
   }
 }

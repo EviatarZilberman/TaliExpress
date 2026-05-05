@@ -16,14 +16,14 @@ namespace TaliExpress.Server.Managers
         public bool AddProduct(string cartId, ProductDbModel product, int amount = 0)
         { 
             if (!this.GetById(this.GetCollectionName(), cartId, out CartDbModel cart)) return false;
-            cart.Products.Add(product.Id, amount);
+            cart.Products.Add(product.Id.ToString(), amount);
             return this.Replace(this.GetCollectionName(), cart);
         }
 
         public bool RemoveProduct(string cartId, ProductDbModel product, int amount = 0)
         {
             if (!this.GetById(this.GetCollectionName(), cartId, out CartDbModel cart)) return false;
-            cart.Products.Remove(product.Id);
+            cart.Products.Remove(product.Id.ToString());
             return this.Replace(this.GetCollectionName(), cart);
         }
 
@@ -33,6 +33,8 @@ namespace TaliExpress.Server.Managers
             cart.Products.Clear();
             return this.Replace(this.GetCollectionName(), cart);
         }
+
+        public bool Update(CartDbModel item) => base.Replace(item);
 
         public override string GetCollectionName() => "carts";
     }

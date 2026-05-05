@@ -19,7 +19,7 @@ import { Router } from '@angular/router';
 })
 export class CartComponent implements OnInit {
   private productSub?: Subscription;
-  public productParam!: CartAction;
+  //public productParam!: CartAction;
 
   constructor(private dataService: TransferDataService,
     private apiRequester: APIRequesterService,
@@ -30,12 +30,10 @@ export class CartComponent implements OnInit {
   ngOnInit(): void {
     this.productSub = this.dataService.currentDataParameter.subscribe(param => {
       if (!param) return;
-      switch (this.productParam.actionType) {
+      switch (param.actionType) {
         case (CartActionKeys.AddToCart):
           {
-            if (this.productParam.usingClass instanceof AddToCart) {
-              this.addToCart(this.productParam.usingClass);
-            }
+            this.addToCart(param.usingClass);
             break;
           }
         case (CartActionKeys.DisplayCart):
@@ -51,7 +49,7 @@ export class CartComponent implements OnInit {
   }
 
   addToCart(product: AddToCart): void {
-    const response: any = this.apiRequester.APIReturn(product, 'Cart', 'AddToCart', APIReturnKeys.Post).subscribe({
+    const response: any = this.apiRequester.APIReturn(product, 'Cart', 'addToCart', APIReturnKeys.Post).subscribe({
       next: (res: BaseApiResponse) => {
         if (res.code === 0) {
           //this.router.navigate(['/']).then(() => {
@@ -59,7 +57,7 @@ export class CartComponent implements OnInit {
         }
       },
       error: (err: any) => {
-        console.error("Login failed", err);
+        console.error("Adding to cart failed", err);
       }
     });
   }
