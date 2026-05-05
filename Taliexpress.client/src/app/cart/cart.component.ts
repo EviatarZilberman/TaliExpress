@@ -38,6 +38,7 @@ export class CartComponent implements OnInit {
           }
         case (CartActionKeys.DisplayCart):
           {
+            this.displayCart();
             break;
           }
       }
@@ -62,5 +63,9 @@ export class CartComponent implements OnInit {
         console.error("Adding to cart failed", err);
       }
     });
+  }
+
+  displayCart(): void {
+
   }
 }
