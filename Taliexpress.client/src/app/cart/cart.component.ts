@@ -2,13 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { TransferDataService } from '../../../Services/TransferDataService';
 import { APIRequesterService } from '../../../Services/APIRequesterService';
-import { CartAction } from '../../../Classes/Common/CartAction';
 import { AddToCart } from '../../../Classes/Common/AddToCart';
 import { BaseApiResponse } from '../../../Classes/ApiResponse/BaseApiResponse';
 import { CartActionKeys } from '../../../Enums/CartActionKeys';
 import { APIReturnKeys } from '../../../Enums/APIReturnKeys';
 import { Router } from '@angular/router';
-
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -23,6 +22,7 @@ export class CartComponent implements OnInit {
 
   constructor(private dataService: TransferDataService,
     private apiRequester: APIRequesterService,
+    private toastr: ToastrService,
     private router: Router) {
 
   }
@@ -52,8 +52,10 @@ export class CartComponent implements OnInit {
     const response: any = this.apiRequester.APIReturn(product, 'Cart', 'addToCart', APIReturnKeys.Post).subscribe({
       next: (res: BaseApiResponse) => {
         if (res.code === 0) {
-          //this.router.navigate(['/']).then(() => {
-          //});
+          this.toastr.success(res.message, 'Success');
+        }
+        else {
+          this.toastr.error(res.message, 'Error');
         }
       },
       error: (err: any) => {

@@ -20,6 +20,8 @@ import { ScreenMessageComponent } from './screenMessage/screenMessage.component'
 import { NewProductComponent } from './new-product/new-product.component';
 import { StoreProductComponent } from './store-product/store-product.component';
 import { CartComponent } from './cart/cart.component';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //import { CustomifDirective } from './directives/customif/customif.directive';
 //import { HighlighttextDirective } from './directives/highlighttext/highlighttext.directive';
 //import { PokemonTemplateFormComponent } from './pokemon-template-form/pokemon-template-form.component';
@@ -54,6 +56,11 @@ export function initConfig(configService: ConfigurationService) {
     AppRoutingModule,
     FormsModule,
     SharedModulesModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-right',
+      timeOut: 3000
+    })
     //PokemonBaseModule,
   ],
   providers: [
