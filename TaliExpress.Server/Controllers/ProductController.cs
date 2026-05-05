@@ -17,29 +17,6 @@ namespace TaliExpress.Server.Controllers
             this.ProductWorker = productWorker;
         }
 
-        [HttpGet("searchProduct")]
-        public IActionResult SearchProduct([FromQuery] string productDescription)
-        {
-            List<ProductDbModel> products = new List<ProductDbModel>();
-            products.Add(new ProductDbModel()
-            {
-                IsAvailable = true,
-                Name = "1",
-                Description = "productDescription1",
-                UserId = "1",
-                Price = 1
-            });
-            products.Add(new ProductDbModel()
-            {
-                IsAvailable = true,
-                Name = "2",
-                Description = "productDescription2",
-                UserId = "2",
-                Price = 1
-            });
-            return Ok(products);
-        }
-
         [HttpPost("addProduct")]
         public async Task<BaseApiResponse> AddProduct([FromBody] AddProductRequest request)
         {
