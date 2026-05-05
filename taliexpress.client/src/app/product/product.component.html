@@ -7,7 +7,8 @@
             <h2>{{ product.name }}</h2>
             <h6>{{ product.description }}</h6>
             <p>{{ product.price }}</p>
-            <button (click)="addToCart(product.id, 1)">Add to Cart</button>
+            <input type="number" min="1" max="{{ product.amountInInventory }}" placeholder="Quantity" />
+            <button (click)="addToCart(product.id, product.amountInInventory)">Add to Cart</button>
           </div>
         </div>
       </div>
