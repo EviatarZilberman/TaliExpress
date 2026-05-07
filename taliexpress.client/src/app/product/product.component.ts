@@ -9,13 +9,11 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { TransferDataService } from '../../../Services/TransferDataService';
 import { APIReturnKeys } from '../../../Enums/APIReturnKeys';
-import { CartActionKeys } from '../../../Enums/CartActionKeys';
 import { SearchRequest } from '../../../Classes/ApiRequests/SearchRequest';
 import { AdvancedSearchRequest } from '../../../Classes/ApiRequests/AdvancedSearchRequest';
 import { SearchResponse } from '../../../Classes/ApiResponse/SearchResponse';
 import { QueryAranger } from '../../../Classes/Solvers/QueryAranger';
-import { AddToCart } from '../../../Classes/Common/AddToCart';
-import { CartAction } from '../../../Classes/Common/CartAction';
+import { CartService } from '../../../Services/CartService';
 
 @Component({
   selector: 'product',
@@ -34,7 +32,8 @@ export class ProductComponent extends BaseComponent implements OnInit, OnDestroy
     protected override router: Router,
     protected httpClient: HttpClient,
     private dataService: TransferDataService,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private cartService: CartService
   ) {
     super(httpClient, router);
   }
@@ -100,10 +99,6 @@ export class ProductComponent extends BaseComponent implements OnInit, OnDestroy
   }
 
   addToCart(id: string, amount: number): void {
-    let addToCart: AddToCart = new AddToCart(id, amount);
-    let cartAction: CartAction = new CartAction(addToCart, CartActionKeys.AddToCart);
-    this.router.navigate(['/cart']).then(() => {
-      this.dataService.processDataParameter(cartAction);
-    });
+    this.cartService.addToCart(id, amount);
   }
 }

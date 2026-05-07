@@ -28,44 +28,10 @@ export class CartComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.productSub = this.dataService.currentDataParameter.subscribe(param => {
-      if (!param) return;
-      switch (param.actionType) {
-        case (CartActionKeys.AddToCart):
-          {
-            this.addToCart(param.usingClass);
-            break;
-          }
-        case (CartActionKeys.DisplayCart):
-          {
-            this.displayCart();
-            break;
-          }
-      }
-    });
+    
   }
 
   ngOnDestroy(): void {
     this.productSub?.unsubscribe();
-  }
-
-  addToCart(product: AddToCart): void {
-    const response: any = this.apiRequester.APIReturn(product, 'Cart', 'addToCart', APIReturnKeys.Post).subscribe({
-      next: (res: BaseApiResponse) => {
-        if (res.code === 0) {
-          this.toastr.success(res.message, 'Success');
-        }
-        else {
-          this.toastr.error(res.message, 'Error');
-        }
-      },
-      error: (err: any) => {
-        console.error("Adding to cart failed", err);
-      }
-    });
-  }
-
-  displayCart(): void {
-
   }
 }
