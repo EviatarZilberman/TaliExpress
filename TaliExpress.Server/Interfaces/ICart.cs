@@ -6,6 +6,8 @@ namespace TaliExpress.Server.Interfaces
     public interface ICart
     {
         public Task<BaseApiResponse> AddToCart(AddToCartRequest request, HttpContext httpContext);
+        public Task<GetDisplayCartResponse> DisplayCart(HttpContext httpContext);
+
 
     }
 }

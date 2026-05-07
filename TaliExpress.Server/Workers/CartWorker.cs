@@ -1,4 +1,5 @@
 ﻿using System.Linq.Expressions;
+using TaliExpress.Server.Classes.AngularObjects;
 using TaliExpress.Server.Classes.API.Requests;
 using TaliExpress.Server.Classes.API.Responses;
 using TaliExpress.Server.Enums;
@@ -52,6 +53,37 @@ namespace TaliExpress.Server.Workers
                 {
                     Code = -1,
                     Message = "An error occurred while adding the product to the cart"
+                };
+            }
+        }
+
+        public async Task<GetDisplayCartResponse> DisplayCart(HttpContext httpContext)
+        {
+            try
+            {
+                string userId = httpContext.User.Claims.FirstOrDefault(c => c.Type == CookiesKeys.ID.ToString())?.Value!;
+                GetDisplayCartResponse result = new GetDisplayCartResponse();
+                if (string.IsNullOrEmpty(userId))
+                {
+                    return new GetDisplayCartResponse() 
+                    {
+                        Code = -1,
+                        Message = "User not authenticated"
+                    };
+                }
+
+                CartManager cartManager = new CartManager();
+                cartManager.GetByUserId(userId, out CartDbModel? cart);
+                if (cart == null || cart.Products.Count < 1) return new GetDisplayCartResponse();
+                result.Cart.Adapt(cart);
+                return result;
+            }
+            catch
+            {
+                return new GetDisplayCartResponse()
+                {
+                    Code = -1,
+                    Message = "An error occurred while retrieving the cart"
                 };
             }
         }

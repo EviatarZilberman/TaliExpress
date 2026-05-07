@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { TransferDataService } from '../../../Services/TransferDataService';
 import { APIRequesterService } from '../../../Services/APIRequesterService';
-import { AddToCart } from '../../../Classes/Common/AddToCart';
 import { BaseApiResponse } from '../../../Classes/ApiResponse/BaseApiResponse';
-import { CartActionKeys } from '../../../Enums/CartActionKeys';
+import { DisplayProduct } from '../../../Classes/Common/DisplayProduct';
 import { APIReturnKeys } from '../../../Enums/APIReturnKeys';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -17,10 +14,8 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './cart.component.css',
 })
 export class CartComponent implements OnInit {
-  private productSub?: Subscription;
-  //public productParam!: CartAction;
-
-  constructor(private dataService: TransferDataService,
+  public displayProducts: DisplayProduct[] = [];
+  constructor(
     private apiRequester: APIRequesterService,
     private toastr: ToastrService,
     private router: Router) {
@@ -28,10 +23,18 @@ export class CartComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
-  }
-
-  ngOnDestroy(): void {
-    this.productSub?.unsubscribe();
+    const response: any = this.apiRequester.APIReturn(null, 'Cart', 'DisplayCart', APIReturnKeys.Post).subscribe({
+      next: (res: BaseApiResponse) => {
+        if (res.code === 0) {
+          this.toastr.success(res.message, 'Success');
+        }
+        else {
+          this.toastr.error(res.message, 'Warning');
+        }
+      },
+      error: (err: any) => {
+        this.toastr.error('Error adding to cart', 'Error');
+      }
+    });
   }
 }

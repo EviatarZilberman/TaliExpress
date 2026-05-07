@@ -20,6 +20,12 @@ namespace TaliExpress.Server.Controllers
         {
             return await this.CartWorker.AddToCart(request, this.HttpContext);
         }
+
+        [HttpPost("displayCart")]
+        public async Task<GetDisplayCartResponse> DisplayCart()
+        {
+            return await this.CartWorker.DisplayCart(this.HttpContext);
+        }
         //[HttpPost]
         //public IActionResult AddProductToCart(string cartId, string ProductId, int amount = 1)
         //{
