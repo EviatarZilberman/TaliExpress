@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { Product } from '../../../Classes/Common/Product';
+import { DisplayProduct } from '../../../Classes/Common/DisplayProduct';
 import { AdvencedSearchParameters } from '../../../Classes/Common/AdvencedSearchParameters';
 import { APIRequesterService } from '../../../Services/APIRequesterService';
 import { BaseComponent } from '../BaseComponent/baseComponent.component';
@@ -25,7 +26,7 @@ import { CartService } from '../../../Services/CartService';
 export class ProductComponent extends BaseComponent implements OnInit, OnDestroy {
   private searchSub?: Subscription;
   public searchParam!: string | AdvencedSearchParameters;
-  products: Product[] = [];
+  public displayProducts: DisplayProduct[] = [];
 
   constructor(
     private apiRequester: APIRequesterService,
@@ -58,7 +59,7 @@ export class ProductComponent extends BaseComponent implements OnInit, OnDestroy
       answer.subscribe({
         next: (result: SearchResponse) => {
           if (result.code === 0) {
-            this.products = result.products;
+            this.displayProducts = this.ConvertToDisplayProducts(result.products);
             this.cd.markForCheck();
           }
         },
@@ -69,17 +70,32 @@ export class ProductComponent extends BaseComponent implements OnInit, OnDestroy
     }
   }
 
-  private searchByTerm(params: any): void {
-    this.apiRequester
-      .APIReturn(params, 'SearchProducts', 'SearchByParameters', APIReturnKeys.Get)
-      .subscribe({
-        next: (result: Product[]) => {
-          this.products = result;
-          console.log('Products found:', this.products);
-        },
-        error: (err: any) => console.error(err)
-      });
+  private ConvertToDisplayProducts(products: Product[]): DisplayProduct[] {
+    let productsResult: DisplayProduct[] = [];
+    for (let i = 0; i < products.length; i++) {
+      productsResult.push(new DisplayProduct(products[i]));
+    }
+    return productsResult;
   }
+
+  increaseAmount(product: DisplayProduct): void {
+    product.productsToBuy++;
+  }
+
+  decreaseAmount(product: DisplayProduct): void {
+    if (product.productsToBuy > 1) product.productsToBuy--;
+    }
+  //private searchByTerm(params: any): void {
+  //  this.apiRequester
+  //    .APIReturn(params, 'SearchProducts', 'SearchByParameters', APIReturnKeys.Get)
+  //    .subscribe({
+  //      next: (result: Product[]) => {
+  //        this.displayProducts = result;
+  //        console.log('Products found:', this.displayProducts);
+  //      },
+  //      error: (err: any) => console.error(err)
+  //    });
+  //}
 
 
   //private searchByTerm(term: string): void {
