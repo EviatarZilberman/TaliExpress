@@ -13,6 +13,8 @@ namespace TaliExpress.Server.Classes.AngularObjects
 
         public void Adapt(CartDbModel item)
         {
+            this.Id = item.Id.ToString();
+            this.userId = item.UserId.ToString();
             ProductsManager productsManager = new ProductsManager();
             foreach(string productId in item.Products.Keys)
             {

@@ -1,5 +1,5 @@
-import { Product } from '../Common/Product';
+import { DisplayProduct } from './DisplayProduct';
 export class Cart {
-  public products!: Product[];
+  public displayProducts!: DisplayProduct[];
   public owner: string = "";
 }

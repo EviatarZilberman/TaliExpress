@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { APIRequesterService } from '../../../Services/APIRequesterService';
-import { BaseApiResponse } from '../../../Classes/ApiResponse/BaseApiResponse';
+import { GetDisplayCartResponse } from '../../../Classes/ApiResponse/GetDisplayCartResponse';
 import { DisplayProduct } from '../../../Classes/Common/DisplayProduct';
 import { APIReturnKeys } from '../../../Enums/APIReturnKeys';
-import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { CartDisplayProduct } from '../../../Classes/Common/CartDisplayProduct';
 
 
 @Component({
@@ -14,27 +14,40 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './cart.component.css',
 })
 export class CartComponent implements OnInit {
-  public displayProducts: DisplayProduct[] = [];
+  public cartDisplayProducts: CartDisplayProduct[] = [];
+  public totalPrice: number = 0;
+  public productsToBuy: string[] = [];
   constructor(
     private apiRequester: APIRequesterService,
-    private toastr: ToastrService,
-    private router: Router) {
-
+    private toastr: ToastrService) {
   }
 
   ngOnInit(): void {
     const response: any = this.apiRequester.APIReturn(null, 'Cart', 'DisplayCart', APIReturnKeys.Post).subscribe({
-      next: (res: BaseApiResponse) => {
+      next: (res: GetDisplayCartResponse) => {
         if (res.code === 0) {
-          this.toastr.success(res.message, 'Success');
-        }
-        else {
-          this.toastr.error(res.message, 'Warning');
+          this.cartDisplayProducts = this.convertProductsToCartDisplayProducts(res.cart.displayProducts);
         }
       },
       error: (err: any) => {
-        this.toastr.error('Error adding to cart', 'Error');
+        this.toastr.error('Error getting cart', 'Error');
       }
     });
+  }
+
+  convertProductsToCartDisplayProducts(products: DisplayProduct[]): CartDisplayProduct[] {
+    return products.map(p => new CartDisplayProduct(p));
+  }
+
+  addOrRemoveFromPurchase(productId: string): void {
+    if (!this.cartDisplayProducts.find(p => p.id === productId)?.isChecked) {
+      this.cartDisplayProducts.find(p => p.id === productId)!.isChecked = true;
+      this.productsToBuy.push(productId);
+      this.totalPrice += this.cartDisplayProducts.find(p => p.id === productId)?.price || 0;
+    } else {
+      this.cartDisplayProducts.find(p => p.id === productId)!.isChecked = false;
+      this.productsToBuy = this.productsToBuy.filter(p => p !== productId);
+      this.totalPrice -= this.cartDisplayProducts.find(p => p.id === productId)?.price || 0;
+    }
   }
 }
