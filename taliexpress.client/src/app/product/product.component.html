@@ -1,17 +1,17 @@
 <div *ngIf="displayProducts; else loading">
     <div class="page-content">
       <h3>Results for: {{ searchParam }}</h3>
-      <div *ngFor="let product of displayProducts; let i = index">
+      <div *ngFor="let displayProducts of displayProducts; let i = index">
         <div class="productDataDiv">
           <div class="leftProductDiv">
-            <h2>{{ product.name }}</h2>
-            <h6>{{ product.description }}</h6>
-            <p>{{ product.price }}</p>
+            <h2>{{ displayProducts.name }}</h2>
+            <h6>{{ displayProducts.description }}</h6>
+            <p>{{ displayProducts.price }}</p>
             <div>
-              <button type="submit" (click)="increaseAmount(product)">+</button>
-              <input type="number" min="1" max="{{ product.amountInInvenotry }}" placeholder="Quantity" [value]="product.productsToBuy" readonly />
-              <button type="submit" (click)="decreaseAmount(product)">-</button>
-              <button (click)="addToCart(product.id, product.productsToBuy)">Add to Cart</button>
+              <button type="submit" (click)="increaseAmount(displayProducts)">+</button>
+              <input type="number" min="1" max="{{ displayProducts.amountInInvenotry }}" placeholder="Quantity" [value]="displayProducts.productsToBuy" readonly />
+              <button type="submit" (click)="decreaseAmount(displayProducts)">-</button>
+              <button (click)="addToCart(displayProducts.id, displayProducts.productsToBuy)">Add to Cart</button>
             </div>
           </div>
         </div>
