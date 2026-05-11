@@ -1,5 +1,5 @@
-import { DisplayProduct } from './DisplayProduct';
+import { CartItem } from './CartItem';
+
 export class Cart {
-  public displayProducts!: DisplayProduct[];
-  public owner: string = "";
+  public cartProducts!: CartItem[];
 }

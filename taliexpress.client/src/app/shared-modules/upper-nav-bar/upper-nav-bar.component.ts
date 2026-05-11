@@ -42,6 +42,10 @@ export class UpperNavBarComponent extends BaseComponent implements OnInit {
     this.router.navigate(['/store']);
   }
 
+  public navigateToCart(): void {
+    this.router.navigate(['/cart']);
+  }
+
   ngOnInit(): void {
     this.dataService.currentDataParameter.subscribe(isConnected => this.isConnected = isConnected);
       if (!this.isConnected) {

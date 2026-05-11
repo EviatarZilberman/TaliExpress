@@ -1,6 +1,6 @@
-import { DisplayProduct } from "./DisplayProduct";
+import { Product } from "./Product";
 
 export class CartItem {
-  public product: DisplayProduct = new DisplayProduct(null!);
+  public product: Product = new Product();
   public amount: number = 0;
 }

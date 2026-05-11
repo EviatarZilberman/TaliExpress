@@ -6,6 +6,6 @@ namespace TaliExpress.Server.Classes.API.Responses
     public class GetDisplayCartResponse : BaseApiResponse
     {
         [JsonPropertyName("cart")]
-        public CartAng Cart { get; set; } = new CartAng();
+        public CartAng DisplayProducts { get; set; } = new CartAng();
     }
 }

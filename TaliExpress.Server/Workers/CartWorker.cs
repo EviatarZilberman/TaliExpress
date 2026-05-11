@@ -75,7 +75,7 @@ namespace TaliExpress.Server.Workers
                 CartManager cartManager = new CartManager();
                 cartManager.GetByUserId(userId, out CartDbModel? cart);
                 if (cart == null || cart.Products.Count < 1) return new GetDisplayCartResponse();
-                result.Cart.Adapt(cart);
+                result.DisplayProducts.Adapt(cart);
                 return result;
             }
             catch

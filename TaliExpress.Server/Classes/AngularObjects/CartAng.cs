@@ -8,19 +8,18 @@ namespace TaliExpress.Server.Classes.AngularObjects
 {
     public sealed class CartAng : BaseAngOwner, IAdapt<CartDbModel>
     {
-        [JsonPropertyName("products")]
-        public Dictionary<int, CartItemAng> CartItemsAng { get; set; } = new Dictionary<int, CartItemAng>();
+        [JsonPropertyName("cartProducts")]
+        public List<CartItemAng> CartItemsAng { get; set; } = new List<CartItemAng>();
 
         public void Adapt(CartDbModel item)
         {
             this.Id = item.Id.ToString();
             this.userId = item.UserId.ToString();
             ProductsManager productsManager = new ProductsManager();
-            int counter = 1;
             foreach (string productId in item.Products.Keys)
             {
                 productsManager.GetById(productId, out ProductDbModel product);
-                this.CartItemsAng.Add(counter, new CartItemAng
+                this.CartItemsAng.Add(new CartItemAng
                 {
                     Product = new ProductAng()
                     {
@@ -37,7 +36,6 @@ namespace TaliExpress.Server.Classes.AngularObjects
                     },
                     Amount = item.Products[productId]
                 });
-                counter++;
             }
         }
     }

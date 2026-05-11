@@ -5,6 +5,7 @@ import { DisplayProduct } from '../../../Classes/Common/DisplayProduct';
 import { APIReturnKeys } from '../../../Enums/APIReturnKeys';
 import { ToastrService } from 'ngx-toastr';
 import { CartDisplayProduct } from '../../../Classes/Common/CartDisplayProduct';
+import { CartItem } from '../../../Classes/Common/CartItem';
 
 
 @Component({
@@ -26,7 +27,7 @@ export class CartComponent implements OnInit {
     const response: any = this.apiRequester.APIReturn(null, 'Cart', 'DisplayCart', APIReturnKeys.Post).subscribe({
       next: (res: GetDisplayCartResponse) => {
         if (res.code === 0) {
-          this.cartDisplayProducts = this.convertProductsToCartDisplayProducts(res.cart.displayProducts);
+          this.cartDisplayProducts = this.convertCartItemsToCartDisplayProducts(res.cart.cartProducts);
         }
       },
       error: (err: any) => {
@@ -35,8 +36,15 @@ export class CartComponent implements OnInit {
     });
   }
 
-  convertProductsToCartDisplayProducts(products: DisplayProduct[]): CartDisplayProduct[] {
-    return products.map(p => new CartDisplayProduct(p));
+  convertCartItemsToCartDisplayProducts(cartProducts: CartItem[]): CartDisplayProduct[] {
+    let result!: CartDisplayProduct[];
+    for (let i = 0; i < cartProducts.length; i++) {
+      let cartDisplayProduct!: CartDisplayProduct;
+      cartDisplayProduct.createByCartItem(cartProducts[i]);
+      result.push(cartDisplayProduct);
+    }
+
+    return result;
   }
 
   addOrRemoveFromPurchase(productId: string): void {
