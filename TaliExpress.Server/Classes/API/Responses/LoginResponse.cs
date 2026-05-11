@@ -5,7 +5,7 @@ namespace TaliExpress.Server.Classes.API.Responses
     public sealed class LoginResponse : BaseApiResponse
     {
         public UserAng User { get; set; } = new UserAng();
-        public StoreAng Store { get; set; } = new StoreAng();
-        public CartAng Cart { get; set; } = new CartAng();
+        public StoreDataAng StoreData { get; set; } = new StoreDataAng();
+        public CartDataAng CartData { get; set; } = new CartDataAng();
     }
 }

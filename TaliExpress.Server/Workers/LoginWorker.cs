@@ -86,15 +86,15 @@ namespace TaliExpress.Server.Workers
                 //JWTCreationHandler.CreateJwt(jwtRequest);
                 UserAng userAng = new UserAng();
                 if (userAng != null) userAng.Adapt(user);
-                StoreAng storeAng = new StoreAng();
-                if (store != null) storeAng.Adapt(store);
-                CartAng cartAng = new CartAng();
-                if (cart != null) cartAng.Adapt(cart);
+                StoreDataAng storeDataAng = new StoreDataAng();
+                if (store != null) storeDataAng.Adapt(store);
+                CartDataAng cartDataAng = new CartDataAng();
+                if (cart != null) cartDataAng.Adapt(cart);
                 return new LoginResponse()
                 {
                     User = userAng!,
-                    Store = storeAng,
-                    Cart = cartAng,
+                    StoreData = storeDataAng,
+                    CartData = cartDataAng,
                     Code = (int)ReturnCode.Success,
                     Message = "Login successful"
                 };

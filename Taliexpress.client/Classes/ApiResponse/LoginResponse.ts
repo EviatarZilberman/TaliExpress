@@ -1,10 +1,10 @@
 import { User } from "../Common/User";
-import { Cart } from "../Common/Cart";
-import { Store } from "../Common/Store";
+import { CartData } from "../Common/CartData";
+import { StoreData } from "../Common/StoreData";
 import { BaseApiResponse } from "./BaseApiResponse";
 
 export class LoginResponse extends BaseApiResponse {
   user: User = new User();
-  cart: Cart = new Cart();
-  store: Store = new Store();
+  cartData: CartData = new CartData();
+  storeData: StoreData = new StoreData();
 }
