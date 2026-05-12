@@ -1,20 +1,20 @@
 <div *ngIf="cartDisplayProducts; else loading">
   <div class="page-content">
-    <div *ngFor="let product of cartDisplayProducts; let i = index">
+    <div *ngFor="let cartDisplayProduct of cartDisplayProducts; let i = index">
       <div>
-        <input type="checkbox" (change)="addOrRemoveFromPurchase(product.id)" [(ngModel)]="product.isChecked" />
+        <input type="checkbox" (change)="addOrRemoveFromPurchase(cartDisplayProduct.id)" [(ngModel)]="cartDisplayProduct.isChecked" />
       </div>
       <div class="productDataDiv">
         <div class="leftProductDiv">
-          <h2>Name: {{ cartDisplayProducts.name }}</h2>
-          <h6>Description: {{ cartDisplayProducts.description }}</h6>
-          <p>Price: {{ cartDisplayProducts.price }}</p>
-          <p>Amount in cart: {{ cartDisplayProducts.productsToBuy }}</p>
+          <h2>Name: {{ cartDisplayProduct.name }}</h2>
+          <h6>Description: {{ cartDisplayProduct.description }}</h6>
+          <p>Price: {{ cartDisplayProduct.price }}</p>
+          <p>Amount in cart: {{ cartDisplayProduct.productsToBuy }}</p>
           <!--<div>
-    <button type="submit" (click)="increaseAmount(product)">+</button>
-    <input type="number" min="1" max="{{ cartDisplayProducts.amountInInvenotry }}" placeholder="Quantity" [value]="product.productsToBuy" readonly />
-    <button type="submit" (click)="decreaseAmount(product)">-</button>
-    <button (click)="addToCart(product.id, product.productsToBuy)">Add to Cart</button>
+    <button type="submit" (click)="increaseAmount(cartDisplayProduct)">+</button>
+    <input type="number" min="1" max="{{ cartDisplayProduct.amountInInvenotry }}" placeholder="Quantity" [value]="cartDisplayProduct.productsToBuy" readonly />
+    <button type="submit" (click)="decreaseAmount(cartDisplayProduct)">-</button>
+    <button (click)="addToCart(cartDisplayProduct.id, cartDisplayProduct.productsToBuy)">Add to Cart</button>
   </div>-->
         </div>
       </div>
