@@ -37,10 +37,10 @@ export class CartComponent implements OnInit {
   }
 
   convertCartItemsToCartDisplayProducts(cartProducts: CartItem[]): CartDisplayProduct[] {
-    let result!: CartDisplayProduct[];
+    let result: CartDisplayProduct[] = [];
     for (let i = 0; i < cartProducts.length; i++) {
-      let cartDisplayProduct!: CartDisplayProduct;
-      cartDisplayProduct.createByCartItem(cartProducts[i]);
+      let cartDisplayProduct: CartDisplayProduct = new CartDisplayProduct(cartProducts[i].product);
+      cartDisplayProduct.productsToBuy = cartProducts[i].amount;
       result.push(cartDisplayProduct);
     }
 
