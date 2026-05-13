@@ -2,7 +2,7 @@
   <div class="page-content">
     <div *ngFor="let cartDisplayProduct of cartDisplayProducts; let i = index">
       <div>
-        <input type="checkbox" (change)="addOrRemoveFromPurchase(cartDisplayProduct.id)" [(ngModel)]="cartDisplayProduct.isChecked" />
+        <input type="checkbox" (change)="addOrRemoveFromPurchase(cartDisplayProduct.id)" />
       </div>
       <div class="productDataDiv">
         <div class="leftProductDiv">
@@ -10,18 +10,23 @@
           <h6>Description: {{ cartDisplayProduct.description }}</h6>
           <p>Price: {{ cartDisplayProduct.price }}</p>
           <p>Amount in cart: {{ cartDisplayProduct.productsToBuy }}</p>
-          <!--<div>
-    <button type="submit" (click)="increaseAmount(cartDisplayProduct)">+</button>
-    <input type="number" min="1" max="{{ cartDisplayProduct.amountInInvenotry }}" placeholder="Quantity" [value]="cartDisplayProduct.productsToBuy" readonly />
-    <button type="submit" (click)="decreaseAmount(cartDisplayProduct)">-</button>
-    <button (click)="addToCart(cartDisplayProduct.id, cartDisplayProduct.productsToBuy)">Add to Cart</button>
-  </div>-->
         </div>
       </div>
+    </div>
+    <div *ngIf="totalPrice !== 0; else disabledPayment">
+      <button type="submit" (click)="payForCheckedProducts()">
+        Pay! ({{ totalPrice }})
+      </button>
     </div>
   </div>
 </div>
 
 <ng-template #loading>
   <p>Loading...</p>
+</ng-template>
+
+<ng-template #disabledPayment>
+  <button type="submit" disabled>
+    Pay! (0)
+  </button>
 </ng-template>

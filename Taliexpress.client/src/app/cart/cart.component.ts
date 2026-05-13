@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { APIRequesterService } from '../../../Services/APIRequesterService';
 import { GetDisplayCartResponse } from '../../../Classes/ApiResponse/GetDisplayCartResponse';
-import { DisplayProduct } from '../../../Classes/Common/DisplayProduct';
 import { APIReturnKeys } from '../../../Enums/APIReturnKeys';
 import { ToastrService } from 'ngx-toastr';
 import { CartDisplayProduct } from '../../../Classes/Common/CartDisplayProduct';
@@ -20,6 +19,7 @@ export class CartComponent implements OnInit {
   public productsToBuy: string[] = [];
   constructor(
     private apiRequester: APIRequesterService,
+    private cd: ChangeDetectorRef,
     private toastr: ToastrService) {
   }
 
@@ -28,6 +28,7 @@ export class CartComponent implements OnInit {
       next: (res: GetDisplayCartResponse) => {
         if (res.code === 0) {
           this.cartDisplayProducts = this.convertCartItemsToCartDisplayProducts(res.cart.cartProducts);
+          this.cd.detectChanges();
         }
       },
       error: (err: any) => {
@@ -48,14 +49,26 @@ export class CartComponent implements OnInit {
   }
 
   addOrRemoveFromPurchase(productId: string): void {
+    let product = this.cartDisplayProducts.find(p => p.id === productId);
+    if (!product) {
+      this.toastr.error('Product not found', 'Error');
+      return;
+    }
     if (!this.cartDisplayProducts.find(p => p.id === productId)?.isChecked) {
       this.cartDisplayProducts.find(p => p.id === productId)!.isChecked = true;
       this.productsToBuy.push(productId);
-      this.totalPrice += this.cartDisplayProducts.find(p => p.id === productId)?.price || 0;
-    } else {
+      this.totalPrice += product!.price * product!.productsToBuy || 0;
+    }
+    else {
       this.cartDisplayProducts.find(p => p.id === productId)!.isChecked = false;
       this.productsToBuy = this.productsToBuy.filter(p => p !== productId);
-      this.totalPrice -= this.cartDisplayProducts.find(p => p.id === productId)?.price || 0;
+      this.totalPrice -= product!.price * product!.productsToBuy || 0;
     }
+    if (this.totalPrice < 0) this.totalPrice = 0;
+  }
+
+  payForCheckedProducts(): void {
+    console.log(this.productsToBuy);
+    console.log(this.totalPrice);
   }
 }
